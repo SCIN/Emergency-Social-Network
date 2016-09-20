@@ -4,7 +4,7 @@ This document includes three sections, technology selection and rationale, techn
 ##Technology Selection and Rationale
 
 ###Deployment Platform
-**Heroku** 
+**Heroku**
 
 ###Back Tier
 
@@ -18,12 +18,12 @@ This document includes three sections, technology selection and rationale, techn
 **AngularJS**: In AngularJS, declarative paradigm is used for creating patterns, which makes code more lightweight, as well as easier to read and iterate. As we have many iterations during the entire SE Project, we should use AngularJS instead of JQuery. More advantages are in the "technology analysis" section.
 
 
-**Bootstrap** 
+**Bootstrap**
 is a free front-end framework for faster and easier web development. In Bootstrap 3, mobile-first styles are part of the core framework. Bootstrap is compatible with all modern browsers (Chrome, Firefox, Internet Explorer, Safari, and Opera). As mentioned in the use cases, the user interface will be accessed from a standard browser, including mobile browsers. So we choose this framework in our front tier.
 
 ###Communication Between the Two Tiers
 
-**Socket.io**
+**Socket.io** enables real-time bidirectional event-based communication. In the ESN project, the use cases include "Share Status", "Chat Publicly", "Chat Privately" and "Administer User Profile", all of which require a real-time bidirectional communication driven by events like status/user permission changes and sending messages.
 
 
 
@@ -117,7 +117,30 @@ is a free front-end framework for faster and easier web development. In Bootstra
 * <http://www.tutorialspoint.com/nodejs/>
 * <http://www.tutorialspoint.com/nodejs/>
 
+###Socket.io
 
+**Strength**:
+
+* Socket.IO enables real-time bidirectional event-based communication.
+* It works on every platform, browser or device, focusing equally on reliability and speed by automatically choosing the communication method such as WebSocket or polling, while providing the same interface.
+* It provides the ability to implement real-time analytics, binary streaming, instant messaging, and document collaboration.
+* It can be easily combined with express.js, providing two ways of connection in the same port of the same domain.
+
+**Weakness**:
+
+* When there are no frequent requests/responses, the cost will be much higher than Ajax.
+* Protocol and behavior patterns are poorly documented.
+
+**Gap**:
+
+* The socket will disconnect when we switch the pages, so we have to use single page techniques or connect/disconnect frequently.
+
+**Reference**:
+
+* http://socket.io/
+* http://xsnippet.org/359042/
+* http://www.infoq.com/cn/news/2015/01/socket-io-websocket
+* https://stackoverflow.com/questions/18240512/stay-connected-to-socket-io-while-switching-pages
 
 
 ###AngularJS
@@ -131,14 +154,14 @@ is a free front-end framework for faster and easier web development. In Bootstra
 
 **Weakness**:
 
-* Angular is big and complicated. With multiple ways to do the same thing it is hard to tell which way is better for particular task. 
+* Angular is big and complicated. With multiple ways to do the same thing it is hard to tell which way is better for particular task.
 * The lifecycle of Angular application is complex, and to master it you really need to read the code.
 * More than 2000 watchers can severely lag the UI. That limits the complexity of your Angular forms, especially big data grids and lists.
 
 **Gap**:
 
 * Though we all want to learn it, we are not very familiar with it.
-* The AngularJS version of Bootstrap is different from the original one 
+* The AngularJS version of Bootstrap is different from the original one
 
 **Reference**:
 
@@ -159,7 +182,7 @@ is a free front-end framework for faster and easier web development. In Bootstra
 
 **Weakness**:
 
-* Weak when it comes to complex data entry screens. 
+* Weak when it comes to complex data entry screens.
 * It's very customizable, but inevitably many sites start looking alike (just like Wordpress—consider how many blog sites look the same).
 * Javascript is tied to jQuery (it's by the far the most common javascript library though and the plugins can just as easily be left unused).
 
@@ -185,15 +208,8 @@ Through the FSE Chat Room, all of us are adept at NodeJS, ExpressJS, HTML5, CSS,
 Though we have used Bootstrap before, we are not familiar with the AngularJS version of Bootstrap. We don't have much experience in frot end development.
 
 ###Gap
-We haven't used AngularJS in our previous projects. We know little about Heroku and PostgreSQL.
+* We haven't used AngularJS in our previous projects. We know little about Heroku and PostgreSQL.
+* The socket will disconnect when we switch the pages, so we might have to use single page techniques.
 
 ###Plan
 Learn those technologies we are not familiar with. Each of us makes a demo independently, using all the development stacks selected, and deploys it to the heroku.
-
-
-
-
-
-
-
-
