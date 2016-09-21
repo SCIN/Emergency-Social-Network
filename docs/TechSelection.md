@@ -24,7 +24,7 @@ is a free front-end framework for faster and easier web development. In Bootstra
 
 ###Communication Between the Two Tiers
 
-**Socket.io**
+**Socket.io** enables real-time bidirectional event-based communication. In the ESN project, the use cases include "Share Status", "Chat Publicly", "Chat Privately" and "Administer User Profile", all of which require a real-time bidirectional communication driven by events like status/user permission changes and sending messages.
 
 
 
@@ -119,7 +119,30 @@ is a free front-end framework for faster and easier web development. In Bootstra
 * <http://www.tutorialspoint.com/nodejs/>
 * <http://www.tutorialspoint.com/nodejs/>
 
+###Socket.io
 
+**Strength**:
+
+* Socket.IO enables real-time bidirectional event-based communication.
+* It works on every platform, browser or device, focusing equally on reliability and speed by automatically choosing the communication method such as WebSocket or polling, while providing the same interface.
+* It provides the ability to implement real-time analytics, binary streaming, instant messaging, and document collaboration.
+* It can be easily combined with express.js, providing two ways of connection in the same port of the same domain.
+
+**Weakness**:
+
+* When there are no frequent requests/responses, the cost will be much higher than Ajax.
+* Protocol and behavior patterns are poorly documented.
+
+**Gap**:
+
+* The socket will disconnect when we switch the pages, so we have to use single page techniques or connect/disconnect frequently.
+
+**Reference**:
+
+* http://socket.io/
+* http://xsnippet.org/359042/
+* http://www.infoq.com/cn/news/2015/01/socket-io-websocket
+* https://stackoverflow.com/questions/18240512/stay-connected-to-socket-io-while-switching-pages
 
 
 ###AngularJS
@@ -187,15 +210,8 @@ Through the FSE Chat Room, all of us are adept at NodeJS, ExpressJS, HTML5, CSS,
 Though we have used Bootstrap before, we are not familiar with the AngularJS version of Bootstrap. We don't have much experience in frot end development.
 
 ###Gap
-We haven't used AngularJS in our previous projects. We know little about Heroku and PostgreSQL.
+* We haven't used AngularJS in our previous projects. We know little about Heroku and PostgreSQL.
+* The socket will disconnect when we switch the pages, so we might have to use single page techniques.
 
 ###Plan
 Learn those technologies we are not familiar with. Each of us makes a demo independently, using all the development stacks selected, and deploys it to the heroku.
-
-
-
-
-
-
-
-
