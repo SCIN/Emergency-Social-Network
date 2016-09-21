@@ -4,13 +4,14 @@ This document includes three sections, technology selection and rationale, techn
 ##Technology Selection and Rationale
 
 ###Deployment Platform
-**Heroku**
+**Heroku** 
+is a go-to solution when we are starting an application and we need some cheap hosting. Heroku free tier is awesome - essentially if you only need one web dyno and 5MB of PostgreSQL, it's free to host an application. On top of that, the learning curve of Heroku is low compared to other cloud computing platforms, which boosts our development speed and prototyping iterations from scratch.
+>>>>>>> master
 
-###Back Tier
 
 **Node.js with express.js** is fit for our project, which is a real-time, multi-user web application. Besides, we can use Javascript in both front-end and server-end. Node.js also provides a rich library of various JavaScript modules which simplifies the development of web applications using Node.js to a great extent. Of course, actually we are requried to use them.
 
-**PostgreSQL**
+**PostgreSQL**: PostgreSQL is an open source relational database. Its query language is standard SQL, so the learning curve is short for people who are already familiar with any other relational databases. Heroku provides PostgreSQL as a service, so there is not intergration problem between them. We can also avoid the complexity of setting up PostgreSQL on our own by using PostgreSQL service on Heroku.
 
 ###Front Tier
 **HTML5**, **CSS** and **JavaScript** are basic and standard web stacks. Each web application will use them.
