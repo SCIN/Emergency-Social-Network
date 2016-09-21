@@ -4,13 +4,13 @@ This document includes three sections, technology selection and rationale, techn
 ##Technology Selection and Rationale
 
 ###Deployment Platform
-**Heroku**
+**Heroku** 
+is a go-to solution when we are starting an application and we need some cheap hosting. Heroku free tier is awesome - essentially if you only need one web dyno and 5MB of PostgreSQL, it's free to host an application. On top of that, the learning curve of Heroku is low compared to other cloud computing platforms, which boosts our development speed and prototyping iterations from scratch.
 
-###Back Tier
 
 **Node.js with express.js** is fit for our project, which is a real-time, multi-user web application. Besides, we can use Javascript in both front-end and server-end. Node.js also provides a rich library of various JavaScript modules which simplifies the development of web applications using Node.js to a great extent. Of course, actually we are requried to use them.
 
-**PostgreSQL**
+**PostgreSQL**: PostgreSQL is an open source relational database. Its query language is standard SQL, so the learning curve is short for people who are already familiar with any other relational databases. Heroku provides PostgreSQL as a service, so there is not intergration problem between them. We can also avoid the complexity of setting up PostgreSQL on our own by using PostgreSQL service on Heroku.
 
 ###Front Tier
 **HTML5**, **CSS** and **JavaScript** are basic and standard web stacks. Each web application will use them.
@@ -23,7 +23,7 @@ is a free front-end framework for faster and easier web development. In Bootstra
 
 ###Communication Between the Two Tiers
 
-**Socket.io**
+**Socket.io** enables real-time bidirectional event-based communication. In the ESN project, the use cases include "Share Status", "Chat Publicly", "Chat Privately" and "Administer User Profile", all of which require a real-time bidirectional communication driven by events like status/user permission changes and sending messages.
 
 
 
@@ -118,7 +118,30 @@ is a free front-end framework for faster and easier web development. In Bootstra
 * <http://www.tutorialspoint.com/nodejs/>
 * <http://www.tutorialspoint.com/nodejs/>
 
+###Socket.io
 
+**Strength**:
+
+* Socket.IO enables real-time bidirectional event-based communication.
+* It works on every platform, browser or device, focusing equally on reliability and speed by automatically choosing the communication method such as WebSocket or polling, while providing the same interface.
+* It provides the ability to implement real-time analytics, binary streaming, instant messaging, and document collaboration.
+* It can be easily combined with express.js, providing two ways of connection in the same port of the same domain.
+
+**Weakness**:
+
+* When there are no frequent requests/responses, the cost will be much higher than Ajax.
+* Protocol and behavior patterns are poorly documented.
+
+**Gap**:
+
+* The socket will disconnect when we switch the pages, so we have to use single page techniques or connect/disconnect frequently.
+
+**Reference**:
+
+* http://socket.io/
+* http://xsnippet.org/359042/
+* http://www.infoq.com/cn/news/2015/01/socket-io-websocket
+* https://stackoverflow.com/questions/18240512/stay-connected-to-socket-io-while-switching-pages
 
 
 ###AngularJS
@@ -186,15 +209,8 @@ Through the FSE Chat Room, all of us are adept at NodeJS, ExpressJS, HTML5, CSS,
 Though we have used Bootstrap before, we are not familiar with the AngularJS version of Bootstrap. We don't have much experience in frot end development.
 
 ###Gap
-We haven't used AngularJS in our previous projects. We know little about Heroku and PostgreSQL.
+* We haven't used AngularJS in our previous projects. We know little about Heroku and PostgreSQL.
+* The socket will disconnect when we switch the pages, so we might have to use single page techniques.
 
 ###Plan
 Learn those technologies we are not familiar with. Each of us makes a demo independently, using all the development stacks selected, and deploys it to the heroku.
-
-
-
-
-
-
-
-
