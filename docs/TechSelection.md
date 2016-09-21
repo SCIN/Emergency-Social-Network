@@ -6,7 +6,6 @@ This document includes three sections, technology selection and rationale, techn
 ###Deployment Platform
 **Heroku** 
 is a go-to solution when we are starting an application and we need some cheap hosting. Heroku free tier is awesome - essentially if you only need one web dyno and 5MB of PostgreSQL, it's free to host an application. On top of that, the learning curve of Heroku is low compared to other cloud computing platforms, which boosts our development speed and prototyping iterations from scratch.
->>>>>>> master
 
 
 **Node.js with express.js** is fit for our project, which is a real-time, multi-user web application. Besides, we can use Javascript in both front-end and server-end. Node.js also provides a rich library of various JavaScript modules which simplifies the development of web applications using Node.js to a great extent. Of course, actually we are requried to use them.
