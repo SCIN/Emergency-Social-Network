@@ -5,6 +5,7 @@ This document includes three sections, technology selection and rationale, techn
 
 ###Deployment Platform
 **Heroku** 
+is a go-to solution when we are starting an application and we need some cheap hosting. Heroku free tier is awesome - essentially if you only need one web dyno and 5MB of PostgreSQL, it's free to host an application. On top of that, the learning curve of Heroku is low compared to other cloud computing platforms, which boosts our development speed and prototyping iterations from scratch.
 
 ###Back Tier
 
