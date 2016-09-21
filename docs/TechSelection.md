@@ -6,10 +6,10 @@ This document includes three sections, technology selection and rationale, techn
 ###Deployment Platform
 **Heroku** 
 is a go-to solution when we are starting an application and we need some cheap hosting. Heroku free tier is awesome - essentially if you only need one web dyno and 5MB of PostgreSQL, it's free to host an application. On top of that, the learning curve of Heroku is low compared to other cloud computing platforms, which boosts our development speed and prototyping iterations from scratch.
+>>>>>>> master
 
-###Back Tier
 
-**Node.js with express.js**
+**Node.js with express.js** is fit for our project, which is a real-time, multi-user web application. Besides, we can use Javascript in both front-end and server-end. Node.js also provides a rich library of various JavaScript modules which simplifies the development of web applications using Node.js to a great extent. Of course, actually we are requried to use them.
 
 **PostgreSQL**: PostgreSQL is an open source relational database. Its query language is standard SQL, so the learning curve is short for people who are already familiar with any other relational databases. Heroku provides PostgreSQL as a service, so there is not intergration problem between them. We can also avoid the complexity of setting up PostgreSQL on our own by using PostgreSQL service on Heroku.
 
@@ -19,7 +19,7 @@ is a go-to solution when we are starting an application and we need some cheap h
 **AngularJS**: In AngularJS, declarative paradigm is used for creating patterns, which makes code more lightweight, as well as easier to read and iterate. As we have many iterations during the entire SE Project, we should use AngularJS instead of JQuery. More advantages are in the "technology analysis" section.
 
 
-**Bootstrap** 
+**Bootstrap**
 is a free front-end framework for faster and easier web development. In Bootstrap 3, mobile-first styles are part of the core framework. Bootstrap is compatible with all modern browsers (Chrome, Firefox, Internet Explorer, Safari, and Opera). As mentioned in the use cases, the user interface will be accessed from a standard browser, including mobile browsers. So we choose this framework in our front tier.
 
 ###Communication Between the Two Tiers
@@ -95,7 +95,8 @@ is a free front-end framework for faster and easier web development. In Bootstra
 
 **Strength**:
 
-* Use Javascript in both front-end and server-end
+* Use Javascript in both front-end and server-end.
+* Node.js also provides a rich library of various JavaScript modules which simplifies the development of web applications using Node.js to a great extent.
 * Unlike its competitors like Rails and Django, which have an opinionated way of building applications, express has no "best way" do something. It is very flexible and pluggable.
 * Fit for real-time, multi-user web application.
 * It's Fast. V8 compiles and executes JavaScript at lightning speeds mainly due to the fact that V8 compiles JavaScript into native machine code.
@@ -132,14 +133,14 @@ is a free front-end framework for faster and easier web development. In Bootstra
 
 **Weakness**:
 
-* Angular is big and complicated. With multiple ways to do the same thing it is hard to tell which way is better for particular task. 
+* Angular is big and complicated. With multiple ways to do the same thing it is hard to tell which way is better for particular task.
 * The lifecycle of Angular application is complex, and to master it you really need to read the code.
 * More than 2000 watchers can severely lag the UI. That limits the complexity of your Angular forms, especially big data grids and lists.
 
 **Gap**:
 
 * Though we all want to learn it, we are not very familiar with it.
-* The AngularJS version of Bootstrap is different from the original one 
+* The AngularJS version of Bootstrap is different from the original one
 
 **Reference**:
 
@@ -160,7 +161,7 @@ is a free front-end framework for faster and easier web development. In Bootstra
 
 **Weakness**:
 
-* Weak when it comes to complex data entry screens. 
+* Weak when it comes to complex data entry screens.
 * It's very customizable, but inevitably many sites start looking alike (just like Wordpress—consider how many blog sites look the same).
 * Javascript is tied to jQuery (it's by the far the most common javascript library though and the plugins can just as easily be left unused).
 
