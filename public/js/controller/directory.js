@@ -9,9 +9,8 @@
  */
 angular.module('ESNApp')
   .controller('DirectoryCtrl', function ($scope, $http) {
-    $scope.happy = 'fun';
-    $http.get('/users')
+    $http.get('/citizen')
     .then(function(res){
-      $scope.happy = res.data;
+      $scope.directory = res.data;
     });
   });

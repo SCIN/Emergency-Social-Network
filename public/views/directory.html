@@ -1,15 +1,19 @@
-<div id="directory" ng-controller='DirectoryCtrl'>
-  {{happy}}
-  <table class="table">
-    <tbody>
-      <tr>
-        <th>Name</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>asdf</td>
-        <td>asdf</td>          
-      </tr>
-    </tbody>
-  </table>
+<div id="directory" ng-controller="DirectoryCtrl" class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">ESN Directory</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <th>Status</th>
+        </tr>
+        <tr ng-repeat="citizen in directory">
+          <td>{{citizen.name}}</td>
+          <td>{{citizen.online}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
