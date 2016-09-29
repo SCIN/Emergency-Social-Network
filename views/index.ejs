@@ -8,13 +8,14 @@
     <script src="js/controller/login.js"></script>
       <script src="js/controller/directory.js"></script>
   </head>
-  <body>
+  <body ng-app="ESNApp">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <div id = "login_page">
+    <div id="login_page">
     </div>
    	<div id = "main_page">
-	    <div id = "directory">
+	    <div id="directory" ng-controller="DirectoryCtrl">
+        {{happy}}
 	    </div>
 	    <div id = "public_wall">
 	    </div>
