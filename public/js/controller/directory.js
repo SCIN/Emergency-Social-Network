@@ -8,6 +8,10 @@
  * Controller of the sampleApp
  */
 angular.module('ESNApp')
-  .controller('DirectoryCtrl', function ($scope) {
+  .controller('DirectoryCtrl', function ($scope, $http) {
     $scope.happy = 'fun';
+    $http.get('/users')
+    .then(function(res){
+      $scope.happy = res.data;
+    });
   });
