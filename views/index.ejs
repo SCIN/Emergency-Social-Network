@@ -18,6 +18,9 @@
         {{happy}}
 	    </div>
 	    <div id = "public_wall">
+            <ul id="messages" ><li ng-repeat="msg in msgs">{{ msg.text }}</ul>
+            <input id="m" autocomplete="off" ng-model="message" />
+            <button  type="button" ng-click="post()">POST</button>
 	    </div>
 	    <div id = "logout_div">
 	    </div>
