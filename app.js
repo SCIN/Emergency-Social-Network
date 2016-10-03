@@ -22,6 +22,16 @@ app.listen(app.get('port'), function() {
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 
+io.on('connection', function(socket){
+    socket.on('newPublicMsg',function(message){
+      console.log('Received a message from client');
+      // emit to other clients
+      socket.broadcast.emit('newPublicMsg', message);
+      // emit back to sender
+      socket.emit('newPublicMsg', message);
+    });
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

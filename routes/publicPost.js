@@ -25,9 +25,9 @@ router.get('/', function(req, res) { // get all messages
 });
 
 router.post('/', function(req, res) {
-	var username = req.query.username;
-	var message = req.query.message;
-	var timestamp = new Date().toDateString();
+	var sender = req.query.sender;
+	var text = req.query.text;
+	var timestamp = req.query.timestamp;
 	var status = req.query.status;
 	var location = req.query.location;
 
@@ -35,4 +35,3 @@ router.post('/', function(req, res) {
 });
 
 module.exports = router;
-
