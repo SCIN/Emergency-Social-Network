@@ -4,18 +4,20 @@ var router = express.Router();
 router.get('/', function(req, res) { // get all messages
 	var list = [];
 	var message1 = {
-		message : "HelloWorld",
+		text : "HelloWorld",
 		timestamp : "09/29/2016",
-		username : "Raj",
+		sender : "Raj",
 		status : "OK",
-		location : "Building 23"
+		location : "Building 23",
+		messageId : 1
 	};
 	var message2 = {
-		message : "HelloFSE",
+		text : "HelloFSE",
 		timestamp : "09/30/2016",
-		username : "Bob",
+		sender : "Bob",
 		status : "OK",
-		location : "Building 19"
+		location : "Building 19",
+		messageId : 2
 	};
 	list.push(message1);
 	list.push(message2);
@@ -23,14 +25,13 @@ router.get('/', function(req, res) { // get all messages
 });
 
 router.post('/', function(req, res) {
-	var username = req.query.username;
-	var message = req.query.message;
-	var timestamp = new Date().toDateString();
-	var status = req.query.status;
-	var location = req.query.location;
+	var sender = req.body.sender;
+	var text = req.body.text;
+	var timestamp = req.body.timestamp;
+	var status = req.body.status;
+	var location = req.body.location;
 
-	res.send('message added');
+	res.send({result : true});
 });
 
 module.exports = router;
-
