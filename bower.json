@@ -1,10 +1,11 @@
 {
-  "name": "angular",
+  "name": "esn-app",
   "version": "1.0.0",
   "dependencies": {
-    "ui.bootstrap": "latest",
-    "angular": "latest",
-    "angular-route": "latest",
-    "socket.io-client": "^1.4.8"
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "socket.io-client": "^1.4.8",
+    "ui.bootstrap": "^2.1.4",
+    "angular-bootstrap": "^2.1.4"
   }
 }
