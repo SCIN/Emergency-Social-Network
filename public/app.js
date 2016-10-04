@@ -9,8 +9,9 @@
  * Main module of the application.
  */
 (function(){
-  var app = angular.module('ESNApp', ['ui.bootstrap', 'ui.router']);
-  app.config(function($stateProvider){
+  var app = angular.module('ESNApp', ['ui.bootstrap', 'ui.router', 'angular-md5']);
+  app.config(function($stateProvider, $urlRouterProvider){
+    $urlRouterProvider.otherwise('/login');
     var loginState = {
       name: 'login',
       url: '/login',

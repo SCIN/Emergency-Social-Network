@@ -6,3 +6,21 @@ body {
 a {
   color: #00B7FF;
 }
+
+#chat_publicly{
+  border: 1px solid #ccc;
+  min-height:500px;
+  width: 70%;
+  margin: auto;
+}
+#public_wall {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 10px;
+  height: 400px;
+  overflow-y: scroll;
+}
+#postmsg{
+  padding: 15px;
+  margin: 10px;
+}
