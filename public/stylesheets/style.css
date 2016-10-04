@@ -31,14 +31,14 @@ a {
 
 #chat_publicly{
   border: 1px solid #ccc;
-  min-height:500px;
-  width: 70%;
+  min-height:90%;
+  width: 95%;
 }
 #public_wall {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
-  height: 400px;
+  min-height: 300px ;
   overflow-y: scroll;
 }
 .publicMsgBox{
