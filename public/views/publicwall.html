@@ -1,25 +1,36 @@
-<div id = "chat_publicly" ng-controller="PublicWallCtrl" class="panel panel-default">
+<div ng-controller="PublicWallCtrl" class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">Pulic Wall</h3>
     </div>
     <div class="panel-body">
-        <div id = "public_wall" >
-            <div  ng-repeat="msg in msgs" class="publicMsgBox">
-                <div class="row">
-                    <div class="col-xs-2">Name:{{msg.sender}} </div>
-                    <div class="col-xs-2">Status:{{msg.status}} </div>
-                    <div class="col-xs-5">Location:{{msg.location}} </div>
-                    <div class="col-xs-3">Time:{{msg.timestamp}} </div>
-                </div>
-                <div class="msgtext">{{msg.text}} </div>
-            </div>
-        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Location</th>
+              <th>Time</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="msg in msgs">
+              <td>{{msg.sender}} </td>
+              <td>{{msg.status}} </td>
+              <td>{{msg.location}} </td>
+              <td>{{msg.timestamp}} </td>
+              <td>{{msg.text}}</td>
+            </tr>
+          </tbody>
+        </table>
 
         <div id="postmsg" class="row">
             <form name="msgInput">
-            <input  class="col-xs-9" autocomplete="off" ng-model="message" ng-required="true"/>
-            <div class="col-xs-1"> </div>
-            <button  type="button" class="col-xs-2" class="btn btn-primary" ng-click="post()" ng-disabled="msgInput.$invalid">POST</button>
+              <div class="input-group">
+                <input  class="form-control" autocomplete="off" ng-model="message" ng-required="true"/>
+                <span class="input-group-btn">
+                  <button  type="button" class="btn btn-primary" ng-click="post()" ng-disabled="msgInput.$invalid">POST</button>
+                </span>
             </form>
         </div>
     </div>
