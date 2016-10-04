@@ -1,6 +1,7 @@
-app = angular.module('ESNApp', [
-  'angular-md5'
-  ]);
+'use strict';
+
+(function(){
+var app = angular.module('ESNApp');
 app.service('usernameService', function () {
     var username = 'First';
     return {
@@ -12,7 +13,8 @@ app.service('usernameService', function () {
         }
     };
 });
-app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', function($scope, $http, md5, usernameService) {
+app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state',
+  function($scope, $http, md5, usernameService, $state) {
   $scope.login={};
   $scope.login.username="";
   $scope.login.password="";
@@ -79,8 +81,8 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', functio
     }
   }
   $scope.onlogin = function(){
+    $state.go('main');
     usernameService.setUsername($scope.login.username);
-    alert('step 9');
   }
 }]);
 app.directive('loginDirective', function (){ 
@@ -108,3 +110,4 @@ app.directive('passwordDirective', function (){
   }
 };
 });
+})();

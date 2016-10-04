@@ -1,4 +1,4 @@
-<div id="directory" ng-controller="DirectoryCtrl" class="panel panel-default">
+<div id="directory" ng-controller="DirectoryCtrl as directoryCtrl" class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">ESN Directory</h3>
   </div>
@@ -9,7 +9,7 @@
           <th>Name</th>
           <th>Status</th>
         </tr>
-        <tr ng-repeat="citizen in directory">
+        <tr ng-repeat="citizen in directoryCtrl.directory">
           <td>{{citizen.name}}</td>
           <td>{{citizen.online}}</td>
         </tr>
