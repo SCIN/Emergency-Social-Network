@@ -10,3 +10,7 @@ npm install
 bower install
 
 npm start
+
+## Attribution
+
+- Background image provided by ["Mike" Michael L. Baird](https://www.flickr.com/photos/mikebaird/)
