@@ -20,6 +20,9 @@ a {
   height: 400px;
   overflow-y: scroll;
 }
+.publicMsgBox{
+  border-bottom: 1px solid #ccc;
+}
 #postmsg{
   padding: 15px;
   margin: 10px;

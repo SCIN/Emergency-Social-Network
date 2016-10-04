@@ -4,7 +4,7 @@
     </div>
     <div class="panel-body">
         <div id = "public_wall" >
-            <div  ng-repeat="msg in msgs">
+            <div  ng-repeat="msg in msgs" class="publicMsgBox">
                 <div class="row">
                     <div class="col-xs-2">Name:{{msg.sender}} </div>
                     <div class="col-xs-2">Status:{{msg.status}} </div>
@@ -16,9 +16,11 @@
         </div>
 
         <div id="postmsg" class="row">
-            <input id="m" class="col-xs-9" autocomplete="off" ng-model="message" />
+            <form name="msgInput">
+            <input  class="col-xs-9" autocomplete="off" ng-model="message" ng-required="true"/>
             <div class="col-xs-1"> </div>
-            <button  type="button" class="col-xs-2" class="btn btn-primary" ng-click="post()">POST</button>
+            <button  type="button" class="col-xs-2" class="btn btn-primary" ng-click="post()" ng-disabled="msgInput.$invalid">POST</button>
+            </form>
         </div>
     </div>
 </div>
