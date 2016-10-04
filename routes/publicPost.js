@@ -31,7 +31,7 @@ router.post('/', function(req, res) {
 	var status = req.query.status;
 	var location = req.query.location;
 
-	res.send('message added');
+	res.send({result : true});
 });
 
 module.exports = router;
