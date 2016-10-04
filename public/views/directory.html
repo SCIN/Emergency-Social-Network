@@ -4,11 +4,13 @@
   </div>
   <div class="panel-body">
     <table class="table">
-      <tbody>
+      <thead>
         <tr>
           <th>Name</th>
           <th>Status</th>
         </tr>
+      </thead>
+      <tbody>
         <tr ng-repeat="citizen in directoryCtrl.directory">
           <td>{{citizen.name}}</td>
           <td>{{citizen.online}}</td>
