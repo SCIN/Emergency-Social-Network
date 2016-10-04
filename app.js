@@ -12,18 +12,21 @@ var authenticate = require('./routes/authenticate');
 var publicPost = require('./routes/publicPost');
 
 var app = express();
-
-app.set('port', (process.env.PORT || 5000));
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
+var port = 5000;
+// app.set('port', (process.env.PORT || 5000));
+// app.listen(app.get('port'), function() {
+//   console.log('Node app is running on port', app.get('port'));
+// });
 
 // setup socket
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-
+http.listen(port, function(){
+  console.log('listening on *:3000');
+});
 io.on('connection', function(socket){
-    socket.on('newPublicMsg',function(message){
+    console.log("connect");
+    socket.on('sendNewPublicMsg',function(message){
       console.log('Received a message from client');
       // emit to other clients
       socket.broadcast.emit('newPublicMsg', message);
@@ -48,7 +51,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/citizen', citizen);
 app.use('/authenticate', authenticate);
-app.use('/public-post', publicPost);
+app.use('/publicMessage', publicPost);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
