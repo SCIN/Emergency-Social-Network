@@ -3,9 +3,19 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	if (req.query.username == null) { // get all users
-		var obj = 
-		res.send(['{' + '"name" : "Raj",' + '"online" : "Yes"' + '}',
-			'{' + '"name" : "Tom",' + '"online" : "No"' + '}']);
+		var list = [];
+		var user1 = {
+			name : "Raj",
+			online : "Yes"
+		};
+		var user2 = {
+			name : "Tom",
+			online : "No"
+		};
+		list.push(user1);
+		list.push(user2);
+
+		res.send(list);
 	} else { // check whether user exists
 		res.send('{}'); // empty json means not exist
 	}
