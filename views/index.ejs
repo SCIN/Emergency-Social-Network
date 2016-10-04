@@ -9,12 +9,14 @@
     <script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="libs/socket.io-client/socket.io.js"></script>
     <script src="app.js"></script>
-    <script src="js/controller/login.js"></script>
     <script src="js/controller/directory.js"></script>
+    <script src="js/controller/login.js"></script>
+    <script src="js/controller/logout.js"></script>
   </head>
   <body ng-app="ESNApp">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <ui-view></ui-view>
     <div id="login_page">
     </div>
    	<div id = "main_page">
@@ -23,6 +25,8 @@
 	    </div>
 	    <div id = "logout_div">
 	    </div>
+      <button class="btn btn-default" ng-controller="LoginController as loginCtrl" ng-click="loginCtrl.click()">Log in</button>
+      <button class="btn btn-default" ng-controller="LogoutController as logoutCtrl" ng-click='logoutCtrl.click()'>Log out</button>
     </div>
   </body>
 </html>

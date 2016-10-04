@@ -9,9 +9,9 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('LoginController', ['$state', function ($state) {
+  app.controller('LogoutController', ['$state', function ($state) {
     this.click = function(){
-      $state.go('main');
+      $state.go('login');
     };
   }]);
 })();
