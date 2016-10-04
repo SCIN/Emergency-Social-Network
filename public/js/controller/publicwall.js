@@ -4,12 +4,12 @@ angular.module('ESNApp')
     .controller('PublicWallCtrl', ['$scope', 'MessageService','$http', function ($scope,MessageService,$http) {
         $scope.msgs = [];
         $scope.message = "";
-
+        $scope.msgs.push(MessageService.createMsg("test post", "dizhu", "emergency","Building 19"));
         $scope.post = function () {
             $http({
                 method : 'POST',
                 url : 'public-post',
-                params: MessageService.createMsg("test post", "dizhu", "emergency","Building 19")
+                params: MessageService.createMsg("test post test post test post test post test post test post ", "dizhu", "emergency","Building 19")
             }).success(function(data, status, headers, config) {
                 console.log(status);
             }).error(function(data, status, headers, config) {
@@ -21,7 +21,7 @@ angular.module('ESNApp')
         $scope.mySocket.on('newPublicMsg', function(msg){
             console.log("received");
             $scope.$apply(function () {
-                $scope.msgs.push({text:msg});
+                $scope.msgs.push(msg);
             });
         });
     }]);
