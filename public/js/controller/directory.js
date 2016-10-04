@@ -7,10 +7,14 @@
  * # MainCtrl
  * Controller of the sampleApp
  */
-angular.module('ESNApp')
-  .controller('DirectoryCtrl', function ($scope, $http) {
+(function(){
+  var app = angular.module('ESNApp');
+  app.controller('DirectoryCtrl', function ($http) {
+    var self = this;
+    self.directory = [];
     $http.get('/citizen')
     .then(function(res){
-      $scope.directory = res.data;
+      self.directory = res.data;
     });
   });
+})();

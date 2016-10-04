@@ -8,5 +8,6 @@
  *
  * Main module of the application.
  */
-angular
-  .module('ESNApp', ['ui.bootstrap']);
+(function(){
+  angular.module('ESNApp', ['ui.bootstrap', 'ui.router']);
+})();
