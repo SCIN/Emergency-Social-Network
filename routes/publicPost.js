@@ -25,11 +25,11 @@ router.get('/', function(req, res) { // get all messages
 });
 
 router.post('/', function(req, res) {
-	var sender = req.query.sender;
-	var text = req.query.text;
-	var timestamp = req.query.timestamp;
-	var status = req.query.status;
-	var location = req.query.location;
+	var sender = req.body.sender;
+	var text = req.body.text;
+	var timestamp = req.body.timestamp;
+	var status = req.body.status;
+	var location = req.body.location;
 
 	res.send({result : true});
 });
