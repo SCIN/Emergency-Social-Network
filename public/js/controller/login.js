@@ -54,7 +54,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', function($scope, $http, md
   }
   $scope.confirm = function(){
     if (confirm("Please confirm the creation of a new user") == true) {
-        $http.put('citizen/', {
+        $http.post('citizen/', {
           online: true
         }).then(function(response) {
           console.log(response.data);
