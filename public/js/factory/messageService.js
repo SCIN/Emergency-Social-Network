@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ESNApp')
-    .factory('MessageService', function () {
+    .factory('MessageService', ['$http', function($http) {
         function createMsg(text, sender, status, location) {
             var d = new Date();
             var message = {
@@ -18,4 +18,4 @@ angular.module('ESNApp')
         return{
             createMsg: createMsg
         };
-    });
+    }]);

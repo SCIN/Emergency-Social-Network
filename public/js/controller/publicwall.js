@@ -14,9 +14,23 @@ angular.module('ESNApp')
             console.log(status);
         });
         $scope.message = "";
+
+        $scope.address = '';
+        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+        function onPositionUpdate(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=true";
+            $http.get(url)
+                .then(function(result) {
+                    var address = result.data.results[2].formatted_address;
+                    $scope.address = address;
+                });
+        }
+
         $scope.mySocket = io();
         $scope.post = function () {
-            var msg = MessageService.createMsg($scope.message, usernameService.getUsername(), "emergency","Building 19");
+            var msg = MessageService.createMsg($scope.message, usernameService.getUsername(), "emergency",$scope.address);
             $http({
                 method : 'POST',
                 url : 'publicMessage',
