@@ -9,21 +9,16 @@
     <script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.8.js"></script>
     <script src="app.js"></script>
-    <script src="js/controller/login.js"></script>
     <script src="js/controller/directory.js"></script>
+    <script src="js/controller/login.js"></script>
+    <script src="js/controller/logout.js"></script>
+    <script src="libs/angular-md5/angular-md5.min.js"></script>
     <script src="js/controller/publicwall.js"></script>
     <script src="js/factory/messageService.js"></script>
   </head>
   <body ng-app="ESNApp">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <div id="login_page">
-    </div>
-   	<div id = "main_page">
-      <div ng-include="'views/directory.html'"></div>
-      <div ng-include="'views/publicwall.html'"></div>
-	    <div id = "logout_div">
-	    </div>
-    </div>
+    <ui-view></ui-view>
   </body>
 </html>

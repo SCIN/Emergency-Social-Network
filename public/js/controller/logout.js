@@ -9,12 +9,9 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('DirectoryCtrl', function ($http) {
-    var self = this;
-    self.directory = [];
-    $http.get('/citizen')
-    .then(function(res){
-      self.directory = res.data;
-    });
-  });
+  app.controller('LogoutController', ['$state', function ($state) {
+    this.click = function(){
+      $state.go('login');
+    };
+  }]);
 })();
