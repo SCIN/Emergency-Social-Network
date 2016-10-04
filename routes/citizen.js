@@ -22,14 +22,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function (req, res) { // add a new user to directory
-	var username = req.query.username;
-	var password = req.query.password;
+	var username = req.body.username;
+	var password = req.body.password;
 	// must be online now
 	res.send({result : true});
 }); 
 
-router.put('/', function(req, res) { // update user online/offline
-	var online = req.query.online;
+router.post('/', function(req, res) { // update user online/offline
+	var online = req.body.online;
 	res.send({result : true});
 });
 
