@@ -1,7 +1,20 @@
-(function(){
-app = angular.module('ESNApp');
+'use strict';
 
-app.controller('LoginCtrl', ['$scope','$http', 'md5', '$state', function($scope, $http, md5, $state) {
+(function(){
+var app = angular.module('ESNApp');
+app.service('usernameService', function () {
+    var username = 'First';
+    return {
+        getUsername: function () {
+            return username;
+        },
+        setUsername: function(value) {
+            username = value;
+        }
+    };
+});
+app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state',
+  function($scope, $http, md5, usernameService, $state) {
   $scope.login={};
   $scope.login.username="";
   $scope.login.password="";
@@ -69,6 +82,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', '$state', function($scope,
   }
   $scope.onlogin = function(){
     $state.go('main');
+    usernameService.setUsername($scope.login.username);
   }
 }]);
 app.directive('loginDirective', function (){ 
