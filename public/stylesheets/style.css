@@ -36,10 +36,18 @@ a {
 }
 #public_wall {
   border: 1px solid #ccc;
-  padding: 15px;
+  padding: 10px;
   margin: 10px;
   height: 400px;
   overflow-y: scroll;
+}
+.publicMsgBox{
+  border-bottom: 1px solid #ccc;
+  padding:5px;
+  margin: 5px;
+}
+.msgtext{
+  margin: 3px;
 }
 #postmsg{
   padding: 15px;
