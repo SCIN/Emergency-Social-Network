@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 
 		res.send(list);
 	} else { // check whether user exists
-		res.send('{}'); // empty json means not exist
+		res.send({result : false}); // empty json means not exist
 	}
 });
 
@@ -25,12 +25,12 @@ router.post('/', function (req, res) { // add a new user to directory
 	var username = req.query.username;
 	var password = req.query.password;
 	// must be online now
-	res.send(username + ' is added successfully');
+	res.send({result : true});
 }); 
 
 router.put('/', function(req, res) { // update user online/offline
 	var online = req.query.online;
-	res.send('online/offline is updated successfully');
+	res.send({result : true});
 });
 
 module.exports = router;
