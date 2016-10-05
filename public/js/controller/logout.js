@@ -9,8 +9,17 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('LogoutController', ['$state', function ($state) {
+  app.controller('LogoutController', ['$state', '$http', 'usernameService', function ($state, $http, usernameService) {
     this.click = function(){
+      // login to the system
+      $http.post('citizen/online/', {
+        username: usernameService.getUsername(),
+        online: false,
+      }).then(function(response) {
+        if(!response.data.result){
+          alert('Fail to logout at server');
+        }
+      });
       $state.go('login');
     };
   }]);
