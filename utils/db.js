@@ -35,7 +35,7 @@ class dbInterface
     /**
 		var state_body = {
 			name : 'Ivor',
-			online : 'Yes'
+			online : false
 		}
 	**/
     updateCitizenState(state_body)
@@ -51,6 +51,18 @@ class dbInterface
     getAllCitizen()
     {
     	return this.db.any('select name, status from citizen');
+    }
+
+    /**
+		var auth_body = {
+			name : 'Ivor',
+			password : 'ssssss'
+		}
+	**/
+    authenticate(auth_body)
+    {
+    	return this.db.one('select id from citizen where name=${name} and password=${password}',
+    						auth_body);
     }
 
     getPublicMessage()
