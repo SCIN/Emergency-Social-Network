@@ -11,7 +11,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="citizen in directoryCtrl.directory">
+        <tr ng-repeat="citizen in directoryCtrl.directory | filter: {online: true} | orderBy: 'name' ">
+          <td>{{citizen.name}}</td>
+          <td>{{citizen.online}}</td>
+        </tr>
+        <tr ng-repeat="citizen in directoryCtrl.directory | filter: {online: false} | orderBy: 'name'" class="active">
           <td>{{citizen.name}}</td>
           <td>{{citizen.online}}</td>
         </tr>
