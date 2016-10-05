@@ -46,7 +46,7 @@ class dbInterface
 
     checkCitizen(name)
     {
-        return this.db.one('select * from citizen where name=$1', [name]);
+        return this.db.one('select name from citizen where name=$1', [name]);
     }
 
     getAllCitizen()
