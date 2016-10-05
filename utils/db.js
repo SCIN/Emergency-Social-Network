@@ -35,7 +35,7 @@ class dbInterface
     /**
 		var state_body = {
 			name : 'Ivor',
-			online : false
+			online : 'Yes'
 		}
 	**/
     updateCitizenState(state_body)

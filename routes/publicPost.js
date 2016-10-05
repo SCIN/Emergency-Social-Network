@@ -1,7 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
+var db = require('../utils/db');
+
 router.get('/', function(req, res) { // get all messages
+	db.getPublicMessage()
+	.then(function(data) {
+		res.send(data);
+		//console.log('lalal2');
+  		//console.log(data);
+  	})
+  	.catch(function(err) {
+  		res.send([]);
+  		//console.log(err);
+  	});
+  	/*
 	var list = [];
 	var message1 = {
 		text : "HelloWorld",
@@ -22,16 +35,27 @@ router.get('/', function(req, res) { // get all messages
 	list.push(message1);
 	list.push(message2);
 	res.send(list);
+	*/
 });
 
 router.post('/', function(req, res) {
+	db.postPublicMessage(req.body)
+	.then(function() {
+		res.send({result : true});
+		console.log('post success!')
+	})
+	.catch(function(err) {
+		res.send({result : false});
+		console.log(err);
+	});
+	/*
 	var sender = req.body.sender;
 	var text = req.body.text;
 	var timestamp = req.body.timestamp;
 	var status = req.body.status;
 	var location = req.body.location;
+	*/
 
-	res.send({result : true});
 });
 
 module.exports = router;
