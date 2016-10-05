@@ -1,7 +1,7 @@
 var app = angular.module('ESNApp');
 
 // the rule of the user name
-app.directive('loginDirective', function (){ 
+app.directive('usernameDirective', function (){ 
   return {
     require: 'ngModel',
     link: function(scope, elem, attr, ngModel) {

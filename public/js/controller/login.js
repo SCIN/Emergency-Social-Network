@@ -58,7 +58,8 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
   }
   // login to the system
   $scope.login = function(){
-    $http.post('citizen/', {
+    $http.post('citizen/online/', {
+      username: $scope.login.username,
       online: true
     }).then(function(response) {
       console.log(response.data);
@@ -75,30 +76,3 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
     usernameService.setUsername($scope.login.username);
   }
 }]);
-
-
-app.directive('loginDirective', function (){ 
-  return {
-    require: 'ngModel',
-    link: function(scope, elem, attr, ngModel) {
-      var blacklist = attr.blacklist.split(' ');
-      ngModel.$parsers.unshift(function(value) {
-       var valid = blacklist.indexOf(value) === -1 &&(!value  || value.length >2);
-       ngModel.$setValidity('ddd', valid);
-       return valid ? value : undefined;
-     });
-    }
-  };
-});
-app.directive('passwordDirective', function (){ 
-  return {
-    require: 'ngModel',
-      link: function(scope, elem, attr, ngModel) {
-        ngModel.$parsers.unshift(function(value) {
-         var valid = !value  || value.length >3;
-         ngModel.$setValidity('length', valid);
-         return valid ? value : undefined;
-       });
-      }
-  };
-});
