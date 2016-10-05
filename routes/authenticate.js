@@ -11,17 +11,14 @@ router.get('/', function(req, res) {
 		}
 		db.authenticate(body)
 		.then(function() {
-			res.status(200);
 			res.send({result : true});
 			console.log('success!')
 		})
 		.catch(function(err) {
-			res.status(400);
 			res.send({result : false});
 			console.log(err);
 		});
 	} else {
-		res.status(400);
 		res.send({result : false});
 	}
 });
