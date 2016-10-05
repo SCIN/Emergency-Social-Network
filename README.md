@@ -16,7 +16,7 @@ $ bower install
 
 ```bash
 $ createdb esn
-$ psql -d esn -f ESN.sql
+$ psql -d esn -f ./utils/ESN.sql
 ```
 
 ### Start
