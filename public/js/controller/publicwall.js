@@ -3,16 +3,20 @@
 angular.module('ESNApp')
     .controller('PublicWallCtrl', ['$scope', 'MessageService','$http','usernameService', function ($scope,MessageService,$http,usernameService) {
         $scope.msgs = [];
-        $http({
-            method : 'GET',
-            url : 'publicMessage',
-        }).success(function(data, status, headers, config) {
-                    for (var i = 0; i < data.length; i++) {
-                        $scope.msgs.push(data[i]);
-                    }
-        }).error(function(data, status, headers, config) {
-            console.log(status);
-        });
+        $scope.getAllMessages = function(){
+            $http({
+                method : 'GET',
+                url : 'publicMessage',
+            }).success(function(data, status, headers, config) {
+                        for (var i = 0; i < data.length; i++) {
+                            $scope.msgs.push(data[i]);
+                        }
+            }).error(function(data, status, headers, config) {
+                console.log(status);
+            });
+        }
+        $scope.getAllMessages();
+        
         $scope.message = "";
 
         $scope.address = '';

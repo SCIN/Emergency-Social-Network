@@ -13,7 +13,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
     } else if($scope.loginpanel.password.$invalid){
       alert("Please provide another password.")
     } else{
-      $http.get('citizen/?username=' + $scope.login.username).then(function(response) {
+      $http.get('citizen/check/?username=' + $scope.login.username).then(function(response) {
         console.log(response.data);
         if(response.data.result){
           $scope.checkMatch();
@@ -25,7 +25,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
   }
   // check if the password match the username
   $scope.checkMatch = function(){
-    $http.get('authenticate/?username=' + $scope.login.username + '&password='+ md5.createHash($scope.login.password)).then(function(response) {
+    $http.get('citizen/authenticate/?username=' + $scope.login.username + '&password='+ md5.createHash($scope.login.password)).then(function(response) {
       console.log(response.data);
       if(response.data.result){
         $scope.login();
@@ -42,7 +42,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
     }).then(function(response) {
       console.log(response.data);
       if(response.data.result){
-        alert('welcome');
+        alert('Welcome to our emergency social network! Tips: You can share your status by selecting OK, Help or Emergency beside your user name. OK:I am OK, I do not need help. Help:I need help, but this is not a life threatening emergency. Emergency:I need help now, as this is a life threatening emergency!');
         $scope.login();
       } else {
         alert('Please re-enter the username and/or password');
