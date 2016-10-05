@@ -3,6 +3,37 @@ var router = express.Router();
 
 var db = require('../utils/db');
 
+router.get('/authenticate/', function(req, res) {
+	if (req.query.username != null && req.query.password != null) { 
+		var body = {
+			name : req.query.username,
+			password : req.query.password
+		}
+		db.authenticate(body)
+		.then(function() {
+			res.send({result : true});
+			console.log('success!')
+		})
+		.catch(function(err) {
+			res.send({result : false});
+			console.log(err);
+		});
+	} else {
+		res.send({result : false});
+	}
+});
+
+router.get('/check/', function(req, res, next) {
+	var name = req.query.username;
+	db.checkCitizen(name)
+	.then(function(citizen) {
+		res.send({result : true});
+	})
+	.catch(function(err) {
+		res.send({result : false});
+	});
+});
+
 router.get('/', function(req, res, next) {
 	if (req.query.username == null) { // get all users
 		db.getAllCitizen()
@@ -32,16 +63,6 @@ router.get('/', function(req, res, next) {
 
 		res.send(list);
 		*/
-	} else { // check whether user exists
-		var name = req.query.username;
-		db.checkCitizen(name)
-		.then(function(citizen) {
-			res.send({result : true});
-		})
-		.catch(function(err) {
-			res.send({result : false});
-		});
-		 // empty json means not exist
 	}
 });
 
