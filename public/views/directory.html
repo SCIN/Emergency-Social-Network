@@ -1,9 +1,14 @@
 <div id="directory" ng-controller="DirectoryCtrl as directoryCtrl" class="panel panel-default" ng-click="directoryCtrl.refresh()">
   <div class="panel-heading">
-    <h3 class="panel-title">ESN Directory</h3>
+    <h3 class="panel-title">ESN Directory
+      <span class="glyphicon pull-right"
+        ng-class="{ 'glyphicon-plus': directoryCtrl.hide,  'glyphicon-minus': !directoryCtrl.hide}"
+        ng-click="directoryCtrl.hide = !directoryCtrl.hide"
+      ><span>
+    </h3>
   </div>
   <div class="panel-body">
-    <table class="table">
+    <table class="table" ng-hide="directoryCtrl.hide">
       <thead>
         <tr>
           <th>Name</th>
@@ -13,11 +18,11 @@
       <tbody>
         <tr ng-repeat="citizen in directoryCtrl.directory | filter: {online: true} | orderBy: 'name' ">
           <td>{{citizen.name}}</td>
-          <td>{{citizen.online}}</td>
+          <td>{{citizen.online ? 'online' : 'offline'}}</td>
         </tr>
         <tr ng-repeat="citizen in directoryCtrl.directory | filter: {online: false} | orderBy: 'name'" class="active">
           <td>{{citizen.name}}</td>
-          <td>{{citizen.online}}</td>
+          <td>{{citizen.online ? 'online' : 'offline' }}</td>
         </tr>
       </tbody>
     </table>

@@ -12,6 +12,7 @@
   app.controller('DirectoryCtrl', function ($http) {
     var self = this;
     self.directory = [];
+    self.hide = true;
 
     self.refresh = function(){
       $http.get('/citizen')
