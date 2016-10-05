@@ -12,9 +12,14 @@
   app.controller('DirectoryCtrl', function ($http) {
     var self = this;
     self.directory = [];
-    $http.get('/citizen')
-    .then(function(res){
-      self.directory = res.data;
-    });
+
+    self.refresh = function(){
+      $http.get('/citizen')
+      .then(function(res){
+        self.directory = res.data;
+      });
+    };
+
+    self.refresh();
   });
 })();
