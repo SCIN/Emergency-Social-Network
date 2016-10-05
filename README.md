@@ -3,6 +3,7 @@ SA3 team project repo (PLEASE DO NOT CREATE ANY PUBLIC REPO INSIDE CMUSV-FSE)
 
 ##install
 
+```bash
 npm install bower -g
 
 npm install 
@@ -10,6 +11,14 @@ npm install
 bower install
 
 npm start
+```
+
+### DB install
+
+```bash
+$ createdb esn
+$ psql -d esn -f ESN.sql
+```
 
 ## Attribution
 
