@@ -1,3 +1,4 @@
+'use strict';
 // Postgres DB
 
 class dbInterface
