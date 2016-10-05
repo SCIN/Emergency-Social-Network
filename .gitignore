@@ -1,3 +1,5 @@
 node_modules/
 public/libs
 .idea/
+app.sublime-workspace
+npm-debug.log
