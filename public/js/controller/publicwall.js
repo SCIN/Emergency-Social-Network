@@ -40,16 +40,6 @@ angular.module('ESNApp')
             }).error(function(data, status, headers, config) {
                 console.log(status);
             });
-            $http.post('citizen/', {
-                online: true
-            }).then(function(response) {
-                console.log(response.data);
-                if(response.data.result){
-                    $scope.onlogin();
-                } else {
-                    alert('Erro! Please re-enter the username and/or password');
-                }
-            });
             $scope.mySocket.emit('sendNewPublicMsg',msg);
         }
         $scope.mySocket.on('newPublicMsg', function(msg){

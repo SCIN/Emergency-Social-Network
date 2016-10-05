@@ -64,7 +64,7 @@ router.post('/', function (req, res) { // add a new user to directory
 	// must be online now
 }); 
 
-router.post('/', function(req, res) { // update user online/offline
+router.post('/online/', function(req, res) { // update user online/offline
 	var online = req.body.online;
 	var username = req.body.username;
 	var state_body = {
