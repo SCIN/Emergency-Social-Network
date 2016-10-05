@@ -1,23 +1,27 @@
 # ESN-F16-SA3
 SA3 team project repo (PLEASE DO NOT CREATE ANY PUBLIC REPO INSIDE CMUSV-FSE)
 
-##install
+### Dependencies Install
 
 ```bash
-npm install bower -g
+$ npm install bower -g
 
-npm install 
+$ npm install
 
-bower install
-
-npm start
+$ bower install
 ```
 
-### DB install
+### DB Install
+- Install Postgres SQL from https://www.postgresql.org/download/
 
 ```bash
 $ createdb esn
 $ psql -d esn -f ESN.sql
+```
+
+### Start
+```bash
+$ npm start
 ```
 
 ## Attribution
