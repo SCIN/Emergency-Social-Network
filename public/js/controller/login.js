@@ -42,6 +42,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
     }).then(function(response) {
       console.log(response.data);
       if(response.data.result){
+        alert('welcome');
         $scope.login();
       } else {
         alert('Please re-enter the username and/or password');
@@ -75,4 +76,33 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
     $state.go('main');
     usernameService.setUsername($scope.login.username);
   }
-}]);
+}
+]);
+
+app.directive('usernameDirective', function (){ 
+  return {
+    require: 'ngModel',
+    link: function(scope, elem, attr, ngModel) {
+      var blacklist = attr.blacklist.split(' ');
+      ngModel.$parsers.unshift(function(value) {
+       var valid = blacklist.indexOf(value) === -1 &&(!value  || value.length >2);
+       ngModel.$setValidity('ddd', valid);
+       return valid ? value : undefined;
+     });
+    }
+  };
+});
+
+// the rule of the password
+app.directive('passwordDirective', function (){ 
+  return {
+    require: 'ngModel',
+      link: function(scope, elem, attr, ngModel) {
+        ngModel.$parsers.unshift(function(value) {
+         var valid = !value  || value.length >3;
+         ngModel.$setValidity('length', valid);
+         return valid ? value : undefined;
+       });
+      }
+  };
+});
