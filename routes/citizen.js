@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
 		*/
 	} else { // check whether user exists
 		var name = req.query.username;
-		db.checkCitizen('Ivorssss')
+		db.checkCitizen(name)
 		.then(function(citizen) {
 			res.send({result : true});
 		})
