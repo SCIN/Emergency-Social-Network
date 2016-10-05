@@ -39,6 +39,7 @@ router.get('/', function(req, res) { // get all messages
 });
 
 router.post('/', function(req, res) {
+	console.log(req.body);
 	db.postPublicMessage(req.body)
 	.then(function() {
 		res.send({result : true});

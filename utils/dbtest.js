@@ -34,37 +34,37 @@ db.updateCitizenState(state_body)
 		console.log(err);
 	});
 
-// db.addCitizen(ctz_body)
-// 	.then(function() {
-// 		console.log('add citizen success!');
-// 	})
-// 	.catch(function(err) {
-// 		console.log(err);
-// 	});
+db.addCitizen(ctz_body)
+	.then(function() {
+		console.log('add citizen success!');
+	})
+	.catch(function(err) {
+		console.log(err);
+	});
 
-// db.postPublicMessage(msg_body)
-// 	.then(function() {
-// 		console.log('post success!')
-// 	})
-// 	.catch(function(err) {
-// 		console.log(err);
-// 	});
+db.postPublicMessage(msg_body)
+	.then(function() {
+		console.log('post success!')
+	})
+	.catch(function(err) {
+		console.log(err);
+	});
 
-// db.getPublicMessage()
-//     		.then(function(data) {
-//     			console.log('lalal2');
-//     	  		console.log(data);
-//     	  	})
-//     	  	.catch(function(err) {
-//     	  		console.log(err);
-//     	  	});
+db.getPublicMessage()
+    		.then(function(data) {
+    			console.log('lalal2');
+    	  		console.log(data);
+    	  	})
+    	  	.catch(function(err) {
+    	  		console.log(err);
+    	  	});
 
-// db.getAllCitizen()
-// 	.then(function(citizen) {
-// 		console.log(citizen);
-// 	})
-// 	.catch(function(err) {
-// 		console.log(err);
-// 	});
+db.getAllCitizen()
+	.then(function(citizen) {
+		console.log(citizen);
+	})
+	.catch(function(err) {
+		console.log(err);
+	});
 
 console.log('lalal2');
