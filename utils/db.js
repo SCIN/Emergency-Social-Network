@@ -51,7 +51,7 @@ class dbInterface
 
     getAllCitizen()
     {
-    	return this.db.any('select name, status from citizen');
+    	return this.db.any('select name, online from citizen');
     }
 
     /**
