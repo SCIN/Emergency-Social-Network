@@ -39,6 +39,8 @@ class dbInterface
 			online : false
 		}
 	**/
+
+    // update online/offline
     updateCitizenState(state_body)
     {
     	return this.db.none('update citizen set online=${online} where name=${name}', state_body);
@@ -121,6 +123,23 @@ class dbInterface
     {
         return this.db.any('select sender as username from privateMessages where receiver=$1 ' + 
                      'UNION select receiver from privateMessages where sender=$1', [username]);
+    }
+
+    // update status
+    updateCitizenStatus(status_body)
+    {
+        this.db.none('update citizen set status=${statusCode} where name=${userName}', status_body);
+        return this.db.none(
+            'insert into statusHistory (name, status, location, timestamp)' +
+            'values (${userName}, ${statusCode}, $(location), $(timestamp))',
+            status_body
+        );
+    }
+
+    // get status history
+    getStatusHistory(name)
+    {     
+        return this.db.any('select * from statusHistory where name=$1', [name]);
     }
 }
 
