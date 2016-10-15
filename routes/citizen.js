@@ -39,31 +39,22 @@ router.get('/', function(req, res, next) {
 		db.getAllCitizen()
 		.then(function(citizen) {
 			res.send(citizen);
-			/*
-			var list = [];
-			citizen.forEach(function(user) {
-
-			});
-			console.log(citizen);*/
 		})
 		.catch(function(err) {
 			console.log(err);
 		});
-		/*
-		var user1 = {
-			name : "Raj",
-			online : true
-		};
-		var user2 = {
-			name : "Tom",
-			online : false
-		};
-		list.push(user1);
-		list.push(user2);
-
-		res.send(list);
-		*/
 	}
+});
+
+router.get('/:userName', function(req, res, next) {
+	var username = req.params.userName;
+	db.getCitizen(username)
+	.then(function(citizen) {
+		res.send(citizen);
+	})
+	.catch(function(err) {
+		console.log(err);
+	});
 });
 
 router.post('/', function (req, res) { // add a new user to directory

@@ -54,6 +54,11 @@ class dbInterface
     	return this.db.any('select name, online from citizen');
     }
 
+    getCitizen(name)
+    {
+        return this.db.any('select name, online from citizen where name=$1', [name]);
+    }
+
     /**
 		var auth_body = {
 			name : 'Ivor',

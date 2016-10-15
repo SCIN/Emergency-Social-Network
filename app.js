@@ -46,7 +46,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/citizen', citizen);
+app.use('/users', citizen);
 app.use('/messages', publicPost);
 
 // catch 404 and forward to error handler
