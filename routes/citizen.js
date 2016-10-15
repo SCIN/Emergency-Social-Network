@@ -98,8 +98,8 @@ router.post('/online/', function(req, res) { // update user online/offline
 router.get('/:userName/private', function(req, res) {
 	var username = req.params.userName;
 	db.getPrivateChatUsers(username)
-	.then(function(data) {
-		res.send(data);
+	.then(function(users) {
+		res.send(users);
   	})
   	.catch(function(err) {
   		res.send([]);

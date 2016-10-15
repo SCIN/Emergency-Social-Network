@@ -92,22 +92,22 @@ class dbInterface
 			location : "Building 19",
 		};
 	**/
-    postPublicMessage(msg_body)
+    postPublicMessage(public_msg_body)
     {
     	return this.db.none(
     		'insert into message (sender, text, timestamp, status, location)' +
     		'values (${sender}, ${text}, ${timestamp}, ${status}, ${location})',
-    		msg_body
+    		public_msg_body
     	);
     }
 
     // Send a chat message to another user
-    postPrivateMessage(msg_body)
+    postPrivateMessage(private_msg_body)
     {
         return this.db.none(
             'insert into privateMessages (sender, receiver, text, timestamp, status, location)' +
             'values (${sender}, ${receiver}, ${text}, ${timestamp}, ${status}, ${location})',
-            msg_body
+            private_msg_body
         );
     }
 
@@ -140,6 +140,22 @@ class dbInterface
     getStatusHistory(name)
     {     
         return this.db.any('select * from statusHistory where name=$1', [name]);
+    }
+
+    // get all announcements
+    getAnnouncements()
+    {
+        return this.db.any('select * from announcements');
+    }
+
+    // post an announcement
+    postAnnouncement(announcement_body)
+    {
+        return this.db.none(
+            'insert into announcements (sender, text, timestamp, location)' +
+            'values (${sender}, ${text}, ${timestamp}, ${location})',
+            announcement_body
+        );
     }
 }
 

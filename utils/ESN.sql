@@ -36,6 +36,15 @@ CREATE TABLE statusHistory (
 	timestamp TEXT
 );
 
+CREATE TABLE announcements (
+	ID SERIAL PRIMARY KEY,
+	text TEXT,
+	timestamp TEXT,
+	sender TEXT,
+	location TEXT
+);
+
+
 INSERT INTO citizen (name, password, online, status)
 	VALUES ('Ivor', 'lalala', TRUE, 'ok');
 INSERT INTO citizen (name, password, online, status)
@@ -52,3 +61,6 @@ INSERT INTO privateMessages (text, timestamp, sender, receiver, status, location
 
 INSERT INTO privateMessages (text, timestamp, sender, receiver, status, location)
 	VALUES ('Hello Ivor', '2016-2-1', 'Ivory', 'Ivor', 'ok', 'Bldg 19');
+
+INSERT INTO announcements (text, timestamp, sender, location)
+	VALUES ('Hello, this is an announcement', '2016-2-1', 'Ivory', 'Bldg 19');
