@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "echo 1"
+    "test": "mocha test"
   },
   "dependencies": {
     "angular-md5": "^0.1.10",
