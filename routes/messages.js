@@ -68,4 +68,25 @@ router.get('/private/:userName1/:userName2', function(req, res) {
   	});
 });
 
+router.get('/announcements', function(req, res) {
+	db.getAnnouncements()
+	.then(function(data) {
+		res.send(data);
+  	})
+  	.catch(function(err) {
+  		res.send([]);
+  	});
+});
+
+router.post('/announcements', function(req, res) {
+	db.postAnnouncement(req.body)
+	.then(function() {
+		res.send({result : true});
+	})
+	.catch(function(err) {
+		res.send({result : false});
+	});
+
+});
+
 module.exports = router;
