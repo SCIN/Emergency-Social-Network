@@ -8,11 +8,20 @@ machine:
   node:
     version:
       4.2.1
+  services:
+    - postgresql
+  environment:
+    NODE_ENV: test
+
+database:
+  override:
+    - createdb esn
+    - psql -d esn -f ./utils/ESN.sql
 
 dependencies:
   override:
-    - npm install --dev
+    - npm install
 
 test:
   post:
-    - npm run test
+    - npm test
