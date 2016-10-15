@@ -71,6 +71,11 @@ class dbInterface
     	return this.db.any('select * from message');
     }
 
+    getPublicMessageOfUser(name)
+    {
+        return this.db.any('select * from message where sender=$1', [name]);
+    }
+
     /**
 		var msg_body = {
 			text : "HelloFSEsss",
