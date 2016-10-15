@@ -5,7 +5,7 @@ angular.module('ESNApp')
         function createMsg(text, sender, status) {
             var d = new Date();
             // statusService.updateAddress();
-            var add = statusService.getAddress();
+            var add = statusService.getLocation();
             var message = {
                 text: text,
                 sender: sender,
