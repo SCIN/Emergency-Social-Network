@@ -9,7 +9,7 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('LogoutController', ['$state', '$http', 'usernameService', function ($state, $http, usernameService) {
+  app.controller('LogoutController', ['$http', 'usernameService', function ($state, $http, usernameService) {
     this.click = function(){
       // login to the system
       $http.post('users/online/', {
@@ -20,7 +20,7 @@
           alert('Fail to logout at server');
         }
       });
-      $state.go('login');
+      // $state.go('login');
     };
   }]);
 })();
