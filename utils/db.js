@@ -98,6 +98,24 @@ class dbInterface
     		msg_body
     	);
     }
+
+    // Send a chat message to another user
+    postPrivateMessage(msg_body)
+    {
+        
+    }
+
+    // Retrieve all private chat messages between two users
+    getPrivateMessage(username1, username2)
+    {
+
+    }
+
+    // Retrieve all users with whom a user has privately chatted with
+    getPrivateChatUsers(username)    
+    {
+        
+    }
 }
 
 var db = new dbInterface();
