@@ -1,16 +1,18 @@
 'use strict';
 
 angular.module('ESNApp')
-    .factory('MessageService', ['$http', function($http) {
-        function createMsg(text, sender, status, location) {
+    .factory('MessageService', ['statusService', function(statusService) {
+        function createMsg(text, sender, status) {
             var d = new Date();
+            // statusService.updateAddress();
+            var add = statusService.getAddress();
             var message = {
                 text: text,
                 sender: sender,
                 status: status,
                 timestamp: d.toLocaleTimeString()+' '+d.toLocaleDateString(),
                 // messageId: messageId,
-                location: location
+                location: add
             };
             return  message;
         }
