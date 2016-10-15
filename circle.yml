@@ -1,0 +1,27 @@
+## Customize the test machine
+machine:
+
+  timezone:
+    America/Los_Angeles # Set the timezone
+
+  # Version of ruby to use
+  node:
+    version:
+      4.2.1
+  services:
+    - postgresql
+  environment:
+    NODE_ENV: test
+
+database:
+  override:
+    - createdb esn
+    - psql -d esn -f ./utils/ESN.sql
+
+dependencies:
+  override:
+    - npm install
+
+test:
+  post:
+    - npm test

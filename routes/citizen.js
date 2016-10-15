@@ -94,4 +94,23 @@ router.post('/online/', function(req, res) { // update user online/offline
 	});
 });
 
+// Retrieve all users with whom a user has privately chatted with
+router.get('/:userName/private', function(req, res) {
+	var username = req.params.userName;
+	db.getPrivateChatUsers(username)
+	.then(function(data) {
+		res.send(data);
+  	})
+  	.catch(function(err) {
+  		res.send([]);
+  	});
+});
+
+// Update a user's status and create a breadcrumb
+router.post('/:userName/status/:statusCode', function(req, res) {
+	var userName = req.params.userName;
+	var statusCode = req.params.statusCode;
+	
+});
+
 module.exports = router;

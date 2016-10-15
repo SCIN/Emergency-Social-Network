@@ -98,6 +98,29 @@ class dbInterface
     		msg_body
     	);
     }
+
+    // Send a chat message to another user
+    postPrivateMessage(msg_body)
+    {
+        return this.db.none(
+            'insert into privateMessages (sender, receiver, text, timestamp, status, location)' +
+            'values (${sender}, ${receiver}, ${text}, ${timestamp}, ${status}, ${location})',
+            msg_body
+        );
+    }
+
+    // Retrieve all private chat messages between two users
+    getPrivateMessage(username1, username2)
+    {
+        return this.db.any('select * from privateMessages where sender=$1 and receiver=$2',
+                [username1], [username2]);
+    }
+
+    // Retrieve all users with whom a user has privately chatted with
+    getPrivateChatUsers(username)    
+    {
+        return this.db.any('select sender from privateMessages where receiver=$1 ', [username]);
+    }
 }
 
 var db = new dbInterface();

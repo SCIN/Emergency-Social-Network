@@ -6,7 +6,7 @@ angular.module('ESNApp')
         $scope.getAllMessages = function(){
             $http({
                 method : 'GET',
-                url : 'publicMessage',
+                url : 'message/public',
             }).success(function(data, status, headers, config) {
                         for (var i = 0; i < data.length; i++) {
                             $scope.msgs.push(data[i]);
@@ -19,25 +19,12 @@ angular.module('ESNApp')
         
         $scope.message = "";
 
-        $scope.address = '';
-        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
-        function onPositionUpdate(position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
-            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=true";
-            $http.get(url)
-                .then(function(result) {
-                    var address = result.data.results[2].formatted_address;
-                    $scope.address = address;
-                });
-        }
-
         $scope.mySocket = io();
         $scope.post = function () {
-            var msg = MessageService.createMsg($scope.message, usernameService.getUsername(), "emergency",$scope.address);
+            var msg = MessageService.createMsg($scope.message, usernameService.getUsername(), "emergency");
             $http({
                 method : 'POST',
-                url : 'publicMessage',
+                url : 'message/public',
                 data: msg
             }).success(function(data, status, headers, config) {
                 console.log(status);
