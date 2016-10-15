@@ -22,8 +22,13 @@ var io = require('socket.io')(http);
 http.listen(port, function(){
   console.log('listening on *:3000');
 });
+
+var users = [];
+var sockets = [];
+
 io.on('connection', function(socket){
     console.log("connect");
+
     socket.on('sendNewPublicMsg',function(message){
       console.log('Received a message from client');
       // emit to other clients
