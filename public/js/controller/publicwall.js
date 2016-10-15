@@ -6,7 +6,7 @@ angular.module('ESNApp')
         $scope.getAllMessages = function(){
             $http({
                 method : 'GET',
-                url : 'message/public',
+                url : 'messages/public',
             }).success(function(data, status, headers, config) {
                         for (var i = 0; i < data.length; i++) {
                             $scope.msgs.push(data[i]);
@@ -24,7 +24,7 @@ angular.module('ESNApp')
             var msg = MessageService.createMsg($scope.message, usernameService.getUsername(), "emergency");
             $http({
                 method : 'POST',
-                url : 'message/public',
+                url : 'messages/public',
                 data: msg
             }).success(function(data, status, headers, config) {
                 console.log(status);
