@@ -9,10 +9,10 @@ machine:
     version:
       4.2.1
 
-  dependencies:
-    override:
-      - npm install --dev
+dependencies:
+  override:
+    - npm install --dev
 
-  test:
-    post:
-      - npm run test
+test:
+  post:
+    - npm run test
