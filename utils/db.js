@@ -110,16 +110,17 @@ class dbInterface
     }
 
     // Retrieve all private chat messages between two users
-    getPrivateMessage(username1, username2)
+    getPrivateMessage(names)
     {
-        return this.db.any('select * from privateMessages where sender=$1 and receiver=$2',
-                [username1], [username2]);
+        return this.db.any('select * from privateMessages where sender=${username1} and receiver=${username2} ' + 
+            'UNION select * from privateMessages where sender=${username2} and receiver=${username1}',names);
     }
 
     // Retrieve all users with whom a user has privately chatted with
     getPrivateChatUsers(username)    
     {
-        return this.db.any('select sender from privateMessages where receiver=$1 ', [username]);
+        return this.db.any('select sender as username from privateMessages where receiver=$1 ' + 
+                     'UNION select receiver from privateMessages where sender=$1', [username]);
     }
 }
 

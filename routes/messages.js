@@ -55,7 +55,11 @@ router.post('/private', function(req, res) {
 router.get('/private/:userName1/:userName2', function(req, res) {
 	var username1 = req.params.userName1;
 	var username2 = req.params.userName2;
-	db.getPrivateMessage(username1, username2)
+	names = {
+		username1 : username1,
+		username2 : username2
+	}
+	db.getPrivateMessage(names)
 	.then(function(data) {
 		res.send(data);
   	})
