@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "mocha test"
+    "test": "mocha test",
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "dependencies": {
     "bower": "^1.7.9",
@@ -21,9 +22,6 @@
     "socket.io": "^1.4.8",
     "bluebird": "^3.3.4",
     "pg-promise": "^3.2.3"
-  },
-  "scripts": {
-    "bowerinstall": "./node_modules/bower/bin/bower install"
   },
   "description": "SA3 team project repo (PLEASE DO NOT CREATE ANY PUBLIC REPO INSIDE CMUSV-FSE)",
   "main": "app.js",
