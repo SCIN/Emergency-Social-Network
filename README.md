@@ -4,14 +4,23 @@
 
 SA3 team project repo (PLEASE DO NOT CREATE ANY PUBLIC REPO INSIDE CMUSV-FSE)
 
+### Environment Setup
+
+```bash
+$ npm install bower grunt-cli -g
+```
+
 ### Dependencies Install
 
 ```bash
-$ npm install bower -g
-
 $ npm install
-
 $ bower install
+```
+
+### Test
+
+```bash
+$ grunt test
 ```
 
 ### DB Install
