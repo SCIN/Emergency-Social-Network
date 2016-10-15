@@ -12,6 +12,7 @@ machine:
     - postgresql
   environment:
     NODE_ENV: test
+    DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/esn
 
 database:
   override:
