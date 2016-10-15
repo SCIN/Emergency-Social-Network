@@ -15,7 +15,7 @@
     self.hide = true;
 
     self.refresh = function(){
-      $http.get('/citizen')
+      $http.get('/users')
       .then(function(res){
         self.directory = res.data;
       });
