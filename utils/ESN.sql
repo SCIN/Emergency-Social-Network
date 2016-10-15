@@ -27,6 +27,15 @@ CREATE TABLE citizen (
 	online BOOLEAN,
 	status TEXT
 );
+
+CREATE TABLE statusHistory (
+	ID SERIAL PRIMARY KEY,
+	name TEXT,
+	status TEXT,
+	location TEXT,
+	timestamp TEXT
+);
+
 INSERT INTO citizen (name, password, online, status)
 	VALUES ('Ivor', 'lalala', TRUE, 'ok');
 INSERT INTO citizen (name, password, online, status)
