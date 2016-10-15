@@ -11,6 +11,9 @@ describe('db', function() {
       return db.getAllCitizen()
       .then(citizens => {
         // assume the db contains the seed data in utils/ESN.sql
+        // filter out unexpected names and sort with name
+        citizens = citizens.filter(a => a.name == 'Ivor' || a.name == 'Ivory')
+        .sort((a, b) => a.name.localeCompare(b.name));
         assert.strictEqual(citizens[0].name, 'Ivor');
         assert.strictEqual(citizens[1].name, 'Ivory');
       });
