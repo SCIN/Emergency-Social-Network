@@ -7,6 +7,7 @@
     "test": "mocha test"
   },
   "dependencies": {
+    "bower": "^3.10.3",
     "angular-md5": "^0.1.10",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
@@ -20,6 +21,9 @@
     "socket.io": "^1.4.8",
     "bluebird": "^3.3.4",
     "pg-promise": "^3.2.3"
+  },
+  "scripts": {
+    "bowerinstall": "./node_modules/bower/bin/bower install"
   },
   "description": "SA3 team project repo (PLEASE DO NOT CREATE ANY PUBLIC REPO INSIDE CMUSV-FSE)",
   "main": "app.js",
