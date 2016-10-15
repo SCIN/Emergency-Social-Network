@@ -13,7 +13,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
     } else if($scope.loginpanel.password.$invalid){
       alert("Please provide another password.")
     } else{
-      $http.get('citizen/check/?username=' + $scope.login.username).then(function(response) {
+      $http.get('users/check/?username=' + $scope.login.username).then(function(response) {
         console.log(response.data);
         if(response.data.result){
           $scope.checkMatch();
@@ -25,7 +25,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
   }
   // check if the password match the username
   $scope.checkMatch = function(){
-    $http.get('citizen/authenticate/?username=' + $scope.login.username + '&password='+ md5.createHash($scope.login.password)).then(function(response) {
+    $http.get('users/authenticate/?username=' + $scope.login.username + '&password='+ md5.createHash($scope.login.password)).then(function(response) {
       console.log(response.data);
       if(response.data.result){
         $scope.login();
@@ -36,7 +36,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
   }
   // register the username
   $scope.register = function(){
-    $http.post('citizen/', {
+    $http.post('users/', {
       username: $scope.login.username,
       password: md5.createHash($scope.login.password)
     }).then(function(response) {
@@ -59,7 +59,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
   }
   // login to the system
   $scope.login = function(){
-    $http.post('citizen/online/', {
+    $http.post('users/online/', {
       username: $scope.login.username,
       online: true
     }).then(function(response) {

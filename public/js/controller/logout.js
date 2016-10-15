@@ -12,7 +12,7 @@
   app.controller('LogoutController', ['$state', '$http', 'usernameService', function ($state, $http, usernameService) {
     this.click = function(){
       // login to the system
-      $http.post('citizen/online/', {
+      $http.post('users/online/', {
         username: usernameService.getUsername(),
         online: false,
       }).then(function(response) {
