@@ -14,9 +14,22 @@ app.service('statusService',['$http',  function ($http) {
     function updateStatus(statusCode) {
         var d = new Date();
         selfStatus.timeStamp = d.toLocaleTimeString()+' '+d.toLocaleDateString();
+        selfStatus.statusCode = statusCode;
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
     }
 
+    //havn't tested this function
+    function postStatus() {
+        $http({
+            method : 'POST',
+            url :" /users/"+ selfStatus.userName + "/status/"+ selfStatus.statusCode,
+            data: selfStatus
+        }).success(function(data, status, headers, config) {
+            console.log(status);
+        }).error(function(data, status, headers, config) {
+            console.log(status);
+        });
+    }
     function onPositionUpdate(position) {
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
@@ -24,7 +37,7 @@ app.service('statusService',['$http',  function ($http) {
         $http.get(url)
             .then(function(result) {
                 selfStatus.location = result.data.results[2].formatted_address;
-            });
+            }).then(postStatus());
     }
     return {
         updateStatus: updateStatus,
