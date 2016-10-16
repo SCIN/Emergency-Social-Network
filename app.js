@@ -26,8 +26,59 @@ http.listen(port, function(){
 var users = [];
 var sockets = [];
 
+var db = require('./utils/db');
+
+db.getAllCitizenStatus()
+.then(function(citizen) {
+  for(var i = 0; i < citizen.length; i++){
+  	var person = citizen[i];
+  	var user = {
+  		"clientId" : -1,
+  		"username" : person.name,
+  		"online" : false,
+  		"status" : person.status,
+  		"location" : person.location,
+  		"timestamp" : person.timestamp
+  	}
+  	users.push(user);
+  }
+})
+.catch(function(err) {
+	console.log(err);
+});
+
 io.on('connection', function(socket){
     console.log("connect");
+
+    var clientId = socket.id;
+
+    // new user
+    socket.on('regist', function(message) {
+      users.push({"clientId" : clientId, "username" : message.username, 
+      	"status" : "Undefined", "online" : true, "location" : '', timestamp : ''});
+      sockets[clientId] = socket;
+      //printAllUsers()
+    });
+
+    // a user goes online
+    socket.on('online', function (message) {
+      goOnline(clientId, message.username);
+      sockets[clientId] = socket;
+      //printAllUsers()
+    });
+
+    // a user goes offline
+    socket.on('logout', function (message) {
+    	sockets.splice(clientId, 1);
+        goOffline(clientId);
+        //printAllUsers()
+    });
+
+    socket.on('disconnect', function () {
+        sockets.splice(clientId, 1);
+        goOffline(clientId);
+        //printAllUsers()
+    });
 
     socket.on('sendNewPublicMsg',function(message){
       console.log('Received a message from client');
@@ -85,5 +136,32 @@ app.use(function(err, req, res, next) {
   });
 });
 
+function goOnline(socket_id, username) {
+	for(var i = 0; i < users.length; i++) {
+		var person = users[i];
+		if (person.username == username) {
+			person.clientId = socket_id;
+			person.online = true;
+			break;
+		}
+	}
+}
 
+function goOffline(socket_id) {    
+	for(var i = 0; i < users.length; i++) {
+		var person = users[i];
+		if (person.clientId == socket_id) {
+			person.clientId = -1;
+			person.online = false;
+			break;
+		}
+	}
+}
+
+// for testing
+function printAllUsers() {
+	for(var i = 0; i < users.length; i++) {
+		console.log(users[i]);
+	}
+}
 module.exports = app;
