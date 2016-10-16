@@ -18,6 +18,20 @@ angular.module('ESNApp')
             return  message;
         }
 
+        function createAnnounce(text) {
+            var d = new Date();
+            var sender = usernameService.getUsername();
+            var add = statusService.getLocation();
+            var annouce = {
+                text: text,
+                sender: sender,
+                timestamp: d.toLocaleTimeString()+' '+d.toLocaleDateString(),
+                // messageId: messageId,
+                location: add
+            };
+            return  annouce;
+        }
+
         function createPrivateMsg(text, receiver) {
             var d = new Date();
             var sender = usernameService.getUsername();
@@ -36,6 +50,7 @@ angular.module('ESNApp')
 
         return{
             createPubMsg: createPubMsg,
-            createPrivateMsg: createPrivateMsg
+            createPrivateMsg: createPrivateMsg,
+            createAnnounce: createAnnounce
         };
     }]);

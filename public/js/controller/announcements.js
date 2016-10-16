@@ -6,7 +6,7 @@ angular.module('ESNApp')
         $scope.getAllMessages = function(){
             $http({
                 method : 'GET',
-                url : 'messages/public'
+                url : '/messages/announcements'
             }).success(function(data, status, headers, config) {
                 for (var i = 0; i < data.length; i++) {
                     $scope.msgs.push(data[i]);
@@ -21,19 +21,19 @@ angular.module('ESNApp')
 
         $scope.mySocket = socketioService.getSocket();
         $scope.post = function () {
-            var msg = MessageService.createPubMsg($scope.message);
+            var msg = MessageService.createAnnounce($scope.message);
             $http({
                 method : 'POST',
-                url : 'messages/public',
+                url : '/messages/announcements',
                 data: msg
             }).success(function(data, status, headers, config) {
                 console.log(status);
             }).error(function(data, status, headers, config) {
                 console.log(status);
             });
-            $scope.mySocket.emit('sendNewPublicMsg',msg);
+            $scope.mySocket.emit('sendAnnouncement',msg);
         }
-        $scope.mySocket.on('newPublicMsg', function(msg){
+        $scope.mySocket.on('newAnnouncement', function(msg){
             console.log("received");
             $scope.$apply(function () {
                 $scope.msgs.push(msg);
