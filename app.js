@@ -90,7 +90,7 @@ io.on('connection', function(socket){
 
     socket.on('sendNewPrivateMsg',function(message){
       getSocketIDByUserName(message.receiver, function(socket_id) {
-        socket.emit('newPrivateMsg', socket_id, message);
+        sockets[socket_id].emit('newPrivateMsg', message);
       });
     });
 });
@@ -175,7 +175,8 @@ function getSocketIDByUserName(name, callback) {
     for(var i = 0; i < users.length; i++) {
         var person = users[i];
         if (person.username == name) {
-            return callback(person.clientId);
+            callback(person.clientId);
+            break;
         }
     }
 }
