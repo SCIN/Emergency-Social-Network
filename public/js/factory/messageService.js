@@ -1,11 +1,12 @@
 'use strict';
 
 angular.module('ESNApp')
-    .factory('MessageService', ['statusService', function(statusService) {
-        function createMsg(text, sender, status) {
+    .factory('MessageService', ['statusService','usernameService', function(statusService, usernameService) {
+        function createPubMsg(text) {
             var d = new Date();
-            // statusService.updateAddress();
+            var sender = usernameService.getUsername();
             var add = statusService.getLocation();
+            var status = statusService.getStatusCode();
             var message = {
                 text: text,
                 sender: sender,
@@ -17,7 +18,24 @@ angular.module('ESNApp')
             return  message;
         }
 
+        function createPrivateMsg(text, receiver) {
+            var d = new Date();
+            var sender = usernameService.getUsername();
+            var add = statusService.getLocation();
+            var status = statusService.getStatusCode();
+            var message = {
+                text: text,
+                sender: sender,
+                status: status,
+                timestamp: d.toLocaleTimeString()+' '+d.toLocaleDateString(),
+                receiver: receiver,
+                location: add
+            };
+            return  message;
+        }
+
         return{
-            createMsg: createMsg
+            createPubMsg: createPubMsg,
+            createPrivateMsg: createPrivateMsg
         };
     }]);
