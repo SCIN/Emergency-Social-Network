@@ -87,6 +87,12 @@ io.on('connection', function(socket){
       // emit back to sender
       socket.emit('newPublicMsg', message);
     });
+
+    socket.on('sendNewPrivateMsg',function(message){
+      getSocketIDByUserName(message.receiver, function(socket_id) {
+        socket.emit('newPrivateMsg', socket_id, message);
+      });
+    });
 });
 
 // view engine setup
@@ -164,4 +170,14 @@ function printAllUsers() {
 		console.log(users[i]);
 	}
 }
+
+function getSocketIDByUserName(name, callback) {
+    for(var i = 0; i < users.length; i++) {
+        var person = users[i];
+        if (person.username == name) {
+            return callback(person.clientId);
+        }
+    }
+}
+
 module.exports = app;
