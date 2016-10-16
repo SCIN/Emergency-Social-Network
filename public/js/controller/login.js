@@ -1,8 +1,8 @@
 'use strict';
 
 var app = angular.module('ESNApp');
-app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService',
-  function($scope, $http, md5, usernameService) {
+app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootScope', '$location', 
+  function($scope, $http, md5, usernameService, $rootScope, $location) {
   $scope.login={};
   $scope.login.username="";
   $scope.login.password="";
@@ -74,6 +74,8 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService',
   // actions after login
   $scope.onlogin = function(){
     usernameService.setUsername($scope.login.username);
+    $rootScope.$broadcast('status:login', {status: true}); 
+    $location.path('announce');
   }
 }
 ]);

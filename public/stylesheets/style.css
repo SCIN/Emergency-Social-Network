@@ -1,4 +1,4 @@
-body {
+/*body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/70/Yosemite_national_park_mirror_lake_2010u.JPG");
@@ -9,7 +9,7 @@ body {
   -moz-background-size: cover;
   -webkit-background-size: cover;
   background-size: cover;
-}
+}*/
 
 a {
   color: #00B7FF;

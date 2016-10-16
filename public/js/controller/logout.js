@@ -9,7 +9,7 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('LogoutController', ['$http', 'usernameService', function ($state, $http, usernameService) {
+  app.controller('LogoutController', ['$http', 'usernameService', function ($http, usernameService) {
     this.click = function(){
       // login to the system
       $http.post('users/online/', {

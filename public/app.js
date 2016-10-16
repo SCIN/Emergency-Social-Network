@@ -39,6 +39,10 @@
   ]);
   app.config(function($routeProvider) {
     $routeProvider.when('/', {templateUrl: 'views/login.html', reloadOnSearch: false});
+    $routeProvider.when('/public', {templateUrl: 'views/publicwall.html', reloadOnSearch: false});
+    $routeProvider.when('/announce', {templateUrl: 'views/publicwall.html', reloadOnSearch: false});
+    $routeProvider.when('/private', {templateUrl: 'views/publicwall.html', reloadOnSearch: false});
+    $routeProvider.when('/settings', {templateUrl: 'views/settings.html', reloadOnSearch: false});
   });
 
 
