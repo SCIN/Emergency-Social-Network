@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ESNApp')
-    .controller('PublicWallCtrl', ['$scope', 'MessageService','$http','usernameService','socketioService', function ($scope,MessageService,$http,usernameService,socketioService) {
+    .controller('PublicWallCtrl', ['$scope', 'MessageService','$http','socketioService', function ($scope,MessageService,$http,socketioService) {
         $scope.msgs = [];
         $scope.getAllMessages = function(){
             $http({
@@ -21,7 +21,7 @@ angular.module('ESNApp')
 
         $scope.mySocket = socketioService.getSocket();
         $scope.post = function () {
-            var msg = MessageService.createMsg($scope.message, usernameService.getUsername(), "emergency");
+            var msg = MessageService.createPubMsg($scope.message);
             $http({
                 method : 'POST',
                 url : 'messages/public',
