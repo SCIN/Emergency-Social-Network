@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('ESNApp')
-    .controller('PrivateChatCtrl', ['$scope', 'MessageService','$http','socketioService', function ($scope,MessageService,$http,socketioService) {
+    .controller('PrivateChatCtrl', ['$scope', 'MessageService','$http','socketioService','usernameService', function ($scope,MessageService,$http,socketioService,usernameService) {
         $scope.msgs = [];
         $scope.receiver = "Bob";
-        $scope.getAllMessages = function(){
+        $scope.getHistoryMessages = function(){
+            $scope.receiver = "Bob";
             $http({
                 method : 'GET',
-                url : 'messages/private'
+                url : 'messages/private'+ $scope.receiver + '/' + usernameService.getUsername()
             }).success(function(data, status, headers, config) {
                 for (var i = 0; i < data.length; i++) {
                     $scope.msgs.push(data[i]);

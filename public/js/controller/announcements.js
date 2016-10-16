@@ -1,22 +1,22 @@
 'use strict';
 
 angular.module('ESNApp')
-    .controller('PublicWallCtrl', ['$scope', 'MessageService','$http','socketioService', function ($scope,MessageService,$http,socketioService) {
+    .controller('AnnouncementCtrl', ['$scope', 'MessageService','$http','socketioService', function ($scope,MessageService,$http,socketioService) {
         $scope.msgs = [];
         $scope.getAllMessages = function(){
             $http({
                 method : 'GET',
                 url : 'messages/public'
             }).success(function(data, status, headers, config) {
-                        for (var i = 0; i < data.length; i++) {
-                            $scope.msgs.push(data[i]);
-                        }
+                for (var i = 0; i < data.length; i++) {
+                    $scope.msgs.push(data[i]);
+                }
             }).error(function(data, status, headers, config) {
                 console.log(status);
             });
         }
         $scope.getAllMessages();
-        
+
         $scope.message = "";
 
         $scope.mySocket = socketioService.getSocket();
