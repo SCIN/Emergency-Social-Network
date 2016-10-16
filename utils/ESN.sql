@@ -1,5 +1,9 @@
-DROP DATABASE IF EXISTS esn;
-CREATE DATABASE esn;
+DROP table IF EXISTS citizen;
+DROP table IF EXISTS message;
+DROP table IF EXISTS privatemessages;
+DROP table IF EXISTS statushistory;
+DROP table IF EXISTS announcements;
+
 \c esn;
 CREATE TABLE message (
 	ID SERIAL PRIMARY KEY,
@@ -25,7 +29,9 @@ CREATE TABLE citizen (
 	name TEXT,
 	password TEXT,
 	online BOOLEAN,
-	status TEXT
+	status TEXT,
+	location TEXT,
+	timestamp TEXT
 );
 
 CREATE TABLE statusHistory (

@@ -56,6 +56,11 @@ class dbInterface
     	return this.db.any('select name, online from citizen');
     }
 
+    getAllCitizenStatus()
+    {
+        return this.db.any('select name,status,location,timestamp from citizen');
+    }
+
     getCitizen(name)
     {
         return this.db.any('select name, online from citizen where name=$1', [name]);
@@ -128,7 +133,7 @@ class dbInterface
     // update status
     updateCitizenStatus(status_body)
     {
-        this.db.none('update citizen set status=${statusCode} where name=${userName}', status_body);
+        this.db.none('update citizen set status=${statusCode}, location=${location}, timestamp=${timestamp} where name=${userName}', status_body);
         return this.db.none(
             'insert into statusHistory (name, status, location, timestamp)' +
             'values (${userName}, ${statusCode}, $(location), $(timestamp))',
@@ -157,6 +162,8 @@ class dbInterface
             announcement_body
         );
     }
+
+
 }
 
 var db = new dbInterface();
