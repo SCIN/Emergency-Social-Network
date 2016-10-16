@@ -57,26 +57,43 @@ io.on('connection', function(socket){
       users.push({"clientId" : clientId, "username" : message.username, 
       	"status" : "Undefined", "online" : true, "location" : '', timestamp : ''});
       sockets[clientId] = socket;
+
+      // update directory
+      socket.broadcast.emit('refreshDirectory', users);
+      socket.emit('refreshDirectory', users);
       //printAllUsers()
     });
 
     // a user goes online
     socket.on('online', function (message) {
-      goOnline(clientId, message.username);
+      goOnline(clientId, message.username, function() {
+          // update directory
+          socket.broadcast.emit('refreshDirectory', users);
+          socket.emit('refreshDirectory', users);
+      });
       sockets[clientId] = socket;
+
       //printAllUsers()
     });
 
     // a user goes offline
     socket.on('logout', function (message) {
     	sockets.splice(clientId, 1);
-        goOffline(clientId);
+        goOffline(clientId, function () {
+          // update directory
+          socket.broadcast.emit('refreshDirectory', users);
+          socket.emit('refreshDirectory', users);
+        });
         //printAllUsers()
     });
 
     socket.on('disconnect', function () {
         sockets.splice(clientId, 1);
-        goOffline(clientId);
+        goOffline(clientId, function () {
+          // update directory
+          socket.broadcast.emit('refreshDirectory', users);
+          socket.emit('refreshDirectory', users);
+        });
         //printAllUsers()
     });
 
@@ -148,23 +165,25 @@ app.use(function(err, req, res, next) {
   });
 });
 
-function goOnline(socket_id, username) {
+function goOnline(socket_id, username, callback) {
 	for(var i = 0; i < users.length; i++) {
 		var person = users[i];
 		if (person.username == username) {
 			person.clientId = socket_id;
 			person.online = true;
+            callback();
 			break;
 		}
 	}
 }
 
-function goOffline(socket_id) {    
+function goOffline(socket_id, callback) {    
 	for(var i = 0; i < users.length; i++) {
 		var person = users[i];
 		if (person.clientId == socket_id) {
 			person.clientId = -1;
 			person.online = false;
+            callback();
 			break;
 		}
 	}
