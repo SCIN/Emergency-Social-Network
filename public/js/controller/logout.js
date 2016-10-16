@@ -21,7 +21,7 @@
           alert('Fail to logout at server');
         }
       });
-      mySocket.emit("logout", {userName: usernameService.getUsername()});
+      mySocket.emit("logout", {username: usernameService.getUsername()});
       $state.go('login');
     };
   }]);

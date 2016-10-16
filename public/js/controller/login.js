@@ -6,6 +6,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
   $scope.login={};
   $scope.login.username="";
   $scope.login.password="";
+  var mySocket = socketioService.getSocket();
   // check if the username already exists
   $scope.checkUserName = function(){
     if($scope.loginpanel.username.$invalid){
@@ -43,6 +44,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
       console.log(response.data);
       if(response.data.result){
         alert('Welcome to our emergency social network! Tips: You can share your status by selecting OK, Help or Emergency beside your user name. OK:I am OK, I do not need help. Help:I need help, but this is not a life threatening emergency. Emergency:I need help now, as this is a life threatening emergency!');
+        mySocket.emit("regist", {username: $scope.login.username});
         $scope.login();
       } else {
         alert('Please re-enter the username and/or password');
@@ -75,7 +77,6 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
   $scope.onlogin = function(){
     $state.go('main');
     usernameService.setUsername($scope.login.username);
-    var mySocket = socketioService.getSocket();
     mySocket.emit("online",{username:$scope.login.username});
   }
 }
