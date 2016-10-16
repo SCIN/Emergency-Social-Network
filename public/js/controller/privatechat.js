@@ -7,7 +7,7 @@ angular.module('ESNApp')
         $scope.getAllMessages = function(){
             $http({
                 method : 'GET',
-                url : 'messages/private',
+                url : 'messages/private'
             }).success(function(data, status, headers, config) {
                 for (var i = 0; i < data.length; i++) {
                     $scope.msgs.push(data[i]);
