@@ -15,16 +15,16 @@
           <th>Status</th>
         </tr>
       </thead>
-      <tbody>
-        <tr ng-repeat="citizen in directoryCtrl.directory | filter: {online: true} | orderBy: 'name' ">
-          <td>{{citizen.name}}</td>
-          <td>{{citizen.online ? 'online' : 'offline'}}</td>
-        </tr>
-        <tr ng-repeat="citizen in directoryCtrl.directory | filter: {online: false} | orderBy: 'name'" class="active">
-          <td>{{citizen.name}}</td>
-          <td>{{citizen.online ? 'online' : 'offline' }}</td>
-        </tr>
-      </tbody>
+      <!--<tbody>-->
+        <!--<tr ng-repeat="citizen in directoryCtrl.directory | filter: {online: true} | orderBy: 'name' ">-->
+          <!--<td>{{citizen.name}}</td>-->
+          <!--&lt;!&ndash;<td>{{citizen.online ? 'online' : 'offline'}}</td>&ndash;&gt;-->
+        <!--</tr>-->
+        <!--<tr ng-repeat="citizen in directoryCtrl.directory | filter: {online: false} | orderBy: 'name'" class="active">-->
+          <!--<td>{{citizen.name}}</td>-->
+          <!--&lt;!&ndash;<td>{{citizen.online ? 'online' : 'offline' }}</td>&ndash;&gt;-->
+        <!--</tr>-->
+      <!--</tbody>-->
     </table>
   </div>
 </div>
