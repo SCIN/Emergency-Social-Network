@@ -81,11 +81,17 @@ io.on('connection', function(socket){
     });
 
     socket.on('sendNewPublicMsg',function(message){
-      console.log('Received a message from client');
       // emit to other clients
       socket.broadcast.emit('newPublicMsg', message);
       // emit back to sender
       socket.emit('newPublicMsg', message);
+    });
+
+    socket.on('sendAnnouncement',function(message){
+      // emit to other clients
+      socket.broadcast.emit('newAnnouncement', message);
+      // emit back to sender
+      socket.emit('newAnnouncement', message);
     });
 
     socket.on('sendNewPrivateMsg',function(message){
