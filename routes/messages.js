@@ -28,6 +28,7 @@ router.post('/public', function(req, res) {
 	console.log(req.body);
 	db.postPublicMessage(req.body)
 	.then(function() {
+		res.status(201);
 		res.send({result : true});
 		console.log('post success!')
 	})
@@ -42,6 +43,7 @@ router.post('/public', function(req, res) {
 router.post('/private', function(req, res) {
 	db.postPrivateMessage(req.body)
 	.then(function() {
+		res.status(201);
 		res.send({result : true});
 		console.log('post success!')
 	})
@@ -81,6 +83,7 @@ router.get('/announcements', function(req, res) {
 router.post('/announcements', function(req, res) {
 	db.postAnnouncement(req.body)
 	.then(function() {
+		res.status(201);
 		res.send({result : true});
 	})
 	.catch(function(err) {
