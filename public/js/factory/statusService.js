@@ -1,8 +1,8 @@
 var app = angular.module('ESNApp');
 
 // share the username among the controllers
-app.service('statusService',['$http',  function ($http) {
-
+app.service('statusService',['$http', 'socketioService',  function ($http,socketioService) {
+    var mySocket = socketioService.getSocket();
     var selfStatus = {
         statusCode:'Undefined',
         location:'unknown',
@@ -29,6 +29,7 @@ app.service('statusService',['$http',  function ($http) {
         }).error(function(data, status, headers, config) {
             console.log(status);
         });
+        mySocket.emit("shareStatus", selfStatus);
     }
     function onPositionUpdate(position) {
         var lat = position.coords.latitude;
@@ -47,9 +48,7 @@ app.service('statusService',['$http',  function ($http) {
         getStatusCode:function () {
             return selfStatus.statusCode;
         },
-        getStatus:function () {
-            return selfStatus;
-        },
+        selfStatus: selfStatus,
         setUsername:function (Username) {
             selfStatus.userName = Username;
         }
