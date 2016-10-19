@@ -3,7 +3,14 @@
 angular.module('ESNApp')
     .controller('PrivateChatCtrl', ['$scope', 'MessageService','$http','socketioService','usernameService', function ($scope,MessageService,$http,socketioService,usernameService) {
         $scope.msgs = [];
-        $scope.receiver = "Bob";
+        $scope.receiver = "";
+
+        $scope.$on('chat:private', function(obj, data){
+            console.log(obj);
+            console.log(data);
+            $scope.receiver = data.username;
+        });
+
         $scope.getHistoryMessages = function(){
             $scope.receiver = "Bob";
             $http({

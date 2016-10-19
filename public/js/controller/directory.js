@@ -9,14 +9,20 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('DirectoryCtrl',['$scope', 'socketioService', function ($scope, $http, socketioService) {
+  app.controller('DirectoryCtrl',['$scope', 'socketioService','$http','$location','$rootScope', 
+    function ($scope, socketioService, $http, $location, $rootScope) {
     $scope.directory = [];
     $scope.hide = true;
     $scope.mySocket = socketioService.getSocket();
     $scope.mySocket.on('refreshDirectory', function(newDirectory){
       $scope.$apply(function () {
+        console.log(newDirectory);
         $scope.directory = newDirectory;
       });
     });
-  });
+    this.chat = function(data){
+      $rootScope.$broadcast('chat:private', {username: data.username}); 
+      $location.path('private');
+    }
+  }]);
 })();

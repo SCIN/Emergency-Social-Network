@@ -1,15 +1,17 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Emergency Social Network</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-controller="LogoutController as logoutCtrl"><a href="#" ng-click='logoutCtrl.click()'>Log Out</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+
+<div ng-controller="navCtrl" class="navbar navbar-app navbar-absolute-top">
+  <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
+    ESN
+  </div>
+  <div class="btn-group pull-left">
+    <div ui-toggle="uiSidebarLeft" class="btn sidebar-toggle">
+      <i class="fa fa-bars"></i> Menu
+    </div>
+  </div>
+  <div class="btn-group pull-right" ui-yield-to="navbarAction">
+    <div ui-toggle="uiSidebarRight" ng-show="loggedin" class="btn sidebar-right-toggle">
+      <i class="fa fa-comment"></i> Directory
+    </div>
+  </div>
+</div>

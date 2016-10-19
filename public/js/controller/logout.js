@@ -9,7 +9,8 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('LogoutController', ['$state', '$http', 'usernameService','socketioService', function ($state, $http, usernameService,socketioService) {
+  app.controller('LogoutController', ['$http', 'usernameService','socketioService', '$location',
+     function ($http, usernameService, socketioService, $location) {
     var mySocket = socketioService.getSocket();
     this.click = function(){
       // login to the system
@@ -22,7 +23,7 @@
         }
       });
       mySocket.emit("logout", {username: usernameService.getUsername()});
-      $state.go('login');
+      $location.path('');
     };
   }]);
 })();

@@ -1,8 +1,9 @@
 'use strict';
 
 var app = angular.module('ESNApp');
-app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state', 'socketioService',
-  function($scope, $http, md5, usernameService, $state,socketioService) {
+
+app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootScope', '$location', 'socketioService',
+  function($scope, $http, md5, usernameService, $rootScope, $location, socketioService) {
   $scope.login={};
   $scope.login.username="";
   $scope.login.password="";
@@ -75,9 +76,10 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$state
   }
   // actions after login
   $scope.onlogin = function(){
-    $state.go('main');
     usernameService.setUsername($scope.login.username);
     mySocket.emit("online",{username:$scope.login.username});
+    $rootScope.$broadcast('status:login', {status: true}); 
+    $location.path('announce');
   }
 }
 ]);
