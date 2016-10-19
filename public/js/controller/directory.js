@@ -9,18 +9,18 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('DirectoryCtrl',['$scope', 'socketioService','$http','$location','$rootScope', 'statusService',
-    function ($scope, socketioService, $http, $location, $rootScope, statusService) {
+  app.controller('DirectoryCtrl',['$scope', 'socketioService','$http','$location','$rootScope', 'chatService', 'statusService',
+    function ($scope, socketioService, $http, $location, $rootScope, chatService, statusService) {
     $scope.directory = [];
     $scope.hide = true;
     $scope.mySocket = socketioService.getSocket();
     $scope.mySocket.on('refreshDirectory', function(newDirectory){
       $scope.$apply(function () {
-        console.log(newDirectory);
         $scope.directory = newDirectory;
       });
     });
     this.chat = function(data){
+      chatService.setTargetName(data.username);
       $rootScope.$broadcast('chat:private', {username: data.username}); 
       $location.path('private');
     };
