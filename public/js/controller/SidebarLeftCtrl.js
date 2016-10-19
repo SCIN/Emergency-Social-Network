@@ -13,6 +13,7 @@
   	$scope.loggedin = false;
     $scope.$on('status:login',function(obj, data){
     	$scope.loggedin = data.status;
+        $scope.username = usernameService.getUsername();
     });
   }]);
 })();
