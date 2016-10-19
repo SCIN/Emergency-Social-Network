@@ -9,13 +9,16 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
         userName:'User',
         timeStamp:'unknown'
     }
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate,postStatus,{timeout:1000})
+        else postStatus();
 
     function updateStatus(statusCode) {
         var d = new Date();
         selfStatus.timeStamp = d.toLocaleTimeString()+' '+d.toLocaleDateString();
         selfStatus.statusCode = statusCode;
-        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+        if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate,postStatus,{timeout:1000})
+            else postStatus();
+
     }
 
     //havn't tested this function
@@ -30,6 +33,10 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
             console.log(status);
         });
         mySocket.emit("shareStatus", selfStatus);
+    }
+
+    function errorCallback(){
+
     }
     function onPositionUpdate(position) {
         var lat = position.coords.latitude;
