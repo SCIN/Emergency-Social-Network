@@ -23,5 +23,8 @@
         'alert-danger': $scope.level == 'alert-danger',
       }
     };
+    $scope.clear = function(){
+      alertService.clear();
+    };
   }]);
 })();

@@ -15,6 +15,15 @@
       alert: function(message, alertLevel){
         body = message;
         level = alertLevel;
+        // clear after 3 seconds;
+        setTimeout(function(){
+          body = '';
+          level = '';
+        }, 3000);
+      },
+      clear: function(){
+        body = '';
+        level = '';
       },
     };
   });
