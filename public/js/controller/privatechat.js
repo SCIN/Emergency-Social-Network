@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('ESNApp')
-    .controller('PrivateChatCtrl', ['$scope', 'MessageService','$http','socketioService','usernameService', function ($scope,MessageService,$http,socketioService,usernameService) {
+    .controller('PrivateChatCtrl', ['$scope', 'MessageService','$http','socketioService','usernameService', 'chatService', 
+        function ($scope,MessageService,$http,socketioService,usernameService, chatService) {
         $scope.msgs = [];
-        $scope.receiver = "";
+        $scope.receiver = chatService.getTargetName();
 
         $scope.$on('chat:private', function(obj, data){
             console.log(obj);
