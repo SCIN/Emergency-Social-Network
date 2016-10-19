@@ -9,8 +9,8 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('DirectoryCtrl',['$scope', 'socketioService','$http','$location','$rootScope', 'chatService',
-    function ($scope, socketioService, $http, $location, $rootScope, chatService) {
+  app.controller('DirectoryCtrl',['$scope', 'socketioService','$http','$location','$rootScope', 'chatService', 'statusService',
+    function ($scope, socketioService, $http, $location, $rootScope, chatService, statusService) {
     $scope.directory = [];
     $scope.hide = true;
     $scope.mySocket = socketioService.getSocket();
@@ -23,6 +23,9 @@
       chatService.setTargetName(data.username);
       $rootScope.$broadcast('chat:private', {username: data.username}); 
       $location.path('private');
-    }
+    };
+    $scope.getIconClass = function(status){
+      return statusService.getIconClass(status);
+    };
   }]);
 })();

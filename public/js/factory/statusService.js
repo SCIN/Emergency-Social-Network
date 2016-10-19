@@ -51,6 +51,14 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
         selfStatus: selfStatus,
         setUsername:function (Username) {
             selfStatus.userName = Username;
-        }
+        },
+        getIconClass: function(status) {
+          return {
+            'label-danger': status == 'emergency',
+            'label-success': status == 'ok',
+            'label-warning': status == 'help',
+            'label-default': status == 'undefined',
+          };
+        },
     };
 }]);
