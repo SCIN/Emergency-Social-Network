@@ -21,6 +21,8 @@
     });
     $scope.mySocket.on('newPrivateMsg', function(msg){
       $scope.$apply(function(){
+        // if the sender is who we are talking to => do not update unread numbers
+        if (chatService.getTargetName() == msg.sender) return;
         $scope.directory.forEach(function(citizen){
           if (citizen.username == msg.sender){
             citizen.unread++;
@@ -33,6 +35,12 @@
       chatService.setTargetName(data.username);
       $rootScope.$broadcast('chat:private', {username: data.username}); 
       $location.path('private');
+      // clear up all the unread numbers for the person we are about to talk to
+      $scope.directory.forEach(function(citizen){
+        if (citizen.username == data.username){
+          citizen.unread = 0;
+        }
+      });
     };
     $scope.getIconClass = function(status){
       return statusService.getIconClass(status);
