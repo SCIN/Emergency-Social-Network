@@ -23,7 +23,8 @@
       $scope.$apply(function(){
         // if the sender is who we are talking to => do not update unread numbers
         if (chatService.getTargetName() == msg.sender) return;
-        alertService.alert('new message from ' + msg.sender, 'alert-info');
+        // alertService.alert('new message from ' + msg.sender, 'alert-info');
+        alert('new message from ' + msg.sender);
         $scope.directory.forEach(function(citizen){
           if (citizen.username == msg.sender){
             citizen.unread++;
