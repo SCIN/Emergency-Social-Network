@@ -87,6 +87,7 @@ router.post('/online/', function(req, res) { // update user online/offline
 	};
 	db.updateCitizenState(state_body)
 	.then(function() {
+		res.status(201);
 		res.send({result : true});
 		//console.log('update success!');
 	})
@@ -124,7 +125,7 @@ router.post('/:userName/status/:statusCode', function(req, res) {
 	}
 	db.updateCitizenStatus(status)
 	.then(function() {
-		res.status(200);
+		res.status(201);
 		res.send({result : true});
 	})
 	.catch(function(err) {
