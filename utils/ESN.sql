@@ -4,7 +4,6 @@ DROP table IF EXISTS privatemessages;
 DROP table IF EXISTS statushistory;
 DROP table IF EXISTS announcements;
 
-\c esn;
 CREATE TABLE message (
 	ID SERIAL PRIMARY KEY,
 	text TEXT,
