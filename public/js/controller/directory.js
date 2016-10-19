@@ -19,6 +19,16 @@
         $scope.directory = newDirectory;
       });
     });
+    $scope.mySocket.on('newPrivateMsg', function(msg){
+      $scope.$apply(function(){
+        $scope.directory.forEach(function(citizen){
+          if (citizen.username == msg.sender){
+            citizen.unread++;
+            citizen.unread = citizen.unread || 1; // if unread is undefined => set to 1
+          }
+        });
+      });
+    });
     this.chat = function(data){
       chatService.setTargetName(data.username);
       $rootScope.$broadcast('chat:private', {username: data.username}); 
