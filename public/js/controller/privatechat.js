@@ -41,6 +41,7 @@ angular.module('ESNApp')
             });
             $scope.mySocket.emit('sendNewPrivateMsg',msg);
             $scope.msgs.push(msg);
+            $scope.message = "";
         }
         $scope.mySocket.on('newPrivateMsg', function(msg){
             $scope.$apply(function () {
