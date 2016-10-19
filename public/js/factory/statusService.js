@@ -9,7 +9,6 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
         userName:'User',
         timeStamp:'unknown'
     }
-    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate,postStatus,{timeout:1000});
 
     function updateStatus(statusCode) {
         var d = new Date();
