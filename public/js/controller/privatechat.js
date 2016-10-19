@@ -10,17 +10,15 @@ angular.module('ESNApp')
             console.log(obj);
             console.log(data);
             $scope.receiver = data.username;
+            $scope.getHistoryMessages();
         });
 
         $scope.getHistoryMessages = function(){
-            $scope.receiver = "Bob";
             $http({
                 method : 'GET',
-                url : 'messages/private'+ $scope.receiver + '/' + usernameService.getUsername()
+                url : 'messages/private/'+ $scope.receiver + '/' + usernameService.getUsername()
             }).success(function(data, status, headers, config) {
-                for (var i = 0; i < data.length; i++) {
-                    $scope.msgs.push(data[i]);
-                }
+                $scope.msgs = data;
             }).error(function(data, status, headers, config) {
                 console.log(status);
             });
@@ -44,9 +42,10 @@ angular.module('ESNApp')
             $scope.msgs.push(msg);
         }
         $scope.mySocket.on('newPrivateMsg', function(msg){
-            console.log(msg);
             $scope.$apply(function () {
-                $scope.msgs.push(msg);
+                if(msg.sender === $scope.receiver) {
+                    $scope.msgs.push(msg);
+                }
             });
         });
     }]);
