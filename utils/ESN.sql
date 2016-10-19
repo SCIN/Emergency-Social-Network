@@ -1,5 +1,9 @@
-DROP DATABASE IF EXISTS esn;
-CREATE DATABASE esn;
+DROP table IF EXISTS citizen;
+DROP table IF EXISTS message;
+DROP table IF EXISTS privatemessages;
+DROP table IF EXISTS statushistory;
+DROP table IF EXISTS announcements;
+
 \c esn;
 CREATE TABLE message (
 	ID SERIAL PRIMARY KEY,
@@ -25,8 +29,28 @@ CREATE TABLE citizen (
 	name TEXT,
 	password TEXT,
 	online BOOLEAN,
-	status TEXT
+	status TEXT,
+	location TEXT,
+	timestamp TEXT
 );
+
+CREATE TABLE statusHistory (
+	ID SERIAL PRIMARY KEY,
+	name TEXT,
+	status TEXT,
+	location TEXT,
+	timestamp TEXT
+);
+
+CREATE TABLE announcements (
+	ID SERIAL PRIMARY KEY,
+	text TEXT,
+	timestamp TEXT,
+	sender TEXT,
+	location TEXT
+);
+
+
 INSERT INTO citizen (name, password, online, status)
 	VALUES ('Ivor', 'lalala', TRUE, 'ok');
 INSERT INTO citizen (name, password, online, status)
@@ -43,3 +67,6 @@ INSERT INTO privateMessages (text, timestamp, sender, receiver, status, location
 
 INSERT INTO privateMessages (text, timestamp, sender, receiver, status, location)
 	VALUES ('Hello Ivor', '2016-2-1', 'Ivory', 'Ivor', 'ok', 'Bldg 19');
+
+INSERT INTO announcements (text, timestamp, sender, location)
+	VALUES ('Hello, this is an announcement', '2016-2-1', 'Ivory', 'Bldg 19');

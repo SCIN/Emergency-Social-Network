@@ -26,15 +26,95 @@ http.listen(port, function(){
 var users = [];
 var sockets = [];
 
+var db = require('./utils/db');
+
+db.getAllCitizenStatus()
+.then(function(citizen) {
+  for(var i = 0; i < citizen.length; i++){
+  	var person = citizen[i];
+  	var user = {
+  		"clientId" : -1,
+  		"username" : person.name,
+  		"online" : false,
+  		"status" : person.status,
+  		"location" : person.location,
+  		"timestamp" : person.timestamp
+  	}
+  	users.push(user);
+  }
+})
+.catch(function(err) {
+	console.log(err);
+});
+
 io.on('connection', function(socket){
     console.log("connect");
 
+    var clientId = socket.id;
+
+    // new user
+    socket.on('regist', function(message) {
+      users.push({"clientId" : clientId, "username" : message.username, 
+      	"status" : "Undefined", "online" : true, "location" : '', timestamp : ''});
+      sockets[clientId] = socket;
+
+      // update directory
+      socket.broadcast.emit('refreshDirectory', users);
+      socket.emit('refreshDirectory', users);
+      //printAllUsers()
+    });
+
+    // a user goes online
+    socket.on('online', function (message) {
+      goOnline(clientId, message.username, function() {
+          // update directory
+          socket.broadcast.emit('refreshDirectory', users);
+          socket.emit('refreshDirectory', users);
+      });
+      sockets[clientId] = socket;
+
+      //printAllUsers()
+    });
+
+    // a user goes offline
+    socket.on('logout', function (message) {
+    	sockets.splice(clientId, 1);
+        goOffline(clientId, function () {
+          // update directory
+          socket.broadcast.emit('refreshDirectory', users);
+          socket.emit('refreshDirectory', users);
+        });
+        //printAllUsers()
+    });
+
+    socket.on('disconnect', function () {
+        sockets.splice(clientId, 1);
+        goOffline(clientId, function () {
+          // update directory
+          socket.broadcast.emit('refreshDirectory', users);
+          socket.emit('refreshDirectory', users);
+        });
+        //printAllUsers()
+    });
+
     socket.on('sendNewPublicMsg',function(message){
-      console.log('Received a message from client');
       // emit to other clients
       socket.broadcast.emit('newPublicMsg', message);
       // emit back to sender
       socket.emit('newPublicMsg', message);
+    });
+
+    socket.on('sendAnnouncement',function(message){
+      // emit to other clients
+      socket.broadcast.emit('newAnnouncement', message);
+      // emit back to sender
+      socket.emit('newAnnouncement', message);
+    });
+
+    socket.on('sendNewPrivateMsg',function(message){
+      getSocketIDByUserName(message.receiver, function(socket_id) {
+        sockets[socket_id].emit('newPrivateMsg', message);
+      });
     });
 });
 
@@ -85,5 +165,45 @@ app.use(function(err, req, res, next) {
   });
 });
 
+function goOnline(socket_id, username, callback) {
+	for(var i = 0; i < users.length; i++) {
+		var person = users[i];
+		if (person.username == username) {
+			person.clientId = socket_id;
+			person.online = true;
+            callback();
+			break;
+		}
+	}
+}
+
+function goOffline(socket_id, callback) {    
+	for(var i = 0; i < users.length; i++) {
+		var person = users[i];
+		if (person.clientId == socket_id) {
+			person.clientId = -1;
+			person.online = false;
+            callback();
+			break;
+		}
+	}
+}
+
+// for testing
+function printAllUsers() {
+	for(var i = 0; i < users.length; i++) {
+		console.log(users[i]);
+	}
+}
+
+function getSocketIDByUserName(name, callback) {
+    for(var i = 0; i < users.length; i++) {
+        var person = users[i];
+        if (person.username == name) {
+            callback(person.clientId);
+            break;
+        }
+    }
+}
 
 module.exports = app;

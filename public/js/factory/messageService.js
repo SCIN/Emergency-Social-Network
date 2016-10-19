@@ -1,21 +1,56 @@
 'use strict';
 
 angular.module('ESNApp')
-    .factory('MessageService', ['$http', function($http) {
-        function createMsg(text, sender, status, location) {
+    .factory('MessageService', ['statusService','usernameService', function(statusService, usernameService) {
+        function createPubMsg(text) {
             var d = new Date();
+            var sender = usernameService.getUsername();
+            var add = statusService.getLocation();
+            var status = statusService.getStatusCode();
             var message = {
                 text: text,
                 sender: sender,
                 status: status,
                 timestamp: d.toLocaleTimeString()+' '+d.toLocaleDateString(),
                 // messageId: messageId,
-                location: location
+                location: add
+            };
+            return  message;
+        }
+
+        function createAnnounce(text) {
+            var d = new Date();
+            var sender = usernameService.getUsername();
+            var add = statusService.getLocation();
+            var annouce = {
+                text: text,
+                sender: sender,
+                timestamp: d.toLocaleTimeString()+' '+d.toLocaleDateString(),
+                // messageId: messageId,
+                location: add
+            };
+            return  annouce;
+        }
+
+        function createPrivateMsg(text, receiver) {
+            var d = new Date();
+            var sender = usernameService.getUsername();
+            var add = statusService.getLocation();
+            var status = statusService.getStatusCode();
+            var message = {
+                text: text,
+                sender: sender,
+                status: status,
+                timestamp: d.toLocaleTimeString()+' '+d.toLocaleDateString(),
+                receiver: receiver,
+                location: add
             };
             return  message;
         }
 
         return{
-            createMsg: createMsg
+            createPubMsg: createPubMsg,
+            createPrivateMsg: createPrivateMsg,
+            createAnnounce: createAnnounce
         };
     }]);

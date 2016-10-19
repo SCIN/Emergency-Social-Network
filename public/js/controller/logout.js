@@ -9,7 +9,9 @@
  */
 (function(){
   var app = angular.module('ESNApp');
-  app.controller('LogoutController', ['$http', 'usernameService', function ($http, usernameService) {
+  app.controller('LogoutController', ['$http', 'usernameService','socketioService', '$location',
+     function ($http, usernameService, socketioService, $location) {
+    var mySocket = socketioService.getSocket();
     this.click = function(){
       // login to the system
       $http.post('users/online/', {
@@ -20,7 +22,8 @@
           alert('Fail to logout at server');
         }
       });
-      // $state.go('login');
+      mySocket.emit("logout", {username: usernameService.getUsername()});
+      $location.path('');
     };
   }]);
 })();

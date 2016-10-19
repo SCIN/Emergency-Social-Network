@@ -13,7 +13,7 @@ class dbInterface
 			promiseLib: this.promise
 		};
 		this.pgp = require('pg-promise')(options);
-		let connectionString = 'postgres://localhost:5432/esn';
+		let connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/esn';
 		this.db = this.pgp(connectionString);
     }
 
@@ -39,6 +39,8 @@ class dbInterface
 			online : false
 		}
 	**/
+
+    // update online/offline
     updateCitizenState(state_body)
     {
     	return this.db.none('update citizen set online=${online} where name=${name}', state_body);
@@ -52,6 +54,11 @@ class dbInterface
     getAllCitizen()
     {
     	return this.db.any('select name, online from citizen');
+    }
+
+    getAllCitizenStatus()
+    {
+        return this.db.any('select name,status,location,timestamp from citizen');
     }
 
     getCitizen(name)
@@ -90,37 +97,73 @@ class dbInterface
 			location : "Building 19",
 		};
 	**/
-    postPublicMessage(msg_body)
+    postPublicMessage(public_msg_body)
     {
     	return this.db.none(
     		'insert into message (sender, text, timestamp, status, location)' +
     		'values (${sender}, ${text}, ${timestamp}, ${status}, ${location})',
-    		msg_body
+    		public_msg_body
     	);
     }
 
     // Send a chat message to another user
-    postPrivateMessage(msg_body)
+    postPrivateMessage(private_msg_body)
     {
         return this.db.none(
             'insert into privateMessages (sender, receiver, text, timestamp, status, location)' +
             'values (${sender}, ${receiver}, ${text}, ${timestamp}, ${status}, ${location})',
-            msg_body
+            private_msg_body
         );
     }
 
     // Retrieve all private chat messages between two users
-    getPrivateMessage(username1, username2)
+    getPrivateMessage(names)
     {
-        return this.db.any('select * from privateMessages where sender=$1 and receiver=$2',
-                [username1], [username2]);
+        return this.db.any('select * from privateMessages where sender=${username1} and receiver=${username2} ' + 
+            'UNION select * from privateMessages where sender=${username2} and receiver=${username1}',names);
     }
 
     // Retrieve all users with whom a user has privately chatted with
     getPrivateChatUsers(username)    
     {
-        return this.db.any('select sender from privateMessages where receiver=$1 ', [username]);
+        return this.db.any('select sender as username from privateMessages where receiver=$1 ' + 
+                     'UNION select receiver from privateMessages where sender=$1', [username]);
     }
+
+    // update status
+    updateCitizenStatus(status_body)
+    {
+        this.db.none('update citizen set status=${statusCode}, location=${location}, timestamp=${timestamp} where name=${userName}', status_body);
+        return this.db.none(
+            'insert into statusHistory (name, status, location, timestamp)' +
+            'values (${userName}, ${statusCode}, $(location), $(timestamp))',
+            status_body
+        );
+    }
+
+    // get status history
+    getStatusHistory(name)
+    {     
+        return this.db.any('select * from statusHistory where name=$1', [name]);
+    }
+
+    // get all announcements
+    getAnnouncements()
+    {
+        return this.db.any('select * from announcements');
+    }
+
+    // post an announcement
+    postAnnouncement(announcement_body)
+    {
+        return this.db.none(
+            'insert into announcements (sender, text, timestamp, location)' +
+            'values (${sender}, ${text}, ${timestamp}, ${location})',
+            announcement_body
+        );
+    }
+
+
 }
 
 var db = new dbInterface();

@@ -55,13 +55,38 @@ router.post('/private', function(req, res) {
 router.get('/private/:userName1/:userName2', function(req, res) {
 	var username1 = req.params.userName1;
 	var username2 = req.params.userName2;
-	db.getPrivateMessage(username1, username2)
+	names = {
+		username1 : username1,
+		username2 : username2
+	}
+	db.getPrivateMessage(names)
 	.then(function(data) {
 		res.send(data);
   	})
   	.catch(function(err) {
   		res.send([]);
   	});
+});
+
+router.get('/announcements', function(req, res) {
+	db.getAnnouncements()
+	.then(function(data) {
+		res.send(data);
+  	})
+  	.catch(function(err) {
+  		res.send([]);
+  	});
+});
+
+router.post('/announcements', function(req, res) {
+	db.postAnnouncement(req.body)
+	.then(function() {
+		res.send({result : true});
+	})
+	.catch(function(err) {
+		res.send({result : false});
+	});
+
 });
 
 module.exports = router;

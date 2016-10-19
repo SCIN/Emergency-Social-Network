@@ -98,8 +98,8 @@ router.post('/online/', function(req, res) { // update user online/offline
 router.get('/:userName/private', function(req, res) {
 	var username = req.params.userName;
 	db.getPrivateChatUsers(username)
-	.then(function(data) {
-		res.send(data);
+	.then(function(users) {
+		res.send(users);
   	})
   	.catch(function(err) {
   		res.send([]);
@@ -110,7 +110,35 @@ router.get('/:userName/private', function(req, res) {
 router.post('/:userName/status/:statusCode', function(req, res) {
 	var userName = req.params.userName;
 	var statusCode = req.params.statusCode;
-	
+
+	var location = req.body.location;
+	var timestamp = req.body.timestamp;
+
+	var status = {
+		userName : userName,
+		statusCode : statusCode,
+		location : location,
+		timestamp : timestamp
+	}
+	db.updateCitizenStatus(status)
+	.then(function() {
+		res.send({result : true});
+	})
+	.catch(function(err) {
+		res.send({result : false});
+	});
+});
+
+// Retrieve a user's status history (all breadcrumbs)
+router.get('/:userName/statuscrumbs', function(req, res) {
+	var userName = req.params.userName;
+	db.getStatusHistory(userName)
+	.then(function(breadcrumbs) {
+		res.send(breadcrumbs);
+  	})
+  	.catch(function(err) {
+  		res.send([]);
+  	});
 });
 
 module.exports = router;

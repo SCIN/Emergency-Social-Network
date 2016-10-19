@@ -1,22 +1,18 @@
 <div id="directory" ng-controller="DirectoryCtrl as directoryCtrl" class="panel panel-default" ng-click="directoryCtrl.refresh()">
   <div class="panel-heading">
     <h3 class="panel-title">ESN Directory
-      <span class="glyphicon pull-right"
-        ng-class="{ 'glyphicon-plus': directoryCtrl.hide,  'glyphicon-minus': !directoryCtrl.hide}"
-        ng-click="directoryCtrl.hide = !directoryCtrl.hide"
-      ><span>
     </h3>
   </div>
   <div class="panel-body">
     <div class="scrollable">
       <div class="scrollable-content">
         <div class="list-group" ui-toggle="uiSidebarRight">
-          <a class="list-group-item media" ng-click="directoryCtrl.chat(citizen);" ng-repeat="citizen in directoryCtrl.directory  | orderBy: 'name' | orderBy: '-online'">
+          <a class="list-group-item media" ng-click="directoryCtrl.chat(citizen);"  ng-repeat="citizen in directory | orderBy: 'username' | orderBy: '-online'">
               <div class="pull-left">
                   <i class="fa fa-user chat-user-avatar"></i>
               </div>
               <div class="media-body">
-                  <h5 class="media-heading">{{citizen.name}}</h5>
+                  <h5 class="media-heading">{{citizen.username}}</h5>
                   <small ng-switch on="citizen.online">
                       <span ng-switch-when="true">
                           <span class="label label-success">ONLINE</span>
@@ -30,6 +26,11 @@
           </a>
         </div>
       </div>
-    </div>   
+    </div>
   </div>
 </div>
+
+
+
+
+  
