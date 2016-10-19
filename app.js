@@ -92,7 +92,6 @@ io.on('connection', function(socket){
         goOffline(clientId, function () {
           // update directory
           socket.broadcast.emit('refreshDirectory', users);
-          socket.emit('refreshDirectory', users);
         });
         //printAllUsers()
     });
@@ -114,6 +113,12 @@ io.on('connection', function(socket){
     socket.on('sendNewPrivateMsg',function(message){
       getSocketIDByUserName(message.receiver, function(socket_id) {
         sockets[socket_id].emit('newPrivateMsg', message);
+      });
+    });
+
+    socket.on('shareStatus', function(message) {
+      updateStatus(message, function(socket_id) {
+        io.sockets.emit('refreshDirectory', users);
       });
     });
 });
@@ -206,4 +211,16 @@ function getSocketIDByUserName(name, callback) {
     }
 }
 
+function updateStatus(data, callback) {
+    for(var i = 0; i < users.length; i++) {
+        var person = users[i];
+        if (person.username == data.userName) {
+            person.status = data.statusCode;
+            person.location = data.location;
+            person.timestamp = data.timeStamp;
+            callback(person.clientId);
+            break;
+        }
+    }
+}
 module.exports = app;

@@ -50,9 +50,11 @@ router.get('/:userName', function(req, res, next) {
 	var username = req.params.userName;
 	db.getCitizen(username)
 	.then(function(citizen) {
+		res.status(200);
 		res.send(citizen);
 	})
 	.catch(function(err) {
+		res.status(404);
 		console.log(err);
 	});
 });
@@ -122,9 +124,11 @@ router.post('/:userName/status/:statusCode', function(req, res) {
 	}
 	db.updateCitizenStatus(status)
 	.then(function() {
+		res.status(200);
 		res.send({result : true});
 	})
 	.catch(function(err) {
+		res.status(404);
 		res.send({result : false});
 	});
 });
@@ -137,6 +141,7 @@ router.get('/:userName/statuscrumbs', function(req, res) {
 		res.send(breadcrumbs);
   	})
   	.catch(function(err) {
+  		res.status(404);
   		res.send([]);
   	});
 });
