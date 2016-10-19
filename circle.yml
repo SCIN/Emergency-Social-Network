@@ -26,3 +26,9 @@ dependencies:
 test:
   post:
     - npm test
+
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: esn-sa3
