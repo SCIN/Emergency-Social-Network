@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('ESNApp')
-    .controller('PrivateChatCtrl', ['$scope', 'MessageService','$http','socketioService','usernameService', 'chatService', 
-        function ($scope,MessageService,$http,socketioService,usernameService, chatService) {
+    .controller('PrivateChatCtrl', ['$scope', 'MessageService','$http','socketioService','usernameService', 'chatService', 'statusService',
+        function ($scope,MessageService,$http,socketioService,usernameService, chatService, statusService) {
         $scope.msgs = [];
         $scope.receiver = chatService.getTargetName();
 
@@ -49,4 +49,7 @@ angular.module('ESNApp')
                 $scope.msgs.push(msg);
             });
         });
+        $scope.getIconClass = function(status){
+          return statusService.getIconClass(status);
+        };
     }]);
