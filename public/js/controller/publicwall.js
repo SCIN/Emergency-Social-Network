@@ -32,6 +32,7 @@ angular.module('ESNApp')
                 console.log(status);
             });
             $scope.mySocket.emit('sendNewPublicMsg',msg);
+            $scope.message = "";
         }
         $scope.mySocket.on('newPublicMsg', function(msg){
             console.log("received");

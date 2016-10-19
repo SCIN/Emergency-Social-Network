@@ -44,7 +44,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootS
     }).then(function(response) {
       console.log(response.data);
       if(response.data.result){
-        alert('Welcome to our emergency social network! Tips: You can share your status by selecting OK, Help or Emergency beside your user name. OK:I am OK, I do not need help. Help:I need help, but this is not a life threatening emergency. Emergency:I need help now, as this is a life threatening emergency!');
+        alert('Welcome to our emergency social network! Tips: You can share your status by selecting OK, Help or Emergency. OK:I am OK, I do not need help. Help:I need help, but this is not a life threatening emergency. Emergency:I need help now, as this is a life threatening emergency!');
         mySocket.emit("regist", {username: $scope.login.username});
         $scope.login();
       } else {
