@@ -107,6 +107,16 @@ class dbInterface
     }
 
     // Send a chat message to another user
+    /**
+        const private_msg_body = {
+            text : "Hello Let's Private",
+            timestamp : "2016-10-21",
+            sender : "Ivory",
+            receiver : "Ivor",
+            status : "ok",
+            location : "Building 19"
+        };
+    **/
     postPrivateMessage(private_msg_body)
     {
         return this.db.none(
@@ -117,6 +127,12 @@ class dbInterface
     }
 
     // Retrieve all private chat messages between two users
+    /**
+        const names = {
+            username1 : 'Ivor',
+            username2 : 'Ivory'
+        }
+    **/
     getPrivateMessage(names)
     {
         return this.db.any('select * from privateMessages where sender=${username1} and receiver=${username2} ' + 
@@ -133,12 +149,13 @@ class dbInterface
     // update status
     updateCitizenStatus(status_body)
     {
-        this.db.none('update citizen set status=${statusCode}, location=${location}, timestamp=${timestamp} where name=${userName}', status_body);
-        return this.db.none(
+        this.db.none(
             'insert into statusHistory (name, status, location, timestamp)' +
             'values (${userName}, ${statusCode}, $(location), $(timestamp))',
             status_body
         );
+
+        return this.db.none('update citizen set status=${statusCode}, location=${location}, timestamp=${timestamp} where name=${userName}', status_body);
     }
 
     // get status history
@@ -154,6 +171,14 @@ class dbInterface
     }
 
     // post an announcement
+    /**
+        const announcement_body = {
+            text : "There is going to be an earthquake in about 5 minuts.",
+            timestamp : "2016-10-21",
+            sender : "Ivory",
+            location : "Building 23"
+        };
+    **/
     postAnnouncement(announcement_body)
     {
         return this.db.none(
@@ -162,8 +187,6 @@ class dbInterface
             announcement_body
         );
     }
-
-
 }
 
 var db = new dbInterface();

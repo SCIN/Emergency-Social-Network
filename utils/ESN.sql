@@ -68,4 +68,7 @@ INSERT INTO privateMessages (text, timestamp, sender, receiver, status, location
 	VALUES ('Hello Ivor', '2016-2-1', 'Ivory', 'Ivor', 'ok', 'Bldg 19');
 
 INSERT INTO announcements (text, timestamp, sender, location)
+	VALUES ('Hello, this is an announcement from Ivor', '2016-1-1', 'Ivor', 'Bldg 23');
+
+INSERT INTO announcements (text, timestamp, sender, location)
 	VALUES ('Hello, this is an announcement', '2016-2-1', 'Ivory', 'Bldg 19');
