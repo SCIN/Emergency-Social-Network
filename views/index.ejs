@@ -31,11 +31,15 @@
     <script src="js/factory/usernameService.js"></script>
     <script src="js/controller/SidebarLeftCtrl.js"></script>
     <script src="js/controller/NavCtrl.js"></script>
+    <script src="js/controller/alertbar.js"></script>
     <script src="js/factory/statusService.js"></script>
     <script src="js/factory/socketioService.js"></script>
     <script src="js/factory/chatService.js"></script>
+    <script src="js/factory/alertService.js"></script>
   </head>
   <body ng-app="ESNApp">
+    <!-- alert bar -->
+    <div ng-include="'views/alertbar.html'"></div>
     <!-- side bars -->
     <div ng-include="'views/sidebar.html'"
             ui-track-as-search-param="true"
