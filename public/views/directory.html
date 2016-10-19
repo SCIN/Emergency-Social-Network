@@ -9,7 +9,7 @@
               <div class="media-body">
                   <h5 class="media-heading">{{citizen.username}} 
                     <span ng-show="citizen.unread" class="badge">{{citizen.unread || 0}}</span>
-                    <span class="label pull-right" ng-class="getIconClass('ok')">{{citizen.status}}</span>
+                    <span class="label pull-right" ng-class="getIconClass(citizen.status)">{{citizen.status}}</span>
                   </h5>
                   <small ng-switch on="citizen.online">
                       <span ng-switch-when="true">
