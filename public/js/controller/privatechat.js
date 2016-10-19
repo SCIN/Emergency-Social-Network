@@ -5,13 +5,6 @@ angular.module('ESNApp')
         function ($scope,MessageService,$http,socketioService,usernameService, chatService, statusService) {
         $scope.msgs = [];
         $scope.receiver = chatService.getTargetName();
-        $scope.getHistoryMessages();
-        $scope.$on('chat:private', function(obj, data){
-            console.log(obj);
-            console.log(data);
-            $scope.receiver = data.username;
-            $scope.getHistoryMessages();
-        });
 
         $scope.getHistoryMessages = function(){
             $http({
@@ -23,6 +16,14 @@ angular.module('ESNApp')
                 console.log(status);
             });
         }
+        
+        $scope.getHistoryMessages();
+        $scope.$on('chat:private', function(obj, data){
+            console.log(obj);
+            console.log(data);
+            $scope.receiver = data.username;
+            $scope.getHistoryMessages();
+        });
 
         $scope.message = "";
 
