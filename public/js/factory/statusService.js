@@ -16,6 +16,9 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
         selfStatus.timeStamp = d.toLocaleTimeString()+' '+d.toLocaleDateString();
         selfStatus.statusCode = statusCode;
         if (navigator.geolocation) navigator.geolocation.getCurrentPosition(onPositionUpdate);
+        else{
+            postStatus();
+        }
     }
 
     //havn't tested this function
