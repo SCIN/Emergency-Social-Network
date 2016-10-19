@@ -23,6 +23,7 @@
         }
       });
       mySocket.emit("logout", {username: usernameService.getUsername()});
+      usernameService.setUsername('');
       $rootScope.$broadcast('status:login', {status: false}); 
       $location.path('');
     };
