@@ -1,9 +1,4 @@
-<div id="directory" ng-controller="DirectoryCtrl as directoryCtrl" class="panel panel-default" ng-click="directoryCtrl.refresh()">
-  <div class="panel-heading">
-    <h3 class="panel-title">ESN Directory
-    </h3>
-  </div>
-  <div class="panel-body">
+<div id="directory" ng-controller="DirectoryCtrl as directoryCtrl" ng-click="directoryCtrl.refresh()">
     <div class="scrollable">
       <div class="scrollable-content">
         <div class="list-group" ui-toggle="uiSidebarRight">
@@ -14,7 +9,7 @@
               <div class="media-body">
                   <h5 class="media-heading">{{citizen.username}} 
                     <span ng-show="citizen.unread" class="badge">{{citizen.unread || 0}}</span>
-                    <span class="label pull-right" ng-class="getIconClass(citizen.status)">{{citizen.status}}</span>
+                    <span class="label pull-right" ng-class="getIconClass('ok')">{{citizen.status}}</span>
                   </h5>
                   <small ng-switch on="citizen.online">
                       <span ng-switch-when="true">
@@ -34,7 +29,6 @@
         </div>
       </div>
     </div>
-  </div>
 </div>
 
 

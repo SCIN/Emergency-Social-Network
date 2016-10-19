@@ -1,15 +1,25 @@
-<div ng-controller="ShareStatusCtrl" class="panel panel-info">
-    <div class="panel-heading">
-        <h3 class="panel-title">Share Status</h3>
-    </div>
-    <div class="panel-body">
-            <div class="btn-group">
-                <label class="btn btn-primary" ng-model="choseStatus" uib-btn-radio="'Emergency'">Emergency</label>
-                <label class="btn btn-primary" ng-model="choseStatus" uib-btn-radio="'OK'">OK</label>
-                <label class="btn btn-primary" ng-model="choseStatus" uib-btn-radio="'Help'">Help</label>
+<div ui-content-for="title">
+    <span>Share Status</span>
+</div>
+<div ng-controller="ShareStatusCtrl">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <div class="container-fluid section section-break" id="toggleExample">
+                <form role="form">
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="btn-group">
+                                <a href class="btn btn-default" ng-click="setStatus('Emergency')" ui-turn-on="button1" ui-shared-state="button1" ui-class="{'active': button1}" ui-exclusion-group="myButtons">Emergency</a>
+                                <a href class="btn btn-default" ng-click="setStatus('OK')" ui-turn-on="button2" ui-shared-state="button2" ui-class="{'active': button2}" ui-exclusion-group="myButtons">OK</a>
+                                <a href class="btn btn-default" ng-click="setStatus('Help')" ui-turn-on="button3" ui-shared-state="button3" ui-class="{'active': button3}" ui-exclusion-group="myButtons">Help</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div>
+                        <button  type="button" class="btn btn-primary btn-block" ng-click="shareStatus()">Share</button>
+                    </div>
+                </form>
             </div>
-            <div>
-                <button  type="button" class="btn btn-primary" ng-click="shareStatus(choseStatus)">Share</button>
-            </div>
+        </div>
     </div>
 </div>
