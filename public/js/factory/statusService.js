@@ -54,10 +54,10 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
         },
         getIconClass: function(status) {
           return {
-            'label-danger': status.toLowerCase() == 'emergency',
-            'label-success': status.toLowerCase() == 'ok',
-            'label-warning': status.toLowerCase() == 'help',
-            'label-default': status.toLowerCase() == 'undefined',
+            'label-danger': (status || '').toLowerCase() == 'emergency',
+            'label-success': (status || '').toLowerCase() == 'ok',
+            'label-warning': (status || '').toLowerCase() == 'help',
+            'label-default': (status || '').toLowerCase() == 'undefined',
           };
         },
     };
