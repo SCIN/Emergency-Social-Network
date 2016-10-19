@@ -5,7 +5,7 @@ angular.module('ESNApp')
         function ($scope,MessageService,$http,socketioService,usernameService, chatService, statusService) {
         $scope.msgs = [];
         $scope.receiver = chatService.getTargetName();
-
+        $scope.getHistoryMessages();
         $scope.$on('chat:private', function(obj, data){
             console.log(obj);
             console.log(data);
