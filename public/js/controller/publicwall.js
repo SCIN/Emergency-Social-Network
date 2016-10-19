@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ESNApp')
-    .controller('PublicWallCtrl', ['$scope', 'MessageService','$http','socketioService', function ($scope,MessageService,$http,socketioService) {
+    .controller('PublicWallCtrl', ['$scope', 'MessageService','$http','socketioService', 'statusService', function ($scope,MessageService,$http,socketioService,statusService) {
         $scope.msgs = [];
         $scope.getAllMessages = function(){
             $http({
@@ -39,4 +39,7 @@ angular.module('ESNApp')
                 $scope.msgs.push(msg);
             });
         });
+        $scope.getIconClass = function(status){
+          return statusService.getIconClass(status);
+        };
     }]);
