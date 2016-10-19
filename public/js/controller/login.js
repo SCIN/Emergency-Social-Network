@@ -2,8 +2,8 @@
 
 var app = angular.module('ESNApp');
 
-app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootScope', '$location', 'socketioService',
-  function($scope, $http, md5, usernameService, $rootScope, $location, socketioService) {
+app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootScope', '$location', 'socketioService','statusService',
+  function($scope, $http, md5, usernameService, $rootScope, $location, socketioService,statusService) {
   $scope.login={};
   $scope.login.username="";
   $scope.login.password="";
@@ -77,6 +77,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootS
   // actions after login
   $scope.onlogin = function(){
     usernameService.setUsername($scope.login.username);
+    statusService.setUsername($scope.login.username);
     mySocket.emit("online",{username:$scope.login.username});
     $rootScope.$broadcast('status:login', {status: true}); 
     $location.path('announce');

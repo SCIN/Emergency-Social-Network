@@ -43,6 +43,7 @@
     $routeProvider.when('/announce', {templateUrl: 'views/announcements.html', reloadOnSearch: false});
     $routeProvider.when('/private', {templateUrl: 'views/privatechat.html', reloadOnSearch: false});
     $routeProvider.when('/settings', {templateUrl: 'views/settings.html', reloadOnSearch: false});
+    $routeProvider.when('/sharestatus', {templateUrl: 'views/sharestatus.html', reloadOnSearch: false});
   });
 
 
