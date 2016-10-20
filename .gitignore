@@ -3,3 +3,4 @@ public/libs
 .idea/
 app.sublime-workspace
 npm-debug.log
+.DS_Store
