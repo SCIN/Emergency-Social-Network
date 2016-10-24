@@ -40,20 +40,9 @@ class dbInterface
 		}
 	**/
 
-    // update online/offline
-    updateCitizenState(state_body)
-    {
-    	return this.db.none('update citizen set online=${online} where name=${name}', state_body);
-    }
-
-    checkCitizen(name)
-    {
-        return this.db.one('select name from citizen where name=$1', [name]);
-    }
-
     getAllCitizen()
     {
-    	return this.db.any('select name, online from citizen');
+    	return this.db.any('select name from citizen');
     }
 
     getAllCitizenStatus()
@@ -63,7 +52,7 @@ class dbInterface
 
     getCitizen(name)
     {
-        return this.db.any('select name, online from citizen where name=$1', [name]);
+        return this.db.one('select name from citizen where name=$1', [name]);
     }
 
     /**
