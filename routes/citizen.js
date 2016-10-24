@@ -78,6 +78,7 @@ router.post('/', function (req, res) { // add a new user to directory
 	// must be online now
 }); 
 
+// no need, now with socket
 router.post('/online/', function(req, res) { // update user online/offline
 	var online = req.body.online;
 	var username = req.body.username;

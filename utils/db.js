@@ -40,6 +40,7 @@ class dbInterface
 		}
 	**/
 
+    // unused?
     // update online/offline
     updateCitizenState(state_body)
     {
@@ -51,6 +52,7 @@ class dbInterface
         return this.db.one('select name from citizen where name=$1', [name]);
     }
 
+    // unused?
     getAllCitizen()
     {
     	return this.db.any('select name, online from citizen');
@@ -61,6 +63,7 @@ class dbInterface
         return this.db.any('select name,status,location,timestamp from citizen');
     }
 
+    // no need online
     getCitizen(name)
     {
         return this.db.any('select name, online from citizen where name=$1', [name]);

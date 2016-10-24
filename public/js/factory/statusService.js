@@ -33,9 +33,11 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
         mySocket.emit("shareStatus", selfStatus);
     }
 
+    // is this useful?
     function errorCallback(){
 
     }
+
     function onPositionUpdate(position) {
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
@@ -44,7 +46,9 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
             .then(function(result) {
                 selfStatus.location = result.data.results[2].formatted_address;
             }).then(postStatus());
+        // error handling?
     }
+
     return {
         updateStatus: updateStatus,
         getLocation: function() {
@@ -59,6 +63,8 @@ app.service('statusService',['$http', 'socketioService',  function ($http,socket
         },
         getIconClass: function(status) {
           return {
+            // maybe just :
+            // 'label-default': status == 'Undefined'
             'label-danger': (status || '').toLowerCase() == 'emergency',
             'label-success': (status || '').toLowerCase() == 'ok',
             'label-warning': (status || '').toLowerCase() == 'help',
