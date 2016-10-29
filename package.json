@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "grunt test; istanbul cover _mocha",
+    "test": "istanbul cover _mocha",
     "lint": "grunt lint",
     "postinstall": "bower install"
   },
