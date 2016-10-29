@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var citizen = require('./routes/citizen');
 var messages = require('./routes/messages');
+var search = require('./routes/search');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -148,6 +149,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', citizen);
 app.use('/messages', messages);
+app.use('/search', search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -64,6 +64,31 @@ class dbInterface
         return this.db.one('select name, online from citizen where name=$1', [name]);
     }
 
+    searchCitizenGivenPrefix(prefix)
+    {
+
+    }
+
+    searchCitizenGivenStatus(status)
+    {
+        return this.db.any('select name, online, status, location, timestamp from citizen where status=$1', [status]);
+
+    }
+
+    searchAnnouncements(words)
+    {
+
+    }
+
+    searchPublicMessages(words)
+    {
+
+    }
+
+    searchPrivateMessages(name, words)
+    {
+
+    }
     /**
 		var auth_body = {
 			name : 'Ivor',
