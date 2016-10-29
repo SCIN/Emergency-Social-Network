@@ -1,12 +1,15 @@
 <div ui-content-for="title">
-    <span>Search Result</span>
+    <span>Search</span>
 </div>
 <div ng-controller="SearchCtrl">
+    <div>
+        <select class="form-control" ng-model="type" ng-options="typeTips[t] for t in types"/>
+    </div>
     <div class="scrollable">
         <div class="scrollable-content">
             <fieldset>
                 <div class="list-group">
-                    <a class="list-group-item"  ng-repeat="msg in msgs">
+                    <a class="list-group-item" ng-repeat="msg in msgs">
                         <p class="list-group-item-heading">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             <strong>{{msg.sender}}</strong>
@@ -24,9 +27,9 @@
     <div id="postmsg" class="navbar-fixed-bottom">
         <form name="msgInput">
             <div class="input-group">
-                <input  class="form-control" autocomplete="off" ng-model="message" ng-required="true"/>
+                <input class="form-control" autocomplete="off" ng-model="message" ng-required="true"/>
                 <span class="input-group-btn">
-          <button  type="button" class="btn btn-primary" ng-click="post()" ng-disabled="msgInput.$invalid">POST</button>
+          <button type="button" class="btn btn-primary" ng-click="post()" ng-disabled="msgInput.$invalid">POST</button>
         </span>
             </div>
         </form>
