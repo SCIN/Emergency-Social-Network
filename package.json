@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "grunt test",
+    "lint": "grunt lint",
     "postinstall": "./node_modules/bower/bin/bower install"
   },
   "dependencies": {
@@ -30,7 +31,9 @@
   },
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
     "grunt-mocha-cli": "^2.1.0",
+    "jshint": "^2.9.4",
     "mocha": "^3.1.2"
   },
   "repository": {
