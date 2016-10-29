@@ -105,6 +105,25 @@ router.post('/:userName/status/:statusCode', function(req, res) {
 	});
 });
 
+//Change online status
+router.post('/online/', function(req, res) { // update user online/offline
+	var online = req.body.online;
+	var username = req.body.username;
+	var state_body = {
+		name : username,
+		online : online
+	};
+	db.updateCitizenState(state_body)
+		.then(function() {
+			res.send({result : true});
+			//console.log('update success!');
+		})
+		.catch(function(err) {
+			res.send({result : false});
+			//console.log(err);
+		});
+});
+
 // Retrieve a user's status history (all breadcrumbs)
 router.get('/:userName/statuscrumbs', function(req, res) {
 	var userName = req.params.userName;

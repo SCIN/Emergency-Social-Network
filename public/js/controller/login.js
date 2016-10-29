@@ -15,13 +15,15 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootS
     } else if($scope.loginpanel.password.$invalid){
       alert("Please provide another password.")
     } else{
-      $http.get('users/check/?username=' + $scope.login.username).then(function(response) {
-        console.log(response.data);
-        if(response.data.result){
-          $scope.checkMatch();
-        } else {
-          $scope.confirm();
+      $http({
+        method : 'GET',
+        url : 'users/' + $scope.login.username
+      }).success(function(data, status, headers, config) {
+        console.log(data);
+        $scope.checkMatch();
         }
+      ).error(function (data, status, headers, config) {
+        $scope.confirm();
       });
     }
   }
@@ -44,9 +46,9 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootS
     }).then(function(response) {
       console.log(response.data);
       if(response.data.result){
-        alert('Welcome to our emergency social network! Tips: You can share your status by selecting OK, Help or Emergency. OK:I am OK, I do not need help. Help:I need help, but this is not a life threatening emergency. Emergency:I need help now, as this is a life threatening emergency!');
+        alert('Welcome to our emergency social network! Tips: You can share your status by selecting OK, Help or Emergency. OK:I am OK, I do not need help. Help:I need help, but this is not a life threatening emergency. Emergency:I need help now, as this is a life threatening emergency! (If you want to share your location with status, please use https connection!)');
         mySocket.emit("regist", {username: $scope.login.username});
-        $scope.login();
+        $scope.onlogin();
       } else {
         alert('Please re-enter the username and/or password');
       }
@@ -60,6 +62,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootS
       alert('You canceled! Please re-enter the username and/or password');
     }
   }
+
   // login to the system
   $scope.login = function(){
     $http.post('users/online/', {
@@ -70,7 +73,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'md5', 'usernameService', '$rootS
       if(response.data.result){
         $scope.onlogin();
       } else {
-        alert('Erro! Please re-enter the username and/or password');
+        alert('Erro! Failed to change online status!');
       }
     });
   }
