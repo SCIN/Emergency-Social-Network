@@ -23,7 +23,7 @@
         console.log(status);
       });
     };
-    $scope.searchCitizensByCitizens = function(query){
+    $scope.searchCitizensByStatus = function(query){
       $http({
         method : 'GET',
         url : 'search/status/' + query,
@@ -101,6 +101,13 @@
                 "wants", "was", "we", "were", "what", "when", "where", "which", "while",
                 "who", "whom", "why", "will", "with", "would", "yet", "you", "your"];
             return stopWords.indexOf(word) >= 0;
+        };
+
+        $scope.searchStrategies = ['searchCitizensByName', 'searchCitizensByStatus', 'searchPublicMessages', 'searchPrivateMessages', 'searchAnnouncements'];
+
+        // main entrypoint for searching
+        $scope.search = function(query){
+          $scope[$scope.searchStrategies[$scope.type]](query);
         };
 
         $scope.typeTips = {
