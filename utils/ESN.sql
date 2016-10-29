@@ -27,7 +27,7 @@ CREATE TABLE citizen (
 	ID SERIAL PRIMARY KEY,
 	name TEXT,
 	password TEXT,
-	online BOOLEAN, # no need?
+	online BOOLEAN,
 	status TEXT,
 	location TEXT,
 	timestamp TEXT

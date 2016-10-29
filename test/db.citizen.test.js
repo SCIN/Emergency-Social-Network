@@ -54,18 +54,6 @@ describe('db', function() {
     });
   });
 
-  describe('.checkCitizen()', function() {
-    it('should resolve success when citizen is found', function() {
-      return db.checkCitizen('Ivor');
-    });
-
-    it('should fail when citizen is not found', function() {
-      return db.checkCitizen('the-name-definitely-not-exist')
-      .then(() => assert.fail(1, 2, 'checkCitizen goes to then() which is not acceptable', '='))
-      .catch(() => {});
-    });
-  });
-
   // complying to JSDoc syntax
   describe('.getAllCitizen()', function() {
     it('should return 2 citizen dummies', function() {
