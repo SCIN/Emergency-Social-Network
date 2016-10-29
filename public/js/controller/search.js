@@ -5,41 +5,78 @@
     app.controller('SearchCtrl', ['$scope', '$http', 'socketioService', 'statusService', function ($scope, $http, socketioService, statusService) {
         $scope.msgs = [];
 
-        // searched results
-        $scope.citizens = [];
-        $scope.publicMessages = [];
-        $scope.privateMessages = [];
+    // searched results
+    $scope.citizens = [{ username: 'user-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', }];
+    $scope.publicMessages = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample text', }];
+    $scope.privateMessages = [{ sender: 'sender-a', receiver: 'receiver-b', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample text', }];
+    $scope.announcements = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample announcement text',}];
 
-        // private methods
-        $scope.searchCitizens = function (query) {
-            $scope.citizens = [{
-                username: 'user-a',
-                location: 'Mountain View',
-                timestamp: new Date(),
-                status: 'Ok',
-            }];
-        };
-        $scope.searchPublicMessages = function (query) {
-            var words = $scope.splitWords(query);
-            $scope.publicMessages = [{
-                sender: 'sender-a',
-                location: 'Mountain View',
-                timestamp: new Date(),
-                status: 'Ok',
-                text: 'sample text',
-            }];
-        };
-        $scope.searchPrivateMessages = function (query) {
-            var words = $scope.splitWords(query);
-            $scope.privateMessages = [{
-                sender: 'sender-a',
-                receiver: 'receiver-b',
-                location: 'Mountain View',
-                timestamp: new Date(),
-                status: 'Ok',
-                text: 'sample text',
-            }];
-        };
+    // private methods
+    $scope.searchCitizensByName = function(query){
+      $http({
+        method : 'GET',
+        url : 'search/name/' + query,
+      }).success(function(data){
+        $scope.citizens = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
+    };
+    $scope.searchCitizensByStatus = function(query){
+      $http({
+        method : 'GET',
+        url : 'search/status/' + query,
+      }).success(function(data){
+        $scope.citizens = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
+    };
+    $scope.searchPublicMessages = function(query){
+      var words = $scope.splitWords(query);
+      $http({
+        method : 'GET',
+        url : 'search/public',
+        data: {
+          count: $scope.publicMessages.length + 1,
+          words: words,
+        },
+      }).success(function(data){
+        $scope.publicMessages = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
+    };
+    $scope.searchPrivateMessages = function(query){
+      var words = $scope.splitWords(query);
+      $http({
+        method : 'GET',
+        url : 'search/private',
+        data: {
+          count: $scope.privateMessages.length + 1,
+          words: words,
+        },
+      }).success(function(data) {
+        $scope.privateMessages = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
+    };
+    $scope.searchAnnouncements = function(query){
+      var words = $scope.splitWords(query);
+      $http({
+        method : 'GET',
+        url : 'search/announcements',
+        data: {
+          count: $scope.announcements.length + 1,
+          words: words,
+        },
+      }).success(function(data) {
+        $scope.announcements = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
+    };
 
         $scope.splitWords = function (query) {
             var words = query.split(/[^a-zA-Z]/);
@@ -63,6 +100,13 @@
                 "wants", "was", "we", "were", "what", "when", "where", "which", "while",
                 "who", "whom", "why", "will", "with", "would", "yet", "you", "your"];
             return stopWords.indexOf(word) >= 0;
+        };
+
+        $scope.searchStrategies = ['searchCitizensByName', 'searchCitizensByStatus', 'searchPublicMessages', 'searchPrivateMessages', 'searchAnnouncements'];
+
+        // main entrypoint for searching
+        $scope.search = function(query){
+          $scope[$scope.searchStrategies[$scope.type]](query);
         };
 
         $scope.typeTips = {
