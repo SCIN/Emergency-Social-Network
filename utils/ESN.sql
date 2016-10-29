@@ -51,9 +51,9 @@ CREATE TABLE announcements (
 
 
 INSERT INTO citizen (name, password, online, status)
-	VALUES ('Ivor', 'lalala', TRUE, 'ok');
+	VALUES ('Ivor', 'lalala', false, 'ok');
 INSERT INTO citizen (name, password, online, status)
-	VALUES ('Ivory', 'lalala', FALSE, 'ok');
+	VALUES ('Ivory', 'lalala', false, 'ok');
 
 INSERT INTO message (text, timestamp, sender, status, location)
 	VALUES ('Hello', '2016-1-1', 'Ivor', 'ok', 'Bldg 23');

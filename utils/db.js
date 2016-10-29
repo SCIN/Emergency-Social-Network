@@ -40,17 +40,14 @@ class dbInterface
 		}
 	**/
 
+    // unused?
     // update online/offline
     updateCitizenState(state_body)
     {
     	return this.db.none('update citizen set online=${online} where name=${name}', state_body);
     }
 
-    checkCitizen(name)
-    {
-        return this.db.one('select name from citizen where name=$1', [name]);
-    }
-
+    // unused?
     getAllCitizen()
     {
     	return this.db.any('select name, online from citizen');
@@ -61,11 +58,37 @@ class dbInterface
         return this.db.any('select name,status,location,timestamp from citizen');
     }
 
+    // no need online
     getCitizen(name)
     {
-        return this.db.any('select name, online from citizen where name=$1', [name]);
+        return this.db.one('select name, online from citizen where name=$1', [name]);
     }
 
+    searchCitizenGivenPrefix(prefix)
+    {
+
+    }
+
+    searchCitizenGivenStatus(status)
+    {
+        return this.db.any('select name, online, status, location, timestamp from citizen where status=$1', [status]);
+
+    }
+
+    searchAnnouncements(words)
+    {
+
+    }
+
+    searchPublicMessages(words)
+    {
+
+    }
+
+    searchPrivateMessages(name, words)
+    {
+
+    }
     /**
 		var auth_body = {
 			name : 'Ivor',

@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,6 +10,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var citizen = require('./routes/citizen');
 var messages = require('./routes/messages');
+var search = require('./routes/search');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -39,8 +42,13 @@ db.getAllCitizenStatus()
   		"status" : person.status,
   		"location" : person.location,
   		"timestamp" : person.timestamp
-  	}
+  	};
   	users.push(user);
+    var status = {
+    	online : false,
+    	name : person.name
+    }
+    db.updateCitizenState(status);
   }
 })
 .catch(function(err) {
@@ -79,7 +87,7 @@ io.on('connection', function(socket){
     // a user goes offline
     socket.on('logout', function (message) {
     	sockets.splice(clientId, 1);
-        goOffline(clientId, function () {
+        goOffline(clientId, function (name) {
           // update directory
           socket.broadcast.emit('refreshDirectory', users);
           socket.emit('refreshDirectory', users);
@@ -89,9 +97,14 @@ io.on('connection', function(socket){
 
     socket.on('disconnect', function () {
         sockets.splice(clientId, 1);
-        goOffline(clientId, function () {
-          // update directory
-          socket.broadcast.emit('refreshDirectory', users);
+        goOffline(clientId, function (name) {
+	        // update directory
+	        var status = {
+	        	online : false,
+	        	name : name
+	        }
+	        db.updateCitizenState(status);
+	        socket.broadcast.emit('refreshDirectory', users);
         });
         //printAllUsers()
     });
@@ -138,6 +151,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', citizen);
 app.use('/messages', messages);
+app.use('/search', search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -188,7 +202,7 @@ function goOffline(socket_id, callback) {
 		if (person.clientId == socket_id) {
 			person.clientId = -1;
 			person.online = false;
-            callback();
+            callback(person.username);
 			break;
 		}
 	}
