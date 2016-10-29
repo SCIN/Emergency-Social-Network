@@ -10,7 +10,6 @@
     $scope.publicMessages = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample text', }];
     $scope.privateMessages = [{ sender: 'sender-a', receiver: 'receiver-b', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample text', }];
     $scope.announcements = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample announcement text',}];
-    $scope.count = 1; // starts from 1
 
     // private methods
     $scope.searchCitizensByName = function(query){
@@ -39,7 +38,7 @@
         method : 'GET',
         url : 'search/public',
         data: {
-          count: $scope.count,
+          count: $scope.publicMessages.length + 1,
           words: words,
         },
       }).success(function(data){
@@ -54,7 +53,7 @@
         method : 'GET',
         url : 'search/private',
         data: {
-          count: $scope.count,
+          count: $scope.privateMessages.length + 1,
           words: words,
         },
       }).success(function(data) {
@@ -69,7 +68,7 @@
         method : 'GET',
         url : 'search/announcements',
         data: {
-          count: $scope.count,
+          count: $scope.announcements.length + 1,
           words: words,
         },
       }).success(function(data) {
