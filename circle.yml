@@ -28,6 +28,8 @@ test:
     - npm test
 
 general:
+  artifacts:
+    - ./coverage
   branches:
     only:
       - master # list of branches to build
