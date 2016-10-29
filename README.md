@@ -22,6 +22,20 @@ $ npm install
 $ grunt test
 ```
 
+### Lint
+
+```bash
+$ grunt lint
+```
+
+For SublimeText support, please refer to [SublimeLinter-jshint plugin](https://github.com/SublimeLinter/SublimeLinter-jshint#sublimelinter-jshint) . The following would be install:
+
+1. SublimeText (the IDE)
+2. Package Control
+3. SublimeLinter
+4. SublimeLinter-jshint
+5. jshint (`npm i jshint -g`)
+
 ### DB Install
 - Install Postgres SQL from https://www.postgresql.org/download/
 
