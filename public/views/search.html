@@ -1,0 +1,34 @@
+<div ui-content-for="title">
+    <span>Search Result</span>
+</div>
+<div ng-controller="SearchCtrl">
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <fieldset>
+                <div class="list-group">
+                    <a class="list-group-item"  ng-repeat="msg in msgs">
+                        <p class="list-group-item-heading">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <strong>{{msg.sender}}</strong>
+                            <span class="label pull-right" ng-class="getIconClass(msg.status)">{{msg.status}}</span>
+                        </p>
+                        <p class="list-group-item-text">{{msg.text}}</p>
+                        <span class="glyphicon glyphicon-map-marker"></span>{{msg.location}}
+                        <br>
+                        <span class="glyphicon glyphicon-time"></span>{{msg.timestamp}}
+                    </a>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div id="postmsg" class="navbar-fixed-bottom">
+        <form name="msgInput">
+            <div class="input-group">
+                <input  class="form-control" autocomplete="off" ng-model="message" ng-required="true"/>
+                <span class="input-group-btn">
+          <button  type="button" class="btn btn-primary" ng-click="post()" ng-disabled="msgInput.$invalid">POST</button>
+        </span>
+            </div>
+        </form>
+    </div>
+</div>
