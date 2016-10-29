@@ -41,6 +41,11 @@ db.getAllCitizenStatus()
   		"timestamp" : person.timestamp
   	}
   	users.push(user);
+    var status = {
+    	online : false,
+    	name : person.name
+    }
+    db.updateCitizenState(status);
   }
 })
 .catch(function(err) {
@@ -79,7 +84,7 @@ io.on('connection', function(socket){
     // a user goes offline
     socket.on('logout', function (message) {
     	sockets.splice(clientId, 1);
-        goOffline(clientId, function () {
+        goOffline(clientId, function (name) {
           // update directory
           socket.broadcast.emit('refreshDirectory', users);
           socket.emit('refreshDirectory', users);
@@ -89,9 +94,14 @@ io.on('connection', function(socket){
 
     socket.on('disconnect', function () {
         sockets.splice(clientId, 1);
-        goOffline(clientId, function () {
-          // update directory
-          socket.broadcast.emit('refreshDirectory', users);
+        goOffline(clientId, function (name) {
+	        // update directory
+	        var status = {
+	        	online : false,
+	        	name : name
+	        }
+	        db.updateCitizenState(status);
+	        socket.broadcast.emit('refreshDirectory', users);
         });
         //printAllUsers()
     });
@@ -188,7 +198,7 @@ function goOffline(socket_id, callback) {
 		if (person.clientId == socket_id) {
 			person.clientId = -1;
 			person.online = false;
-            callback();
+            callback(person.username);
 			break;
 		}
 	}
