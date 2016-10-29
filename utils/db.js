@@ -13,7 +13,7 @@ class dbInterface
 			promiseLib: this.promise
 		};
 		this.pgp = require('pg-promise')(options);
-		let connectionString = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/esn';
+		let connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/esn';
 		this.db = this.pgp(connectionString);
     }
 
@@ -40,9 +40,22 @@ class dbInterface
 		}
 	**/
 
+    // unused?
+    // update online/offline
+    updateCitizenState(state_body)
+    {
+    	return this.db.none('update citizen set online=${online} where name=${name}', state_body);
+    }
+
+    checkCitizen(name)
+    {
+        return this.db.one('select name from citizen where name=$1', [name]);
+    }
+
+    // unused?
     getAllCitizen()
     {
-    	return this.db.any('select name from citizen');
+    	return this.db.any('select name, online from citizen');
     }
 
     getAllCitizenStatus()
@@ -50,9 +63,10 @@ class dbInterface
         return this.db.any('select name,status,location,timestamp from citizen');
     }
 
+    // no need online
     getCitizen(name)
     {
-        return this.db.one('select name from citizen where name=$1', [name]);
+        return this.db.any('select name, online from citizen where name=$1', [name]);
     }
 
     /**
