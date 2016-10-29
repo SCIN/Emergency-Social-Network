@@ -44,6 +44,7 @@ router.get('/:userName', function(req, res, next) {
 	})
 	.catch(function(err) {
 		res.status(404);
+		res.send([]);
 		console.log(err);
 	});
 });

@@ -27,6 +27,7 @@ CREATE TABLE citizen (
 	ID SERIAL PRIMARY KEY,
 	name TEXT,
 	password TEXT,
+	online BOOLEAN,
 	status TEXT,
 	location TEXT,
 	timestamp TEXT
@@ -49,10 +50,10 @@ CREATE TABLE announcements (
 );
 
 
-INSERT INTO citizen (name, password, status)
-	VALUES ('Ivor', 'lalala', 'ok');
-INSERT INTO citizen (name, password, status)
-	VALUES ('Ivory', 'lalala', 'ok');
+INSERT INTO citizen (name, password, online, status)
+	VALUES ('Ivor', 'lalala', false, 'ok');
+INSERT INTO citizen (name, password, online, status)
+	VALUES ('Ivory', 'lalala', false, 'ok');
 
 INSERT INTO message (text, timestamp, sender, status, location)
 	VALUES ('Hello', '2016-1-1', 'Ivor', 'ok', 'Bldg 23');

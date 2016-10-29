@@ -24,8 +24,13 @@ dependencies:
     - npm install
 
 test:
-  post:
+  override:
     - npm test
+
+general:
+  branches:
+    only:
+      - master # list of branches to build
 
 deployment:
   staging:
