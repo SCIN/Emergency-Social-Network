@@ -68,9 +68,9 @@
         $scope.typeTips = {
             userByName: 'Search Users by Username (Or Part of User Name)',
             userByStatus: 'Search Users by User Status',
-            publicMsg: 'Search Public Messages',
-            privateMsg: 'Search Your Private Messages',
-            announcements: 'Search Announcements'
+            publicMsg: 'Search Public Messages by Key Words',
+            privateMsg: 'Search Your Private Messages by Key Words',
+            announcements: 'Search Announcement by Key Words '
         };
         $scope.types = ['userByName', 'userByStatus', 'publicMsg', 'privateMsg', 'announcements'];
         $scope.type = $scope.types[0];
