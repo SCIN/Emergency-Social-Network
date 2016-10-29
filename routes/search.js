@@ -4,9 +4,9 @@ var router = express.Router();
 var db = require('../utils/db');
 
 // return a list of citizens
-router.get('/prefix/:userNamePrefix', function(req, res) {
-	var prefix = req.params.userNamePrefix;
-	db.searchCitizenGivenPrefix(prefix)
+router.get('/name/:userName', function(req, res) {
+	var name = req.params.userName;
+	db.searchCitizenGiveName(name)
 	.then(function(citizen) {
 		res.status(200);
 		res.send(citizen);
@@ -33,7 +33,8 @@ router.get('/status/:status', function(req, res) {
 
 // return a list of announcements
 router.get('/announcements', function(req, res) {
-	var words = req.query.words;
+	var input = req.query.input;
+	input = input.trim();
 	db.searchAnnouncements(words)
 	.then(function(announcements) {
 		res.status(200);
@@ -47,7 +48,8 @@ router.get('/announcements', function(req, res) {
 
 // return a list of public messages
 router.get('/public', function(req, res) {
-	var words = req.query.words;
+	var input = req.query.input;
+	input = input.trim();
 	db.searchPublicMessages(words)
 	.then(function(messages) {
 		res.status(200);
@@ -61,7 +63,8 @@ router.get('/public', function(req, res) {
 
 // return a list of private messages
 router.get('/private/:userName', function(req, res) {
-	var words = req.query.words;
+	var input = req.query.input;
+	input = input.trim();
 	var name = req.params.userName;
 
 	db.searchPrivateMessages(name, words)
