@@ -1,18 +1,20 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 
 var db = require('../utils/db');
 
 router.get('/authenticate/', function(req, res) {
-	if (req.query.username != null && req.query.password != null) { 
+	if (req.query.username && req.query.password) { 
 		var body = {
 			name : req.query.username,
 			password : req.query.password
-		}
+		};
 		db.authenticate(body)
 		.then(function() {
 			res.send({result : true});
-			console.log('success!')
+			console.log('success!');
 		})
 		.catch(function(err) {
 			res.send({result : false});
@@ -24,7 +26,7 @@ router.get('/authenticate/', function(req, res) {
 });
 
 router.get('/', function(req, res, next) {
-	if (req.query.username == null) { // get all users
+	if (!req.query.username) { // get all users
 		db.getAllCitizen()
 		.then(function(citizen) {
 			res.send(citizen);
@@ -93,7 +95,7 @@ router.post('/:userName/status/:statusCode', function(req, res) {
 		statusCode : statusCode,
 		location : location,
 		timestamp : timestamp
-	}
+	};
 	db.updateCitizenStatus(status)
 	.then(function() {
 		res.status(201);
