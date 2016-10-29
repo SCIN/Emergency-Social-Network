@@ -75,19 +75,41 @@ class dbInterface
 
     }
 
-    searchAnnouncements(words)
+    searchAnnouncements(words, count)
     {
-
+        var condition = '';
+        for(var i = 0; i < words.length; i++){
+            if (i > 0) {
+                condition += " AND ";
+            }
+            condition += "text like '%" + words[i] + "%'"
+        }
+        return this.db.any('select text, timestamp, sender, location from announcements where '
+            + condition + " order by timestamp desc" + " limit 10 OFFSET " + (count - 1));
     }
 
-    searchPublicMessages(words)
+    searchPublicMessages(words, count)
     {
-
+        var condition = '';
+        for(var i = 0; i < words.length; i++){
+            if (i > 0) {
+                condition += " AND ";
+            }
+            condition += "text like '%" + words[i] + "%'"
+        }
+        return this.db.any('select text, timestamp, sender, location status from message where '
+            + condition + " order by timestamp desc" + " limit 10 OFFSET " + (count - 1));
     }
 
-    searchPrivateMessages(name, words)
+    searchPrivateMessages(name, words, count)
     {
-
+        var condition = 'sender=' + name + ' OR receiver=' + name;
+        for(var i = 0; i < words.length; i++){
+            condition += " AND ";
+            condition += "text like '%" + words[i] + "%'"
+        }
+        return this.db.any('select text, timestamp, sender, receiver, location status from privateMessages where '
+            + condition + " order by timestamp desc" + " limit 10 OFFSET " + (count - 1));
     }
     /**
 		var auth_body = {
