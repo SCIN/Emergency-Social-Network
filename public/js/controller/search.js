@@ -13,8 +13,25 @@
     $scope.count = 1; // starts from 1
 
     // private methods
-    $scope.searchCitizens = function(query){
-
+    $scope.searchCitizensByName = function(query){
+      $http({
+        method : 'GET',
+        url : 'search/name/' + query,
+      }).success(function(data){
+        $scope.citizens = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
+    };
+    $scope.searchCitizensByCitizens = function(query){
+      $http({
+        method : 'GET',
+        url : 'search/status/' + query,
+      }).success(function(data){
+        $scope.citizens = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
     };
     $scope.searchPublicMessages = function(query){
       var words = $scope.splitWords(query);
@@ -30,7 +47,6 @@
       }).error(function(data, status) {
         console.log(status);
       });
-      
     };
     $scope.searchPrivateMessages = function(query){
       var words = $scope.splitWords(query);
