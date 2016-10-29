@@ -36,8 +36,8 @@ describe('db', function() {
 								exist = false;
 							}
 						}
+            assert.strictEqual(exist, true);
 					}
-					assert.strictEqual(exist, true);
 				});
 			});
 		});

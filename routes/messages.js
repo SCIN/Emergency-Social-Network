@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 
@@ -30,7 +32,7 @@ router.post('/public', function(req, res) {
 	.then(function() {
 		res.status(201);
 		res.send({result : true});
-		console.log('post success!')
+		console.log('post success!');
 	})
 	.catch(function(err) {
 		res.send({result : false});
@@ -45,7 +47,7 @@ router.post('/private', function(req, res) {
 	.then(function() {
 		res.status(201);
 		res.send({result : true});
-		console.log('post success!')
+		console.log('post success!');
 	})
 	.catch(function(err) {
 		res.send({result : false});
@@ -57,10 +59,10 @@ router.post('/private', function(req, res) {
 router.get('/private/:userName1/:userName2', function(req, res) {
 	var username1 = req.params.userName1;
 	var username2 = req.params.userName2;
-	names = {
+	var names = {
 		username1 : username1,
 		username2 : username2
-	}
+	};
 	db.getPrivateMessage(names)
 	.then(function(data) {
 		res.send(data);

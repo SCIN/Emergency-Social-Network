@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -39,7 +41,7 @@ db.getAllCitizenStatus()
   		"status" : person.status,
   		"location" : person.location,
   		"timestamp" : person.timestamp
-  	}
+  	};
   	users.push(user);
   }
 })
