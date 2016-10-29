@@ -6,39 +6,61 @@
     $scope.msgs = [];
 
     // searched results
-    $scope.citizens = [];
-    $scope.publicMessages = [];
-    $scope.privateMessages = [];
+    $scope.citizens = [{ username: 'user-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', }];
+    $scope.publicMessages = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample text', }];
+    $scope.privateMessages = [{ sender: 'sender-a', receiver: 'receiver-b', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample text', }];
+    $scope.announcements = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample announcement text',}];
+    $scope.count = 1; // starts from 1
 
     // private methods
     $scope.searchCitizens = function(query){
-      $scope.citizens = [{
-        username: 'user-a',
-        location: 'Mountain View',
-        timestamp: new Date(),
-        status: 'Ok',
-      }];
+
     };
     $scope.searchPublicMessages = function(query){
       var words = $scope.splitWords(query);
-      $scope.publicMessages = [{
-        sender: 'sender-a',
-        location: 'Mountain View',
-        timestamp: new Date(),
-        status: 'Ok',
-        text: 'sample text',
-      }];
+      $http({
+        method : 'GET',
+        url : 'search/public',
+        data: {
+          count: $scope.count,
+          words: words,
+        },
+      }).success(function(data){
+        $scope.publicMessages = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
+      
     };
     $scope.searchPrivateMessages = function(query){
       var words = $scope.splitWords(query);
-      $scope.privateMessages = [{
-        sender: 'sender-a',
-        receiver: 'receiver-b',
-        location: 'Mountain View',
-        timestamp: new Date(),
-        status: 'Ok',
-        text: 'sample text',
-      }];
+      $http({
+        method : 'GET',
+        url : 'search/private',
+        data: {
+          count: $scope.count,
+          words: words,
+        },
+      }).success(function(data) {
+        $scope.privateMessages = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
+    };
+    $scope.searchAnnouncements = function(query){
+      var words = $scope.splitWords(query);
+      $http({
+        method : 'GET',
+        url : 'search/announcements',
+        data: {
+          count: $scope.count,
+          words: words,
+        },
+      }).success(function(data) {
+        $scope.announcements = data;
+      }).error(function(data, status) {
+        console.log(status);
+      });
     };
 
     $scope.splitWords = function(query){
