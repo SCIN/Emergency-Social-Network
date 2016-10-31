@@ -11,9 +11,9 @@ describe('db', function() {
 				messages = messages.filter(a => a.sender == 'Ivor' || a.sender == 'Ivory')
 							.sort((a, b) => a.sender.localeCompare(b.sender));
 				assert.strictEqual(messages[0].sender, 'Ivor');
-				assert.strictEqual(messages[0].timestamp, '2016-1-1');
+				assert.strictEqual(messages[0].timestamp, '10:37:36 PM 10/01/2016');
 				assert.strictEqual(messages[1].sender, 'Ivory');
-				assert.strictEqual(messages[1].timestamp, '2016-2-1');
+				assert.strictEqual(messages[1].timestamp, '11:37:36 PM 10/01/2016');
 			});
 		});
 	});
@@ -33,7 +33,7 @@ describe('db', function() {
 		it('should post new message', function() {
 			const msg_body = {
 				text : "HelloFSEsss",
-				timestamp : "2016-9-21",
+				timestamp : "11:37:36 PM 10/21/2016",
 				sender : "Ivory",
 				status : "ok",
 				location : "Building 19"
