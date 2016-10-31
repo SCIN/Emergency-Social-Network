@@ -2,7 +2,7 @@
 
 (function () {
     var app = angular.module('ESNApp');
-    app.controller('SearchCtrl', ['$scope', '$http', 'socketioService', 'statusService', function ($scope, $http, socketioService, statusService) {
+    app.controller('SearchCtrl', ['$scope', '$http', 'socketioService', 'statusService', 'usernameService', function ($scope, $http, socketioService, statusService, usernameService) {
     $scope.queryMsg = "";
 
     // searched results
@@ -13,6 +13,9 @@
 
     // private methods
     $scope.searchCitizensByName = function(query, isNewSearch){
+      // param check
+      if (!query)
+        return alert('search query cannot be empty');
       $http({
         method : 'GET',
         url : 'search/name/' + query,
@@ -26,6 +29,9 @@
       });
     };
     $scope.searchCitizensByStatus = function(query, isNewSearch){
+      // param check
+      if (!query)
+        return alert('search query cannot be empty');
       $http({
         method : 'GET',
         url : 'search/status/' + query,
@@ -40,6 +46,9 @@
     };
     $scope.searchPublicMessages = function(query, isNewSearch){
       var words = $scope.splitWords(query);
+      // param check
+      if (!words || words.length <= 0)
+        return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
         url : 'search/public',
@@ -55,9 +64,12 @@
     };
     $scope.searchPrivateMessages = function(query, isNewSearch){
       var words = $scope.splitWords(query);
+      // param check
+      if (!words || words.length <= 0)
+        return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
-        url : 'search/private',
+        url : 'search/private/' + usernameService.getUsername(),
         data: {
           count: isNewSearch ? 1 : $scope.privateMessages.length + 1,
           words: words,
@@ -70,6 +82,9 @@
     };
     $scope.searchAnnouncements = function(query, isNewSearch){
       var words = $scope.splitWords(query);
+      // param check
+      if (!words || words.length <= 0)
+        return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
         url : 'search/announcements',
