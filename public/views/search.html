@@ -6,10 +6,12 @@
         <select class="form-control" ng-model="type" ng-options="typeTips[t] for t in types"/>
     </div>
     <div class="scrollable">
+
         <div class="scrollable-content">
             <fieldset>
-                <div class="list-group">
-                    <a class="list-group-item" ng-repeat="msg in msgs">
+
+                <div class="list-group" >
+                    <a class="list-group-item" ng-repeat="msg in publicMessages" ng-show="type == 'searchCitizensByName'">
                         <p class="list-group-item-heading">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             <strong>{{msg.sender}}</strong>
@@ -21,17 +23,48 @@
                         <span class="glyphicon glyphicon-time"></span>{{msg.timestamp}}
                     </a>
                 </div>
+                <!--<div class="list-group" ng-show="type == 'privateMsg'">-->
+                    <!--<a class="list-group-item"  ng-repeat="msg in privateMessages">-->
+
+                        <!--<p class="list-group-item-heading">-->
+                            <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                            <!--<strong>{{msg.sender}}</strong>-->
+                            <!--<span class="label pull-right" ng-class="getIconClass(msg.status)">{{msg.status}}</span>-->
+                        <!--</p>-->
+                        <!--<p class="list-group-item-text">{{msg.text}}</p>-->
+                        <!--<span class="glyphicon glyphicon-map-marker"></span>{{msg.location}}-->
+                        <!--<br>-->
+                        <!--<span class="glyphicon glyphicon-time"></span>{{msg.timestamp}}-->
+                    <!--</a>-->
+                <!--</div>-->
+                <!--<div class="list-group" ng-show="type == 'announcements'">-->
+                    <!--<a class="list-group-item"  ng-repeat="msg in announcements">-->
+                        <!--<p class="list-group-item-heading">-->
+                            <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
+                            <!--<strong>{{msg.sender}}</strong>-->
+                            <!--<span class="label pull-right" ng-class="getIconClass(msg.status)">{{msg.status}}</span>-->
+                        <!--</p>-->
+                        <!--<p class="list-group-item-text">{{msg.text}}</p>-->
+                        <!--<span class="glyphicon glyphicon-map-marker"></span>{{msg.location}}-->
+                        <!--<br>-->
+                        <!--<span class="glyphicon glyphicon-time"></span>{{msg.timestamp}}-->
+                    <!--</a>-->
+                <!--</div>-->
             </fieldset>
-            <span />
         </div>
+    </div>
+    <div>
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-primary" ng-click="search()" >More</button>
+        </span>
     </div>
     <div id="postmsg" class="navbar-fixed-bottom">
         <form name="msgInput">
             <div class="input-group">
-                <input class="form-control" autocomplete="off" ng-model="message" ng-required="true"/>
+                <input class="form-control" autocomplete="off" ng-model="queryMsg" ng-required="true"/>
                 <span class="input-group-btn">
-          <button type="button" class="btn btn-primary" ng-click="post()" ng-disabled="msgInput.$invalid">POST</button>
-        </span>
+                     <button type="button" class="btn btn-primary" ng-click="search()" ng-disabled="msgInput.$invalid">Search</button>
+                </span>
             </div>
         </form>
     </div>

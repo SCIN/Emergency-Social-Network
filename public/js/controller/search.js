@@ -3,7 +3,7 @@
 (function () {
     var app = angular.module('ESNApp');
     app.controller('SearchCtrl', ['$scope', '$http', 'socketioService', 'statusService', function ($scope, $http, socketioService, statusService) {
-        $scope.msgs = [];
+    $scope.queryMsg = "";
 
     // searched results
     $scope.citizens = [{ username: 'user-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', }];
@@ -102,26 +102,25 @@
             return stopWords.indexOf(word) >= 0;
         };
 
-        $scope.searchStrategies = ['searchCitizensByName', 'searchCitizensByStatus', 'searchPublicMessages', 'searchPrivateMessages', 'searchAnnouncements'];
-
         // main entrypoint for searching
-        $scope.search = function(query){
-          $scope[$scope.searchStrategies[$scope.type]](query);
+        $scope.search = function(){
+          $scope[$scope.type]($scope.queryMsg);
+          $scope.queryMsg = "";
         };
 
         $scope.typeTips = {
-            userByName: 'Search Users by Username (Or Part of User Name)',
-            userByStatus: 'Search Users by User Status',
-            publicMsg: 'Search Public Messages by Key Words',
-            privateMsg: 'Search Your Private Messages by Key Words',
-            announcements: 'Search Announcement by Key Words '
+            searchCitizensByName: 'Search Users by Username (Or Part of User Name)',
+            searchCitizensByStatus: 'Search Users by User Status',
+            searchPublicMessages: 'Search Public Messages by Key Words',
+            searchPrivateMessages: 'Search Your Private Messages by Key Words',
+            searchAnnouncements: 'Search Announcement by Key Words '
         };
-        $scope.types = ['userByName', 'userByStatus', 'publicMsg', 'privateMsg', 'announcements'];
+        $scope.types = ['searchCitizensByName', 'searchCitizensByStatus', 'searchPublicMessages', 'searchPrivateMessages', 'searchAnnouncements'];
         $scope.type = $scope.types[0];
         $scope.getIconClass = function (status) {
             return statusService.getIconClass(status);
         };
-        $scope.mySocket = socketioService.getSocket();
+
         $scope.getIconClass = function (status) {
             return statusService.getIconClass(status);
         };
