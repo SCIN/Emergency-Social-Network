@@ -127,9 +127,6 @@
             return statusService.getIconClass(status);
         };
 
-        $scope.getIconClass = function (status) {
-            return statusService.getIconClass(status);
-        };
     }]);
 })();
 

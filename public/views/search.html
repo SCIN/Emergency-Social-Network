@@ -53,17 +53,13 @@
             </fieldset>
         </div>
     </div>
-    <div>
-        <span class="input-group-btn">
-            <button type="button" class="btn btn-primary" ng-click="search()" >More</button>
-        </span>
-    </div>
     <div id="postmsg" class="navbar-fixed-bottom">
         <form name="msgInput">
             <div class="input-group">
                 <input class="form-control" autocomplete="off" ng-model="queryMsg" ng-required="true"/>
                 <span class="input-group-btn">
                      <button type="button" class="btn btn-primary" ng-click="search()" ng-disabled="msgInput.$invalid">Search</button>
+                    <button type="button" class="btn btn-primary" ng-click="more()" >More</button>
                 </span>
             </div>
         </form>
