@@ -17,7 +17,7 @@
         method : 'GET',
         url : 'search/name/' + query,
       }).success(function(data){
-        $scope.citizens = data;
+        $scope.citizens = $scope.citizens.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
@@ -27,7 +27,7 @@
         method : 'GET',
         url : 'search/status/' + query,
       }).success(function(data){
-        $scope.citizens = data;
+        $scope.citizens = $scope.citizens.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
@@ -42,7 +42,7 @@
           words: words,
         },
       }).success(function(data){
-        $scope.publicMessages = data;
+        $scope.publicMessages = $scope.publicMessages.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
@@ -57,7 +57,7 @@
           words: words,
         },
       }).success(function(data) {
-        $scope.privateMessages = data;
+        $scope.privateMessages = $scope.privateMessages.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
@@ -72,7 +72,7 @@
           words: words,
         },
       }).success(function(data) {
-        $scope.announcements = data;
+        $scope.announcements = $scope.announcements.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
