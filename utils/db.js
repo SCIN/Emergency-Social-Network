@@ -103,7 +103,7 @@ class dbInterface
 
     searchPrivateMessages(name, words, count)
     {
-        var condition = 'sender=' + name + ' OR receiver=' + name;
+        var condition = "(sender='" + name + "' OR receiver='" + name + "')";
         for(var i = 0; i < words.length; i++){
             condition += " AND ";
             condition += "text like '%" + words[i] + "%'"
