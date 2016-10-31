@@ -12,34 +12,28 @@
     $scope.announcements = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample announcement text',}];
 
     // private methods
-    $scope.searchCitizensByName = function(query, isNewSearch){
+    $scope.searchCitizensByName = function(query){
       // param check
       if (!query)
         return alert('search query cannot be empty');
       $http({
         method : 'GET',
         url : 'search/name/' + query,
-        data: {
-          count: isNewSearch ? 1 : $scope.citizens.length + 1,
-        },
       }).success(function(data){
-        $scope.citizens = isNewSearch ? data : $scope.citizens.concat(data);
+        $scope.citizens = data;
       }).error(function(data, status) {
         console.log(status);
       });
     };
-    $scope.searchCitizensByStatus = function(query, isNewSearch){
+    $scope.searchCitizensByStatus = function(query){
       // param check
       if (!query)
         return alert('search query cannot be empty');
       $http({
         method : 'GET',
         url : 'search/status/' + query,
-        data: {
-          count: isNewSearch ? 1 : $scope.citizens.length + 1,
-        },
       }).success(function(data){
-        $scope.citizens = isNewSearch ? data : $scope.citizens.concat(data);
+        $scope.citizens = data;
       }).error(function(data, status) {
         console.log(status);
       });
@@ -51,11 +45,9 @@
         return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
-        url : 'search/public',
-        data: {
-          count: isNewSearch ? 1 : $scope.publicMessages.length + 1,
-          words: words,
-        },
+        url : 'search/public?' +
+          'count=' + (isNewSearch ? 1 : $scope.publicMessages.length + 1) +
+          '&words=' + words.join('+'),
       }).success(function(data){
         $scope.publicMessages = isNewSearch ? data : $scope.publicMessages.concat(data);
       }).error(function(data, status) {
@@ -69,11 +61,9 @@
         return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
-        url : 'search/private/' + usernameService.getUsername(),
-        data: {
-          count: isNewSearch ? 1 : $scope.privateMessages.length + 1,
-          words: words,
-        },
+        url : 'search/private/' + usernameService.getUsername() + '?' +
+          'count=' + (isNewSearch ? 1 : $scope.privateMessages.length + 1) +
+          '&words=' + words.join('+'),
       }).success(function(data) {
         $scope.privateMessages = isNewSearch ? data : $scope.privateMessages.concat(data);
       }).error(function(data, status) {
@@ -87,11 +77,9 @@
         return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
-        url : 'search/announcements',
-        data: {
-          count: isNewSearch ? 1 : $scope.announcements.length + 1,
-          words: words,
-        },
+        url : 'search/announcements?' +
+          'count=' + (isNewSearch ? 1 : $scope.announcements.length + 1) +
+          '&words=' + words.join('+'),
       }).success(function(data) {
         $scope.announcements = isNewSearch ? data : $scope.announcements.concat(data);
       }).error(function(data, status) {
