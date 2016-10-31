@@ -12,67 +12,73 @@
     $scope.announcements = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample announcement text',}];
 
     // private methods
-    $scope.searchCitizensByName = function(query){
+    $scope.searchCitizensByName = function(query, isNewSearch){
       $http({
         method : 'GET',
         url : 'search/name/' + query,
+        data: {
+          count: isNewSearch ? 1 : $scope.citizens.length + 1,
+        },
       }).success(function(data){
-        $scope.citizens = $scope.citizens.concat(data);
+        $scope.citizens = isNewSearch ? data : $scope.citizens.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
     };
-    $scope.searchCitizensByStatus = function(query){
+    $scope.searchCitizensByStatus = function(query, isNewSearch){
       $http({
         method : 'GET',
         url : 'search/status/' + query,
+        data: {
+          count: isNewSearch ? 1 : $scope.citizens.length + 1,
+        },
       }).success(function(data){
-        $scope.citizens = $scope.citizens.concat(data);
+        $scope.citizens = isNewSearch ? data : $scope.citizens.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
     };
-    $scope.searchPublicMessages = function(query){
+    $scope.searchPublicMessages = function(query, isNewSearch){
       var words = $scope.splitWords(query);
       $http({
         method : 'GET',
         url : 'search/public',
         data: {
-          count: $scope.publicMessages.length + 1,
+          count: isNewSearch ? 1 : $scope.publicMessages.length + 1,
           words: words,
         },
       }).success(function(data){
-        $scope.publicMessages = $scope.publicMessages.concat(data);
+        $scope.publicMessages = isNewSearch ? data : $scope.publicMessages.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
     };
-    $scope.searchPrivateMessages = function(query){
+    $scope.searchPrivateMessages = function(query, isNewSearch){
       var words = $scope.splitWords(query);
       $http({
         method : 'GET',
         url : 'search/private',
         data: {
-          count: $scope.privateMessages.length + 1,
+          count: isNewSearch ? 1 : $scope.privateMessages.length + 1,
           words: words,
         },
       }).success(function(data) {
-        $scope.privateMessages = $scope.privateMessages.concat(data);
+        $scope.privateMessages = isNewSearch ? data : $scope.privateMessages.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
     };
-    $scope.searchAnnouncements = function(query){
+    $scope.searchAnnouncements = function(query, isNewSearch){
       var words = $scope.splitWords(query);
       $http({
         method : 'GET',
         url : 'search/announcements',
         data: {
-          count: $scope.announcements.length + 1,
+          count: isNewSearch ? 1 : $scope.announcements.length + 1,
           words: words,
         },
       }).success(function(data) {
-        $scope.announcements = $scope.announcements.concat(data);
+        $scope.announcements = isNewSearch ? data : $scope.announcements.concat(data);
       }).error(function(data, status) {
         console.log(status);
       });
