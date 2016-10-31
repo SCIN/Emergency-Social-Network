@@ -2,7 +2,7 @@
 
 (function () {
     var app = angular.module('ESNApp');
-    app.controller('SearchCtrl', ['$scope', '$http', 'socketioService', 'statusService', function ($scope, $http, socketioService, statusService) {
+    app.controller('SearchCtrl', ['$scope', '$http', 'socketioService', 'statusService', 'usernameService', function ($scope, $http, socketioService, statusService, usernameService) {
         $scope.msgs = [];
 
     // searched results
@@ -69,7 +69,7 @@
         return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
-        url : 'search/private',
+        url : 'search/private/' + usernameService.getUsername(),
         data: {
           count: isNewSearch ? 1 : $scope.privateMessages.length + 1,
           words: words,
