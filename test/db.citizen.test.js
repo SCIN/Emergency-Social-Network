@@ -86,7 +86,7 @@ describe('db', function() {
     it('should approve with correct password', function() {
       const auth_body = {
         name : 'Ivor',
-        password : 'lalala'
+        password : '9aa6e5f2256c17d2d430b100032b997c'
       };
       return db.authenticate(auth_body);
     });

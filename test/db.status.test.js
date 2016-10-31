@@ -10,7 +10,7 @@ describe('db', function() {
 				userName : 'Ivor',
 				statusCode : 'emergency',
 				location : 'Bldg 33',
-				timestamp : '2016-6-7'
+				timestamp : '11:37:36 PM 10/01/2016'
 			};
 
 			return db.updateCitizenStatus(status_body).then(() => {
@@ -31,7 +31,7 @@ describe('db', function() {
 				userName : 'Ivor',
 				statusCode : 'help',
 				location : 'Bldg 33',
-				timestamp : '2016-6-7'
+				timestamp : '11:37:36 PM 10/01/2016'
 			};
 
 			return db.updateCitizenStatus(status_body).then(() => {
@@ -52,7 +52,7 @@ describe('db', function() {
 				userName : 'Ivor',
 				statusCode : 'ok',
 				location : 'Bldg 33',
-				timestamp : '2016-6-7'
+				timestamp : '11:37:36 PM 10/01/2016'
 			};
 
 			return db.updateCitizenStatus(status_body).then(() => {
@@ -75,7 +75,7 @@ describe('db', function() {
 				assert.strictEqual(histories[0].name, 'Ivor');
 				assert.strictEqual(histories[0].location, 'Bldg 33');
 				assert.strictEqual(histories[0].status, 'emergency');
-				assert.strictEqual(histories[0].timestamp, '2016-6-7');
+				assert.strictEqual(histories[0].timestamp, '11:37:36 PM 10/01/2016');
 			});
 		});
 	});

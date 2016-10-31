@@ -36,7 +36,7 @@ describe('db', function() {
 		it('should post new message', function() {
 			const private_msg_body = {
 				text : "Hello Let's Private",
-				timestamp : "2016-10-21",
+				timestamp : "11:37:36 PM 10/21/2016",
 				sender : "Ivory",
 				receiver : "Ivor",
 				status : "ok",

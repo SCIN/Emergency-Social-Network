@@ -22,7 +22,7 @@ describe('db', function() {
 		it('should post a new annoucement', function() {
 			const announcement_body = {
 				text : "There is going to be an earthquake in about 5 minuts.",
-				timestamp : "2016-10-21",
+				timestamp : "10:37:36 PM 10/21/2016",
 				sender : "Ivory",
 				location : "Building 23"
 			};
