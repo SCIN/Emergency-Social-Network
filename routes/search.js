@@ -6,7 +6,7 @@ var db = require('../utils/db');
 // return a list of citizens
 router.get('/name/:userName', function(req, res) {
 	var name = req.params.userName;
-	db.searchCitizenGiveName(name)
+	db.searchCitizenGivenName(name)
 	.then(function(citizen) {
 		res.status(200);
 		res.send(citizen);

@@ -64,7 +64,7 @@ class dbInterface
         return this.db.one('select name, online from citizen where name=$1', [name]);
     }
 
-    searchCitizenGiveName(name)
+    searchCitizenGivenName(name)
     {
         return this.db.any("select name, online, status, location, timestamp from citizen where name like '%" + name + "%'");
     }
