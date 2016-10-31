@@ -4,3 +4,4 @@ public/libs
 app.sublime-workspace
 npm-debug.log
 .DS_Store
+coverage/

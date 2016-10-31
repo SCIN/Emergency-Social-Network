@@ -6,8 +6,8 @@ const db = require('../utils/db');
 describe('db', function() {
   describe('.getCitizen()', function() {
     it('should return citizen', function() {
-      return db.getCitizen('Ivor').then(citizens => {
-        assert.strictEqual(citizens[0].name, 'Ivor');
+      return db.getCitizen('Ivor').then(citizen => {
+        assert.strictEqual(citizen.name, 'Ivor');
       });
     });
   });
@@ -19,8 +19,8 @@ describe('db', function() {
           password: "Niceday1"
         };
         return db.addCitizen(dummy).then(() => {
-          return db.getCitizen(dummy.name).then(citizens => {
-            assert(citizens.length > 0);
+          return db.getCitizen(dummy.name).then(citizen => {
+            assert.strictEqual(citizen.name, dummy.name);
           });
         });
     });
@@ -33,8 +33,7 @@ describe('db', function() {
         online : true
       };
       return db.updateCitizenState(state_body).then(() => {
-        return db.getCitizen(state_body.name).then(citizens => {
-          const citizen = citizens[0];
+        return db.getCitizen(state_body.name).then(citizen => {
           assert.strictEqual(citizen.online, true);
         });
       });
@@ -46,8 +45,7 @@ describe('db', function() {
         online : false
       };
       return db.updateCitizenState(state_body).then(() => {
-        return db.getCitizen(state_body.name).then(citizens => {
-          const citizen = citizens[0];
+        return db.getCitizen(state_body.name).then(citizen => {
           assert.strictEqual(citizen.online, false);
         });
       });
