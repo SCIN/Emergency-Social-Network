@@ -13,6 +13,9 @@
 
     // private methods
     $scope.searchCitizensByName = function(query, isNewSearch){
+      // param check
+      if (!query)
+        return alert('search query cannot be empty');
       $http({
         method : 'GET',
         url : 'search/name/' + query,
@@ -26,6 +29,9 @@
       });
     };
     $scope.searchCitizensByStatus = function(query, isNewSearch){
+      // param check
+      if (!query)
+        return alert('search query cannot be empty');
       $http({
         method : 'GET',
         url : 'search/status/' + query,
@@ -40,6 +46,9 @@
     };
     $scope.searchPublicMessages = function(query, isNewSearch){
       var words = $scope.splitWords(query);
+      // param check
+      if (!words || words.length <= 0)
+        return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
         url : 'search/public',
@@ -55,6 +64,9 @@
     };
     $scope.searchPrivateMessages = function(query, isNewSearch){
       var words = $scope.splitWords(query);
+      // param check
+      if (!words || words.length <= 0)
+        return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
         url : 'search/private',
@@ -70,6 +82,9 @@
     };
     $scope.searchAnnouncements = function(query, isNewSearch){
       var words = $scope.splitWords(query);
+      // param check
+      if (!words || words.length <= 0)
+        return alert('please enter at least 1 non-stopword in search query');
       $http({
         method : 'GET',
         url : 'search/announcements',
