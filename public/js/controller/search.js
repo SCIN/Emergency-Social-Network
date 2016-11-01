@@ -6,10 +6,10 @@
     $scope.queryMsg = "";
 
     // searched results
-    $scope.citizens = [{ username: 'user-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', }];
-    $scope.publicMessages = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample text', }];
-    $scope.privateMessages = [{ sender: 'sender-a', receiver: 'receiver-b', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample text', }];
-    $scope.announcements = [{ sender: 'sender-a', location: 'Mountain View', timestamp: new Date(), status: 'Ok', text: 'sample announcement text',}];
+    $scope.citizens = [];
+    $scope.publicMessages = [];
+    $scope.privateMessages = [];
+    $scope.announcements = [];
 
     // private methods
     $scope.searchCitizensByName = function(query){
