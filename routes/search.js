@@ -33,13 +33,13 @@ router.get('/status/:status', function(req, res) {
 
 // return a list of announcements
 router.get('/announcements', function(req, res) {
-	var words = req.query.words;
+	var words = req.query.words.split(' ');
 	var count = req.query.count;
 
-	db.searchAnnouncements(words)
+	db.searchAnnouncements(words, count)
 	.then(function(announcements) {
 		res.status(200);
-		res.send(announcements, count);
+		res.send(announcements);
   	})
   	.catch(function(err) {
   		res.status(404);
@@ -49,7 +49,7 @@ router.get('/announcements', function(req, res) {
 
 // return a list of public messages
 router.get('/public', function(req, res) {
-	var words = req.query.words;
+	var words = req.query.words.split(' ');
 	var count = req.query.count;
 
 	db.searchPublicMessages(words, count)
@@ -65,7 +65,7 @@ router.get('/public', function(req, res) {
 
 // return a list of private messages
 router.get('/private/:userName', function(req, res) {
-	var words = req.query.words;
+	var words = req.query.words.split(' ');
 	var count = req.query.count;
 
 	var name = req.params.userName;

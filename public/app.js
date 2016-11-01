@@ -44,6 +44,7 @@
     $routeProvider.when('/private', {templateUrl: 'views/privatechat.html', reloadOnSearch: false});
     $routeProvider.when('/settings', {templateUrl: 'views/settings.html', reloadOnSearch: false});
     $routeProvider.when('/sharestatus', {templateUrl: 'views/sharestatus.html', reloadOnSearch: false});
+    $routeProvider.when('/search', {templateUrl: 'views/search.html', reloadOnSearch: false});
   });
 
 
