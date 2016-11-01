@@ -13,7 +13,7 @@ class dbInterface
 			promiseLib: this.promise
 		};
 		this.pgp = require('pg-promise')(options);
-		let connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/esn';
+		let connectionString = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/esn';
 		this.db = this.pgp(connectionString);
     }
 
