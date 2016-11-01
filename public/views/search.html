@@ -2,12 +2,13 @@
     <span>Search</span>
 </div>
 <div ng-controller="SearchCtrl">
-    <div>
-        <select class="form-control" ng-model="type" ng-options="typeTips[t] for t in types"/>
-    </div>
+    
     <div class="scrollable">
 
         <div class="scrollable-content">
+            <div>
+                <select class="form-control" ng-model="type" ng-options="typeTips[t] for t in types"></select>
+            </div>
             <fieldset>
 
                 <div class="list-group" >
