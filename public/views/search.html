@@ -22,13 +22,13 @@
                                     <span class="label label-default"><i>OFFLINE</i></span>
                                 </span>
                             </small>
-                            <strong>{{citizen.username}}</strong>
-                            <span class="label pull-right" ng-class="getIconClass(msg.status)">{{citizen.status}}</span>
+                            <strong>{{citizen.name}}</strong>
+                            <span class="label pull-right" ng-class="getIconClass(citizen.status)">{{citizen.status}}</span>
 
                         </p>
-                        <p class="list-group-item-text">{{msg.text}}</p>
-                        <span class="glyphicon glyphicon-map-marker"></span>{{citizen.location}}
-                        <span class="glyphicon glyphicon-time"></span>{{citizen.timestamp}}
+                        <!-- <p class="list-group-item-text">{{msg.text}}</p> -->
+                        <span class="glyphicon glyphicon-map-marker">{{citizen.location}}</span>
+                        <span class="glyphicon glyphicon-time">{{citizen.timestamp}}</span>
                     </a>
                 </div>
                 <div class="list-group" >
@@ -72,15 +72,18 @@
                     </a>
                 </div>
             </fieldset>
+
         </div>
     </div>
+
     <div id="postmsg" class="navbar-fixed-bottom">
+        <button type="button" class="btn btn-primary btn-block" ng-click="more()"  style="background-color: black;" >More</button>
         <form name="msgInput">
             <div class="input-group">
                 <input class="form-control" autocomplete="off" ng-model="queryMsg" ng-required="true"/>
                 <span class="input-group-btn">
                      <button type="button" class="btn btn-primary" ng-click="search()" ng-disabled="msgInput.$invalid">Search</button>
-                    <button type="button" class="btn btn-primary" ng-click="more()" >More</button>
+                    
                 </span>
             </div>
         </form>
