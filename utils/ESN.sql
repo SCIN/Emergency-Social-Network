@@ -51,24 +51,24 @@ CREATE TABLE announcements (
 
 
 INSERT INTO citizen (name, password, online, status)
-	VALUES ('Ivor', 'lalala', false, 'ok');
+	VALUES ('Ivor', '9aa6e5f2256c17d2d430b100032b997c', false, 'ok');
 INSERT INTO citizen (name, password, online, status)
-	VALUES ('Ivory', 'lalala', false, 'ok');
+	VALUES ('Ivory', '9aa6e5f2256c17d2d430b100032b997c', false, 'ok');
 
 INSERT INTO message (text, timestamp, sender, status, location)
-	VALUES ('Hello', '2016-1-1', 'Ivor', 'ok', 'Bldg 23');
+	VALUES ('Hello', '10:37:36 PM 10/01/2016', 'Ivor', 'ok', 'Bldg 23');
 
 INSERT INTO message (text, timestamp, sender, status, location)
-	VALUES ('Hello', '2016-2-1', 'Ivory', 'ok', 'Bldg 19');
+	VALUES ('Hello', '11:37:36 PM 10/01/2016', 'Ivory', 'ok', 'Bldg 19');
 
 INSERT INTO privateMessages (text, timestamp, sender, receiver, status, location)
-	VALUES ('Hello Ivory', '2016-1-1', 'Ivor', 'Ivory', 'ok', 'Bldg 23');
+	VALUES ('Hello Ivory', '10:37:36 PM 10/01/2016', 'Ivor', 'Ivory', 'ok', 'Bldg 23');
 
 INSERT INTO privateMessages (text, timestamp, sender, receiver, status, location)
-	VALUES ('Hello Ivor', '2016-2-1', 'Ivory', 'Ivor', 'ok', 'Bldg 19');
+	VALUES ('Hello Ivor', '11:37:36 PM 10/01/2016', 'Ivory', 'Ivor', 'ok', 'Bldg 19');
 
 INSERT INTO announcements (text, timestamp, sender, location)
-	VALUES ('Hello, this is an announcement from Ivor', '2016-1-1', 'Ivor', 'Bldg 23');
+	VALUES ('Hello, this is an announcement from Ivor', '10:37:36 PM 10/01/2016', 'Ivor', 'Bldg 23');
 
 INSERT INTO announcements (text, timestamp, sender, location)
-	VALUES ('Hello, this is an announcement', '2016-2-1', 'Ivory', 'Bldg 19');
+	VALUES ('Hello, this is an announcement', '11:37:36 PM 10/01/2016', 'Ivory', 'Bldg 19');
