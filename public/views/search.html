@@ -9,9 +9,29 @@
 
         <div class="scrollable-content">
             <fieldset>
-
                 <div class="list-group" >
-                    <a class="list-group-item" ng-repeat="msg in publicMessages" ng-show="type == 'searchCitizensByName'">
+                    <a class="list-group-item" ng-repeat="citizen in citizens" ng-show="type == 'searchCitizensByName' || type == 'searchCitizensByStatus'">
+                        <p class="list-group-item-heading">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <small ng-switch on="citizen.online">
+                                <span ng-switch-when="true">
+                                    <span class="label label-info">ONLINE</span>
+                                </span>
+                                <span ng-switch-default>
+                                    <span class="label label-default"><i>OFFLINE</i></span>
+                                </span>
+                            </small>
+                            <strong>{{citizen.username}}</strong>
+                            <span class="label pull-right" ng-class="getIconClass(msg.status)">{{citizen.status}}</span>
+
+                        </p>
+                        <p class="list-group-item-text">{{msg.text}}</p>
+                        <span class="glyphicon glyphicon-map-marker"></span>{{citizen.location}}
+                        <span class="glyphicon glyphicon-time"></span>{{citizen.timestamp}}
+                    </a>
+                </div>
+                <div class="list-group" >
+                    <a class="list-group-item" ng-repeat="msg in publicMessages" ng-show="type == 'searchPublicMessages'">
                         <p class="list-group-item-heading">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             <strong>{{msg.sender}}</strong>
@@ -23,7 +43,7 @@
                         <span class="glyphicon glyphicon-time"></span>{{msg.timestamp}}
                     </a>
                 </div>
-                <!--<div class="list-group" ng-show="type == 'privateMsg'">-->
+                <!--<div class="list-group" ng-show="type == 'searchPrivateMessages'">-->
                     <!--<a class="list-group-item"  ng-repeat="msg in privateMessages">-->
 
                         <!--<p class="list-group-item-heading">-->
@@ -37,7 +57,7 @@
                         <!--<span class="glyphicon glyphicon-time"></span>{{msg.timestamp}}-->
                     <!--</a>-->
                 <!--</div>-->
-                <!--<div class="list-group" ng-show="type == 'announcements'">-->
+                <!--<div class="list-group" ng-show="type == 'searchAnnouncements'">-->
                     <!--<a class="list-group-item"  ng-repeat="msg in announcements">-->
                         <!--<p class="list-group-item-heading">-->
                             <!--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>-->
