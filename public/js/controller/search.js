@@ -50,6 +50,12 @@
           '&words=' + words.join('+'),
       }).success(function(data){
         $scope.publicMessages = isNewSearch ? data : $scope.publicMessages.concat(data);
+          if(data.length > 0){
+              $scope.enableMore = true;
+          }
+          else {
+              $scope.enableMore = false;
+          }
       }).error(function(data, status) {
         console.log(status);
       });
@@ -66,6 +72,12 @@
           '&words=' + words.join('+'),
       }).success(function(data) {
         $scope.privateMessages = isNewSearch ? data : $scope.privateMessages.concat(data);
+          if(data.length > 0){
+              $scope.enableMore = true;
+          }
+          else {
+              $scope.enableMore = false;
+          }
       }).error(function(data, status) {
         console.log(status);
       });
@@ -82,6 +94,12 @@
           '&words=' + words.join('+'),
       }).success(function(data) {
         $scope.announcements = isNewSearch ? data : $scope.announcements.concat(data);
+          if(data.length > 0){
+              $scope.enableMore = true;
+          }
+          else {
+              $scope.enableMore = false;
+          }
       }).error(function(data, status) {
         console.log(status);
       });
@@ -115,12 +133,12 @@
 
         // main entrypoint for searching
         $scope.search = function(){
-          $scope[$scope.type]($scope.queryMsg);
+          $scope[$scope.type]($scope.queryMsg, true);
         };
 
         $scope.enableMore = false;
         $scope.more = function () {
-          $scope[$scope.type]($scope.queryMsg, $scope.enableMore);
+          $scope[$scope.type]($scope.queryMsg, false);
         }
 
         $scope.typeTips = {
