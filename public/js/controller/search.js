@@ -11,6 +11,14 @@
     $scope.privateMessages = [];
     $scope.announcements = [];
 
+    function updateMoreEnable(data) {
+        if(data.length >= 10){
+            $scope.enableMore = true;
+        }
+        else {
+            $scope.enableMore = false;
+        }
+    }
     // private methods
     $scope.searchCitizensByName = function(query){
       // param check
@@ -50,12 +58,7 @@
           '&words=' + words.join('+'),
       }).success(function(data){
         $scope.publicMessages = isNewSearch ? data : $scope.publicMessages.concat(data);
-          if(data.length > 0){
-              $scope.enableMore = true;
-          }
-          else {
-              $scope.enableMore = false;
-          }
+          updateMoreEnable(data);
       }).error(function(data, status) {
         console.log(status);
       });
@@ -72,12 +75,7 @@
           '&words=' + words.join('+'),
       }).success(function(data) {
         $scope.privateMessages = isNewSearch ? data : $scope.privateMessages.concat(data);
-          if(data.length > 0){
-              $scope.enableMore = true;
-          }
-          else {
-              $scope.enableMore = false;
-          }
+          updateMoreEnable(data);
       }).error(function(data, status) {
         console.log(status);
       });
@@ -94,12 +92,7 @@
           '&words=' + words.join('+'),
       }).success(function(data) {
         $scope.announcements = isNewSearch ? data : $scope.announcements.concat(data);
-          if(data.length > 0){
-              $scope.enableMore = true;
-          }
-          else {
-              $scope.enableMore = false;
-          }
+        updateMoreEnable(data);
       }).error(function(data, status) {
         console.log(status);
       });
