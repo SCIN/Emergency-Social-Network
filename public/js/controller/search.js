@@ -4,7 +4,7 @@
     var app = angular.module('ESNApp');
     app.controller('SearchCtrl', ['$scope', '$http', 'socketioService', 'statusService', 'usernameService', function ($scope, $http, socketioService, statusService, usernameService) {
     $scope.queryMsg = "";
-
+    
     // searched results
     $scope.citizens = [];
     $scope.publicMessages = [];
@@ -50,6 +50,12 @@
           '&words=' + words.join('+'),
       }).success(function(data){
         $scope.publicMessages = isNewSearch ? data : $scope.publicMessages.concat(data);
+          if(data.length > 0){
+              $scope.enableMore = true;
+          }
+          else {
+              $scope.enableMore = false;
+          }
       }).error(function(data, status) {
         console.log(status);
       });
@@ -66,6 +72,12 @@
           '&words=' + words.join('+'),
       }).success(function(data) {
         $scope.privateMessages = isNewSearch ? data : $scope.privateMessages.concat(data);
+          if(data.length > 0){
+              $scope.enableMore = true;
+          }
+          else {
+              $scope.enableMore = false;
+          }
       }).error(function(data, status) {
         console.log(status);
       });
@@ -82,6 +94,12 @@
           '&words=' + words.join('+'),
       }).success(function(data) {
         $scope.announcements = isNewSearch ? data : $scope.announcements.concat(data);
+          if(data.length > 0){
+              $scope.enableMore = true;
+          }
+          else {
+              $scope.enableMore = false;
+          }
       }).error(function(data, status) {
         console.log(status);
       });
@@ -93,7 +111,9 @@
                 return word && !$scope.isStopWord(word);
             });
         };
+        
 
+        
         $scope.isStopWord = function (word) {
             var stopWords = ["a", "able", "about", "across", "after", "all",
                 "almost", "also", "am", "among", "an", "and", "any", "are", "as", "at",
@@ -113,9 +133,13 @@
 
         // main entrypoint for searching
         $scope.search = function(){
-          $scope[$scope.type]($scope.queryMsg);
-          $scope.queryMsg = "";
+          $scope[$scope.type]($scope.queryMsg, true);
         };
+
+        $scope.enableMore = false;
+        $scope.more = function () {
+          $scope[$scope.type]($scope.queryMsg, false);
+        }
 
         $scope.typeTips = {
             searchCitizensByName: 'Search Users by Username (Or Part of User Name)',
