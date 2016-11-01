@@ -4,7 +4,7 @@
     var app = angular.module('ESNApp');
     app.controller('SearchCtrl', ['$scope', '$http', 'socketioService', 'statusService', 'usernameService', function ($scope, $http, socketioService, statusService, usernameService) {
     $scope.queryMsg = "";
-
+    
     // searched results
     $scope.citizens = [];
     $scope.publicMessages = [];
@@ -93,7 +93,9 @@
                 return word && !$scope.isStopWord(word);
             });
         };
+        
 
+        
         $scope.isStopWord = function (word) {
             var stopWords = ["a", "able", "about", "across", "after", "all",
                 "almost", "also", "am", "among", "an", "and", "any", "are", "as", "at",
@@ -114,8 +116,12 @@
         // main entrypoint for searching
         $scope.search = function(){
           $scope[$scope.type]($scope.queryMsg);
-          $scope.queryMsg = "";
         };
+
+        $scope.enableMore = false;
+        $scope.more = function () {
+          $scope[$scope.type]($scope.queryMsg, $scope.enableMore);
+        }
 
         $scope.typeTips = {
             searchCitizensByName: 'Search Users by Username (Or Part of User Name)',

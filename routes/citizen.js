@@ -88,13 +88,13 @@ router.post('/:userName/status/:statusCode', function(req, res) {
 	var statusCode = req.params.statusCode;
 
 	var location = req.body.location;
-	var timestamp = req.body.timestamp;
+	var timeStamp = req.body.timeStamp;
 
 	var status = {
 		userName : userName,
 		statusCode : statusCode,
 		location : location,
-		timestamp : timestamp
+		timestamp : timeStamp
 	};
 	db.updateCitizenStatus(status)
 	.then(function() {

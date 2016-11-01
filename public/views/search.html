@@ -13,8 +13,7 @@
                 <div class="list-group" >
                     <a class="list-group-item" ng-repeat="citizen in citizens" ng-show="type == 'searchCitizensByName' || type == 'searchCitizensByStatus'">
                         <p class="list-group-item-heading">
-                                                                               <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            <small ng-switch on="citizen.online">
+                                                                                                        <small ng-switch on="citizen.online">
                                 <span ng-switch-when="true">
                                     <span class="label label-info">ONLINE</span>
                                 </span>
@@ -22,12 +21,14 @@
                                     <span class="label label-default"><i>OFFLINE</i></span>
                                 </span>
                             </small>
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             <strong>{{citizen.name}}</strong>
                             <span class="label pull-right" ng-class="getIconClass(citizen.status)">{{citizen.status}}</span>
 
                         </p>
                         <!-- <p class="list-group-item-text">{{msg.text}}</p> -->
                         <span class="glyphicon glyphicon-map-marker">{{citizen.location}}</span>
+                        <br>
                         <span class="glyphicon glyphicon-time">{{citizen.timestamp}}</span>
                     </a>
                 </div>
@@ -77,7 +78,7 @@
     </div>
 
     <div id="postmsg" class="navbar-fixed-bottom">
-        <button type="button" class="btn btn-primary btn-block" ng-click="more()"  style="background-color: black;" >More</button>
+        <button type="button" class="btn btn-primary btn-block" ng-click="more()"  style="background-color: black;" ng-show="enableMore">More</button>
         <form name="msgInput">
             <div class="input-group">
                 <input class="form-control" autocomplete="off" ng-model="queryMsg" ng-required="true"/>
