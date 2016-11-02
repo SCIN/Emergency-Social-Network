@@ -47,7 +47,7 @@ db.getAllCitizenStatus()
     var status = {
     	online : false,
     	name : person.name
-    }
+    };
     db.updateCitizenState(status);
   }
 })
@@ -102,7 +102,7 @@ io.on('connection', function(socket){
 	        var status = {
 	        	online : false,
 	        	name : name
-	        }
+	        };
 	        db.updateCitizenState(status);
 	        socket.broadcast.emit('refreshDirectory', users);
         });
