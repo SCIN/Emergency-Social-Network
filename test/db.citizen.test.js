@@ -76,8 +76,8 @@ describe('db', function() {
         .sort((a, b) => a.name.localeCompare(b.name));
         assert.strictEqual(citizens[0].name, 'Ivor');
         assert.strictEqual(citizens[1].name, 'Ivory');
-        assert.strictEqual(citizens[0].status, 'ok');
-        assert.strictEqual(citizens[1].status, 'ok');
+        assert.strictEqual(citizens[0].status, 'OK');
+        assert.strictEqual(citizens[1].status, 'OK');
       });
     });
   });
@@ -97,7 +97,7 @@ describe('db', function() {
         password : 'definitely-wrong-password',
       };
       return db.authenticate(auth_body)
-      .then(() => assert.fail(null, null, 'authenticate goes to then() which is not acceptable'), () => {});
+      .then(() => assert.fail(1, 2, 'authenticate goes to then() which is not acceptable', '>'), () => {});
     });
   });
 });

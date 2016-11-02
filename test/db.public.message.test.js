@@ -35,7 +35,7 @@ describe('db', function() {
 				text : "HelloFSEsss",
 				timestamp : "11:37:36 PM 10/21/2016",
 				sender : "Ivory",
-				status : "ok",
+				status : "OK",
 				location : "Building 19"
 			};
 			
