@@ -13,7 +13,7 @@ class dbInterface
 			promiseLib: this.promise
 		};
 		this.pgp = require('pg-promise')(options);
-		let connectionString = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/esn';
+		let connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/esn';
 		this.db = this.pgp(connectionString);
     }
 
@@ -66,12 +66,12 @@ class dbInterface
 
     searchCitizenGivenName(name)
     {
-        return this.db.any("select name, online, status, location, timestamp from citizen where name like '%" + name + "%'");
+        return this.db.any("select name, online, status, location, timestamp from citizen where name like '%" + name + "%' order by online desc, name");
     }
 
     searchCitizenGivenStatus(status)
     {
-        return this.db.any('select name, online, status, location, timestamp from citizen where status=$1', [status]);
+        return this.db.any('select name, online, status, location, timestamp from citizen where status=$1 order by online desc, name' , [status]);
 
     }
 
