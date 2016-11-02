@@ -39,7 +39,7 @@ describe('db', function() {
 				timestamp : "11:37:36 PM 10/21/2016",
 				sender : "Ivory",
 				receiver : "Ivor",
-				status : "ok",
+				status : "OK",
 				location : "Building 19"
 			};
 			

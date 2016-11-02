@@ -8,7 +8,7 @@ describe('db', function() {
 		it('should update citizen status to emergency', function() {
 			const status_body = {
 				userName : 'Ivor',
-				statusCode : 'emergency',
+				statusCode : 'Emergency',
 				location : 'Bldg 33',
 				timestamp : '11:37:36 PM 10/01/2016'
 			};
@@ -29,7 +29,7 @@ describe('db', function() {
 		it('should update citizen status to help', function() {
 			const status_body = {
 				userName : 'Ivor',
-				statusCode : 'help',
+				statusCode : 'Help',
 				location : 'Bldg 33',
 				timestamp : '11:37:36 PM 10/01/2016'
 			};
@@ -50,7 +50,7 @@ describe('db', function() {
 		it('should update citizen status to ok', function() {
 			const status_body = {
 				userName : 'Ivor',
-				statusCode : 'ok',
+				statusCode : 'OK',
 				location : 'Bldg 33',
 				timestamp : '11:37:36 PM 10/01/2016'
 			};
@@ -74,7 +74,7 @@ describe('db', function() {
 			return db.getStatusHistory('Ivor').then(histories => {
 				assert.strictEqual(histories[0].name, 'Ivor');
 				assert.strictEqual(histories[0].location, 'Bldg 33');
-				assert.strictEqual(histories[0].status, 'emergency');
+				assert.strictEqual(histories[0].status, 'Emergency');
 				assert.strictEqual(histories[0].timestamp, '11:37:36 PM 10/01/2016');
 			});
 		});
